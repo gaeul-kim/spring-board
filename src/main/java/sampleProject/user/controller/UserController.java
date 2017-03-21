@@ -2,6 +2,7 @@ package sampleProject.user.controller;
 
 import java.util.HashMap;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+    Logger log = Logger.getLogger(this.getClass());
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerForm() {
@@ -19,7 +21,7 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerSign(@RequestParam HashMap<String, Object> param) {
-        System.out.println(param);
+        log.debug(param);
 
         return "null";
     }
