@@ -18,80 +18,47 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-<style type="text/css">
-body {
-} 
-
-.row {
-	padding-bottom: 5px;
-}
-
-.form-control {
-	border: none;
-	box-shadow: none;
-}
-
-.info {
-	padding: 6px 12px;
-}
-
-.form-box {
-	margin-bottom: 10px;
-	border: 1px solid gray;
-	border-bottom: none;
-}
-
-.input-box {
-	border-bottom: 1px solid gray;
-}
-
-.form-signUp {
-	padding: 15px;
-}
-</style>
+<link rel="stylesheet" href="/css/user_register.css">
 </head>
 <body>
 	<div class="container">
-
-		<form class="form-signUp" action="register" method="post">
-			<div class="form-box">
-				<div class="input-box">
-					<input class="form-control" type="text" placeholder="아이디"
-						id="userId" name="userId" maxlength="15" required>
-					<div class="info"></div>
+		<div class="content">
+			<form class="form-signUp" action="register" method="post">
+				<div class="form-box">
+					<div class="input-box">
+						<input class="form-control" type="text" placeholder="아이디"
+							id="userId" name="userId" maxlength="15">
+						<div class="info"></div>
+					</div>
+					<div class="input-box">
+						<input class="form-control" type="password" placeholder="비밀번호"
+							id="userPassword" name="userPassword" maxlength="15">
+						<div class="info"></div>
+					</div>
+					<div class="input-box">
+						<input class="form-control" type="password" placeholder="비밀번호 확인"
+							id="checkPassword" name="checkPassword" maxlength="15">
+						<div class="info"></div>
+					</div>
 				</div>
-				<div class="input-box">
-					<input class="form-control" type="password" placeholder="비밀번호"
-						id="userPassword" name="userPassword" maxlength="15" required>
-					<div class="info"></div>
+				<div class="form-box">
+					<div class="input-box">
+						<input class="form-control" type="text" placeholder="이름"
+							id="userName" name="userName" maxlength="10">
+						<div class="info"></div>
+					</div>
+					<div class="input-box">
+						<input class="form-control" type="text" placeholder="이메일"
+							id="userEmail" name="userEmail" maxlength="30">
+						<div class="info"></div>
+					</div>
 				</div>
-				<div class="input-box">
-					<input class="form-control" type="password" placeholder="비밀번호 확인"
-						id="checkPassword" name="checkPassword" maxlength="15" required>
-					<div class="info"></div>
-				</div>
-			</div>
-			<div class="form-box">
-				<div class="input-box">
-					<input class="form-control" type="text" placeholder="이름"
-						id="userName" name="userName" maxlength="10" required>
-					<div class="info"></div>
-				</div>
-				<div class="input-box">
-					<input class="form-control" type="email" placeholder="이메일"
-						id="userEmail" name="userEmail" maxlength="30" required>
-					<div class="info"></div>
-				</div>
-			</div>
-			<button class="btn btn-default" id="signUp" name="signUp">회원가입</button>
-		</form>
-
+				<button class="btn btn-primary btn-block" id="signUp" name="signUp">회원가입</button>
+			</form>
+		</div>
 	</div>
 	<script>
 		$(document).ready(function() {
-			var isSubmissible = false;
-	
 	
 			function validate_userId() {
 				var val = $('#userId').val();
@@ -107,20 +74,24 @@ body {
 					var param = {
 						"userId" : val
 					}
+					var result;
 					$.ajax({
 						dataType : 'json',
 						data : param,
+						async : false,
 						url : '/user/checkId',
 						method : 'post',
 						success : function(data) {
-							if (data.result == 'success') {
-								$('#userId + .info').html("사용 가능한 아이디 입니다").attr('style', 'color:black');
-							} else if (data.result == 'fail') {
-								$('#userId + .info').html("이미 사용중이거나 탈퇴한 아이디 입니다").attr('style', 'color:red');
-								;
-							}
+							result = data.result;
 						}
 					});
+					if (result == 'fail') {
+						$('#userId + .info').html("이미 사용중이거나 탈퇴한 아이디 입니다").attr('style', 'color:red');
+						return false;
+					} else if (result == 'success') {
+						$('#userId + .info').html("사용 가능한 아이디 입니다").attr('style', 'color:black');
+						return true;
+					}
 				}
 			}
 			function validate_userPassword() {
@@ -131,11 +102,11 @@ body {
 					$('#userPassword + .info').html("필수 입력").attr('style', 'color:red');
 					return false;
 				} else if (!regex.test(val)) {
-					$('#userPassword + .info').html("5~15자의 영문 대 소문자, 숫자 혹은 특수문자를 반드시 포함").attr('style', 'color:red');
+					$('#userPassword + .info').html("5~15자의 영문 대소문자, 숫자 혹은 특수문자를 반드시 포함").attr('style', 'color:red');
 					return false;
 				} else {
-					$('#userPassword + .info').html("확인").attr('style', 'color:black');
-					;
+					$('#userPassword + .info').html("").attr('style', 'color:black');
+					return true;
 				}
 			}
 			function validate_checkPassword() {
@@ -149,25 +120,63 @@ body {
 					$('#checkPassword + .info').html("비밀번호 불일치").attr('style', 'color:red');
 					return false;
 				} else {
-					$('#checkPassword + .info').html("확인").attr('style', 'color:black');
+					$('#checkPassword + .info').html("비밀번호 일치").attr('style', 'color:black');
+					return true;
+				}
+			}
+	
+			function validate_userName() {
+				var val = $('#userName').val();
+				var regex = /^[가-힣]{2,5}|[a-zA-Z]{4,10}$/;
+	
+				if (val == '' | val == null) {
+					$('#userName + .info').html("필수 입력").attr('style', 'color:red');
+					return false;
+				} else if (!regex.test(val)) {
+					$('#userName + .info').html("2~10자의 한글, 4~10자의 영문자").attr('style', 'color:red');
+					return false;
+				} else {
+					$('#userName + .info').html("").attr('style', 'color:black');
+					return true;
+				}
+			}
+	
+			function validate_userEmail() {
+				var val = $('#userEmail').val();
+				var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	
+				if (val == '' | val == null) {
+					$('#userEmail + .info').html("필수 입력").attr('style', 'color:red');
+					return false;
+				} else if (!regex.test(val)) {
+					$('#userEmail + .info').html("이메일 주소가 올바르지 않습니다").attr('style', 'color:red');
+					return false;
+				} else {
+					$('#userEmail + .info').html("").attr('style', 'color:black');
+					return true;
 				}
 			}
 	
 			$('#userId').focusout(function() {
 				validate_userId();
 			});
-			$('#userPassword').focusout(function() {
+			$('#userPassword, #checkPassword').focusout(function() {
 				validate_userPassword();
-			});
-			$('#checkPassword').focusout(function() {
 				validate_checkPassword();
 			});
 	
+			$('#userName').focusout(function() {
+				validate_userName();
+			});
+			$('#userEmail').focusout(function() {
+				validate_userEmail();
+			});
 	
-			$('#signUp').click(function() {
-				validate_userId();
-				validate_userPassword();
-				validate_checkPassword();
+	
+			$('.form-signUp').submit(function() {
+				if (!validate_userId() | !validate_userPassword() | !validate_checkPassword() | !validate_userName() | !validate_userEmail()) {
+					return false;
+				}
 			});
 		})
 	</script>
