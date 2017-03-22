@@ -17,11 +17,11 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDAO;
 
     @Override
-    public String checkUserId(HashMap<String, Object> param) throws Exception {
-        if (0 < userDAO.selectUserId(param)) {
-            return "fail";
+    public Boolean checkUserId(HashMap<String, Object> param) throws Exception {
+        if (userDAO.selectUserId(param) > 0) {
+            return false;
+        } else {
+            return true;
         }
-        return "success";
     }
-
 }

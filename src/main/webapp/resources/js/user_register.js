@@ -10,7 +10,7 @@ $(document).ready(function() {
 		} else if (!regex.test(val)) {
 			$('#user_id + .info').html("5~15자의 영문 소문자, 숫자만 가능").attr('style', 'color:red');
 			return false;
-		} else {
+			} else {
 			var param = {
 				"user_id" : val
 			}

@@ -4,6 +4,6 @@ import java.util.HashMap;
 
 public interface UserService {
 
-    String checkUserId(HashMap<String, Object> param) throws Exception;
+    Boolean checkUserId(HashMap<String, Object> param) throws Exception;
 
 }

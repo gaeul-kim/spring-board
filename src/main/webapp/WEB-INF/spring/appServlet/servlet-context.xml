@@ -27,6 +27,13 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
+	<!-- <beans:bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"> 
+		<beans:property name="cacheSeconds" value="0" /> <beans:property name="webBindingInitializer"> 
+		<beans:bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer"> 
+		<beans:property name="validator" ref="validator" /> </beans:bean> </beans:property> 
+		</beans:bean> <beans:bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" 
+		/> -->
+
 	<context:component-scan base-package="sampleProject" />
 
 </beans:beans>
