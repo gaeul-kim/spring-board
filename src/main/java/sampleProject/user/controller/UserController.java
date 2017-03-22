@@ -1,6 +1,7 @@
 package sampleProject.user.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -8,6 +9,7 @@ import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +25,7 @@ public class UserController {
     @Resource(name = "userService")
     private UserService userService;
 
-    Logger log = Logger.getLogger(this.getClass());
+    Logger LOG = Logger.getLogger(this.getClass());
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerForm() {
@@ -32,15 +34,14 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerSign(@RequestParam HashMap<String, Object> param, @Valid User user, BindingResult bindingResult) {
-        log.debug(param);
 
         if (bindingResult.hasErrors()) {
-            log.debug(bindingResult.getAllErrors());
+            List<ObjectError> list = bindingResult.getAllErrors();
+            for (ObjectError e : list) {
+                LOG.debug(e);
+            }
         }
-        log.debug(user.getUser_id());
-        log.debug(user.getUser_password());
-        log.debug(user.getUser_name());
-        log.debug(user.getUser_email());
+
         // 유효성 체크
         // 회원가입 로직
 

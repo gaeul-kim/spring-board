@@ -5,24 +5,22 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class User {
-    @NotNull
     @Size(min = 5, max = 15, message = "5~15자의 영문 소문자, 숫자만 가능")
     @Pattern(regexp = "/^[a-z0-9+]{5,15}$/")
     private String user_id;
 
-    @NotNull
     // "/^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{5,15}$/"
     @Size(min = 5, max = 15, message = "")
+    @NotNull
     private String user_password;
 
-    @NotNull
     @Pattern(regexp = "/^[가-힣]{2,5}|[a-zA-Z]{4,10}$/")
     @Size(min = 2, max = 10, message = "")
     private String user_name;
 
-    @NotNull
     @Pattern(regexp = "/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i")
     @Size(min = 3)
+    @NotNull
     private String user_email;
 
     public String getUser_id() {

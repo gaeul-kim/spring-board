@@ -1,42 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring"
+	uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>회원가입</title>
 </head>
 <body>
-	<form:form modelAttribute="user" autocomplete="off">
+	<spring:form modelAttribute="member" method="post">
 
 		<h4>
 			<strong>회원가입</strong>
 		</h4>
 		<div class="clearfix">
 			<div class="left">
-				<form:label path="id">아이디</form:label>
+				<spring:label path="id">아이디</spring:label>
 			</div>
 			<div class="left">
-				<form:input path="id" />
-				<form:errors path="id" />
-			</div>
-		</div>
-		<div class="clearfix">
-			<div class="left">
-				<form:label path="password">비밀번호</form:label>
-			</div>
-			<div class="left">
-				<form:input path="password" />
-				<form:errors path="password" />
+				<spring:input path="id" />
+				<spring:errors path="id" />
 			</div>
 		</div>
 		<div class="clearfix">
 			<div class="left">
-				<form:label path="email">이메일</form:label>
+				<spring:label path="password">비밀번호</spring:label>
 			</div>
 			<div class="left">
-				<form:input path="email" />
-				<form:errors path="email" />
+				<spring:input path="password" />
+				<spring:errors path="password" />
+			</div>
+		</div>
+		<div class="clearfix">
+			<div class="left">
+				<spring:label path="email">이메일</spring:label>
+			</div>
+			<div class="left">
+				<spring:input path="email" />
+				<spring:errors path="email" />
 			</div>
 		</div>
 		<div class="clearfix">
@@ -44,6 +45,6 @@
 			<div class="left"></div>
 		</div>
 		<input type="submit" value="업로드" />
-	</form:form>
+	</spring:form>
 </body>
 </html>

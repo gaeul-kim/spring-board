@@ -2,14 +2,14 @@ package sampleProject.test.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class TestUser {
-    @NotEmpty(message="아이디를 입력하세요!")
+public class Member {
+    @NotEmpty(message = "아이디를 입력하세요!")
     private String id;
 
-    @NotEmpty(message="비밀번호를 입력하세요!")
+    @NotEmpty(message = "비밀번호를 입력하세요!")
     private String password;
 
-    @NotEmpty(message="이메일을 입력하세요!")
+    @NotEmpty(message = "이메일을 입력하세요!")
     private String email;
 
     public String getId() {
