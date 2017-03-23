@@ -26,12 +26,22 @@ public class User {
     @Size(min = 5, max = 15, message = "5~15자의 영문 대소문자와 숫자/특수문자를 포함")
     private String confirm_password;
 
-    public String getconfirm_password() {
+    private Integer user_idx;
+
+    public String getConfirm_password() {
         return confirm_password;
     }
 
-    public void setconfirm_password(String confirm_password) {
+    public void setConfirm_password(String confirm_password) {
         this.confirm_password = confirm_password;
+    }
+
+    public Integer getUser_idx() {
+        return user_idx;
+    }
+
+    public void setUser_idx(Integer user_idx) {
+        this.user_idx = user_idx;
     }
 
     public String getUser_id() {

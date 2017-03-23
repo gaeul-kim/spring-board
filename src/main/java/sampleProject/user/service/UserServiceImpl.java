@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import sampleProject.user.dao.UserDAO;
+import sampleProject.user.domain.User;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -24,4 +25,21 @@ public class UserServiceImpl implements UserService {
             return true;
         }
     }
+
+    @Override
+    public Boolean checkUserId(User user) throws Exception {
+        if (userDAO.selectUserId(user) > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public void registerUser(User user) throws Exception {
+        if (checkUserId(user)) {
+            userDAO.insertUser(user);
+        }
+    }
+
 }
