@@ -1,15 +1,14 @@
 package sampleProject.user.controller;
 
 import java.util.HashMap;
-import java.util.List;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,24 +27,22 @@ public class UserController {
     Logger LOG = Logger.getLogger(this.getClass());
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String registerForm() {
+    public String registerForm(Model model) {
+        model.addAttribute("user", new User());
         return "/user/register";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String registerSign(@RequestParam HashMap<String, Object> param, @Valid User user, BindingResult bindingResult) {
+    public String registerSign(@Valid User user, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            List<ObjectError> list = bindingResult.getAllErrors();
-            for (ObjectError e : list) {
-                LOG.debug(e);
-            }
+            // List<ObjectError> list = bindingResult.getAllErrors();
+            // for (ObjectError e : list) {
+            // LOG.debug(e);
+            // }
+            return "/user/register";
         }
-
-        // 유효성 체크
-        // 회원가입 로직
-
-        return "null";
+        return "user/success";
     }
 
     @RequestMapping("/checkId")

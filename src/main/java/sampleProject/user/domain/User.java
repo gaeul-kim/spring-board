@@ -1,27 +1,38 @@
 package sampleProject.user.domain;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class User {
-    @Size(min = 5, max = 15, message = "5~15자의 영문 소문자, 숫자만 가능")
-    @Pattern(regexp = "/^[a-z0-9+]{5,15}$/")
+    @NotEmpty(message = "필수 입력")
+    @Size(min = 5, max = 15, message = "5~15자의 영문 소문자/숫자")
     private String user_id;
 
-    // "/^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{5,15}$/"
-    @Size(min = 5, max = 15, message = "")
-    @NotNull
+    @NotEmpty(message = "필수 입력")
+    @Size(min = 5, max = 15, message = "5~15자의 영문 대소문자와 숫자/특수문자를 포함")
     private String user_password;
 
-    @Pattern(regexp = "/^[가-힣]{2,5}|[a-zA-Z]{4,10}$/")
-    @Size(min = 2, max = 10, message = "")
+    @NotEmpty(message = "필수 입력")
+    @Size(min = 2, max = 10, message = "2~10자의 한글, 4~10자의 영문자")
     private String user_name;
 
-    @Pattern(regexp = "/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i")
-    @Size(min = 3)
-    @NotNull
+    @NotEmpty(message = "필수 입력")
+    @Email(message = "이메일 주소가 유효하지 않습니다")
     private String user_email;
+
+    @NotEmpty(message = "필수 입력")
+    @Size(min = 5, max = 15, message = "5~15자의 영문 대소문자와 숫자/특수문자를 포함")
+    private String confirm_password;
+
+    public String getconfirm_password() {
+        return confirm_password;
+    }
+
+    public void setconfirm_password(String confirm_password) {
+        this.confirm_password = confirm_password;
+    }
 
     public String getUser_id() {
         return user_id;

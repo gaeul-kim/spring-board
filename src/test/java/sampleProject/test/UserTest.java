@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -21,12 +20,6 @@ import sampleProject.user.service.UserService;
 
 public class UserTest {
     Logger log = Logger.getLogger(this.getClass());
-
-    // static MockHttpServletRequest request = new MockHttpServletRequest();
-    // static MockHttpServletResponse response = new MockHttpServletResponse();
-
-    @Autowired
-    private ApplicationContext applicationContext;
 
     @Autowired
     private UserService userService;
@@ -44,13 +37,6 @@ public class UserTest {
         Boolean availableUserId = userService.checkUserId(map);
 
         assertEquals(false, availableUserId);
-    }
-
-    @Test
-    public void userValidation() throws Exception {
-//        user.setUser_id("");
-//        log.debug(result.hasErrors());
-
     }
 
 }

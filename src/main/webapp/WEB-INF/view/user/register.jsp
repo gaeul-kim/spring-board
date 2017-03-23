@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,38 +25,49 @@
 <body>
 	<div class="container">
 		<div class="content">
-			<form class="form-signUp" action="register" method="post">
+			<form:form modelAttribute="user" method="post" autocomplete="false">
 				<div class="form-box">
 					<div class="input-box">
-						<input class="form-control" type="text" placeholder="아이디"
-							id="user_id" name="user_id" maxlength="15">
-						<div class="info"></div>
+						<form:input path="user_id" class="form-control" placeholder="아이디"
+							maxlength="15" />
+						<div class="info">
+							<form:errors path="user_id" cssClass="errorMessage" />
+						</div>
+
 					</div>
 					<div class="input-box">
-						<input class="form-control" type="password" placeholder="비밀번호"
-							id="user_password" name="user_password" maxlength="15">
-						<div class="info"></div>
+						<form:password path="user_password" class="form-control"
+							placeholder="비밀번호" maxlength="15" />
+						<div class="info">
+							<form:errors path="user_password" cssClass="errorMessage" />
+						</div>
 					</div>
 					<div class="input-box">
-						<input class="form-control" type="password" placeholder="비밀번호 확인"
-							id="check_password" name="check_password" maxlength="15">
-						<div class="info"></div>
+						<form:password path="confirm_password" class="form-control"
+							placeholder="비밀번호 확인" maxlength="15" />
+						<div class="info">
+							<form:errors path="user_password" cssClass="errorMessage" />
+						</div>
 					</div>
 				</div>
 				<div class="form-box">
 					<div class="input-box">
-						<input class="form-control" type="text" placeholder="이름"
-							id="user_name" name="user_name" maxlength="10">
-						<div class="info"></div>
+						<form:input path="user_name" class="form-control" placeholder="이름"
+							maxlength="10" />
+						<div class="info">
+							<form:errors path="user_name" cssClass="errorMessage" />
+						</div>
 					</div>
 					<div class="input-box">
-						<input class="form-control" type="text" placeholder="이메일"
-							id="user_email" name="user_email" maxlength="30">
-						<div class="info"></div>
+						<form:input path="user_email" class="form-control"
+							placeholder="이메일" maxlength="30" />
+						<div class="info">
+							<form:errors path="user_email" cssClass="errorMessage" />
+						</div>
 					</div>
 				</div>
 				<button class="btn btn-primary btn-block" id="signUp" name="signUp">회원가입</button>
-			</form>
+			</form:form>
 		</div>
 	</div>
 	<script src="/js/user_register.js"></script>

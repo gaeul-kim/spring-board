@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-test page
-<a href="/user/register">register</a>
+success
 </body>
 </html>

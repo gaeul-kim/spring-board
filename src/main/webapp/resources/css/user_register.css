@@ -1,9 +1,5 @@
 @CHARSET "UTF-8";
 
-.row {
-	padding-bottom: 5px;
-}
-
 .form-control {
 	border: none;
 	box-shadow: none;
@@ -24,11 +20,15 @@
 	border-bottom: 1px solid gray;
 }
 
-.form-signUp {
+#user {
 	padding: 15px;
 }
 
 .content {
 	margin: auto;
 	width: 300px;
+}
+
+.errorMessage {
+	color: red;
 }
