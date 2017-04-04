@@ -1,17 +1,23 @@
 package sampleProject.test;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import sampleProject.board.dao.BoardDAO;
+import sampleProject.board.domain.Article;
+import sampleProject.board.service.BoardService;
 import sampleProject.user.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,10 +25,16 @@ import sampleProject.user.service.UserService;
         "file:src/main/webapp/WEB-INF/spring/appServlet/interceptor-context.xml", "file:src/main/webapp/WEB-INF/spring/root-context.xml" })
 
 public class UserTest {
-    Logger log = Logger.getLogger(this.getClass());
+    Logger LOG = Logger.getLogger(this.getClass());
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BoardDAO boardDAO;
+
+    @Autowired
+    private BoardService boardService;
 
     @Before
     public void setUp() throws Exception {
@@ -37,6 +49,44 @@ public class UserTest {
         Boolean availableUserId = userService.checkUserId(map);
 
         assertEquals(false, availableUserId);
+    }
+
+    @Ignore
+    @Test
+    public void insertArticle() throws Exception {
+        // boardDAO.deleteAll();
+
+        Long currentTime = System.currentTimeMillis();
+        Article article = new Article();
+        article.setArticle_title("제목" + currentTime);
+        article.setArticle_content("가나다");
+        article.setArticle_writer("sangsik");
+        article.setArticle_password("1234");
+
+        boardDAO.insertArticle(article);
+    }
+
+    @Test
+    public void selectArticles() throws Exception {
+        LOG.debug(boardDAO.selectArticles());
+    }
+
+    @Test
+    public void selectArticle() throws Exception {
+        Article article1 = new Article();
+        article1.setArticle_id(15);
+
+        Article article2 = boardService.articleDetail(article1);
+
+        assertThat(article1.getArticle_id(), is(article2.getArticle_id()));
+    }
+
+    @Test
+    public void updateDeleteDate() throws Exception {
+
+        Article article = new Article();
+        article.setArticle_id(21);
+        boardService.articleDelete(article);
     }
 
 }

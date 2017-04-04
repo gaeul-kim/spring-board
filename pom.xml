@@ -14,7 +14,12 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
-
+		<!-- IpsumLorem -->
+		<dependency>
+			<groupId>net._01001111</groupId>
+			<artifactId>jlorem</artifactId>
+			<version>1.1</version>
+		</dependency>
 		<!-- print query log -->
 		<dependency>
 			<groupId>org.lazyluke</groupId>
