@@ -6,13 +6,13 @@ import sampleProject.board.domain.Article;
 
 public interface BoardService {
 
-    List<Article> articleList() throws Exception;
+    List<Article> getArticles(String category) throws Exception;
 
-    Article articleDetail(Article article) throws Exception;
+    Article getArticle(Article article) throws Exception;
 
-    Article articleWrite(Article article) throws Exception;
+    Article writeArticle(Article article) throws Exception;
     
-    Article articleModify(Article article) throws Exception;
+    Article modifyArticle(Article article) throws Exception;
 
-    void articleDelete(Article article) throws Exception;
+    void deleteArticle(Article article) throws Exception;
 }

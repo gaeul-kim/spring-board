@@ -10,6 +10,15 @@ public class Article {
     private String article_insert_date;
     private String article_delete_date;
     private Integer article_hit;
+    private String article_category;
+
+    public String getArticle_category() {
+        return article_category;
+    }
+
+    public void setArticle_category(String article_category) {
+        this.article_category = article_category;
+    }
 
     public Integer getArticle_id() {
         return article_id;

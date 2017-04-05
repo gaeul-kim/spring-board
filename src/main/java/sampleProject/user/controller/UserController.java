@@ -18,7 +18,7 @@ import sampleProject.user.domain.User;
 import sampleProject.user.service.UserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping(value = "/user")
 public class UserController {
     Logger LOG = Logger.getLogger(this.getClass());
 

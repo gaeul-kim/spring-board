@@ -8,7 +8,6 @@ import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +50,6 @@ public class UserTest {
         assertEquals(false, availableUserId);
     }
 
-    @Ignore
     @Test
     public void insertArticle() throws Exception {
         // boardDAO.deleteAll();
@@ -62,13 +60,14 @@ public class UserTest {
         article.setArticle_content("가나다");
         article.setArticle_writer("sangsik");
         article.setArticle_password("1234");
+        article.setArticle_category("test");
 
         boardDAO.insertArticle(article);
     }
 
     @Test
     public void selectArticles() throws Exception {
-        LOG.debug(boardDAO.selectArticles());
+        LOG.debug(boardDAO.selectArticles("test"));
     }
 
     @Test
@@ -76,7 +75,7 @@ public class UserTest {
         Article article1 = new Article();
         article1.setArticle_id(15);
 
-        Article article2 = boardService.articleDetail(article1);
+        Article article2 = boardService.getArticle(article1);
 
         assertThat(article1.getArticle_id(), is(article2.getArticle_id()));
     }
@@ -86,7 +85,7 @@ public class UserTest {
 
         Article article = new Article();
         article.setArticle_id(21);
-        boardService.articleDelete(article);
+        boardService.deleteArticle(article);
     }
 
 }

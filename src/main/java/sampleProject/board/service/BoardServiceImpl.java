@@ -18,18 +18,18 @@ public class BoardServiceImpl implements BoardService {
     private BoardDAO boardDAO;
 
     @Override
-    public List<Article> articleList() throws Exception {
-        return boardDAO.selectArticles();
+    public List<Article> getArticles(String category) throws Exception {
+        return boardDAO.selectArticles(category);
     }
 
     @Override
-    public Article articleDetail(Article article) throws Exception {
+    public Article getArticle(Article article) throws Exception {
         boardDAO.updateHit(article);
         return boardDAO.selectArticle(article);
     }
 
     @Override
-    public Article articleWrite(Article article) throws Exception {
+    public Article writeArticle(Article article) throws Exception {
 
         // 삽입된 데이터의 article_id를 파라미터 객체에 넣어줌(sequence)
         // 작성 후 해당 글 보기
@@ -38,12 +38,12 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void articleDelete(Article article) throws Exception {
+    public void deleteArticle(Article article) throws Exception {
         boardDAO.updateDeleteDate(article);
     }
 
     @Override
-    public Article articleModify(Article article) throws Exception {
+    public Article modifyArticle(Article article) throws Exception {
         boardDAO.updateArticle(article);
         return boardDAO.selectArticle(article);
     }

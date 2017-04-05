@@ -11,8 +11,8 @@ import sampleProject.common.dao.AbstractDAO;
 public class BoardDAO extends AbstractDAO {
 
     @SuppressWarnings("unchecked")
-    public List<Article> selectArticles() throws Exception {
-        return selectList("board.selectArticles");
+    public List<Article> selectArticles(String category) throws Exception {
+        return selectList("board.selectArticles", category);
     }
 
     public Article selectArticle(Article article) throws Exception {
