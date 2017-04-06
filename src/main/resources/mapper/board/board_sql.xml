@@ -24,7 +24,8 @@
         <![CDATA[
             update article
                 set article_hit = article_hit+1
-                    where article_id = #{article_id}               
+                    where article_id = #{article_id}
+                        and article_delete_date is null               
         ]]>
 	</update>
 	<insert id="insertArticle" parameterType="sampleProject.board.domain.Article"

@@ -12,6 +12,14 @@ public class Article {
     private Integer article_hit;
     private String article_category;
 
+    public Article(Integer article_id) {
+        super();
+        this.article_id = article_id;
+    }
+
+    public Article() {
+    }
+
     public String getArticle_category() {
         return article_category;
     }

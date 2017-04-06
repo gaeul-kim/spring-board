@@ -12,7 +12,7 @@ public interface BoardService {
 
     Article writeArticle(Article article) throws Exception;
     
-    Article modifyArticle(Article article) throws Exception;
+    Article editArticle(Article article) throws Exception;
 
     void deleteArticle(Article article) throws Exception;
 }

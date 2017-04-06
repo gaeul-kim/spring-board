@@ -43,7 +43,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Article modifyArticle(Article article) throws Exception {
+    public Article editArticle(Article article) throws Exception {
         boardDAO.updateArticle(article);
         return boardDAO.selectArticle(article);
     }

@@ -25,7 +25,6 @@ public class BoardController {
     @RequestMapping(value = "/{category}", method = RequestMethod.GET)
     public String articleList(Model model, @PathVariable String category) throws Exception {
 
-        
         List<Article> articles = boardService.getArticles(category);
         model.addAttribute("articles", articles);
         return null;
