@@ -5,7 +5,7 @@
 	<select id="selectArticles" parameterType="sampleProject.article.domain.Article"
 		resultType="sampleProject.article.domain.Article">
 		<![CDATA[
-		    select articleId, articleTitle, articleWriter, articleInsertDate, articleHit, articleCategory
+		    select articleId, articleTitle, articleWriter, date_format(articleInsertDate,'%Y-%m-%d') articleInsertDate, articleHit, articleCategory
 		        from article 
 		            where articleDeleteDate is null 
 		                and articleCategory = #{articleCategory}
@@ -15,7 +15,7 @@
 		resultType="sampleProject.article.domain.Article">
         <![CDATA[
             select 
-                articleId, articleTitle, articleContent, articleWriter, articleInsertDate, articleHit, articleCategory
+                articleId, articleTitle, articleContent, articleWriter, date_format(articleInsertDate,'%Y-%m-%d %H:%i') articleInsertDate, articleHit, articleCategory
                     from article
                         where articleDeleteDate is null 
                             and articleId = #{articleId}
