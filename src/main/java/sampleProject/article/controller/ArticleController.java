@@ -1,4 +1,4 @@
-package sampleProject.board.controller;
+package sampleProject.article.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import sampleProject.board.domain.Article;
-import sampleProject.board.service.BoardService;
+import sampleProject.article.domain.Article;
+import sampleProject.article.service.ArticleService;
 
 @Controller
 @RequestMapping(value = "/article")
@@ -19,20 +19,20 @@ public class ArticleController {
     Logger LOG = Logger.getLogger(this.getClass());
 
     @Resource
-    private BoardService boardService;
+    private ArticleService articleService;
 
     @RequestMapping(value = "/{articleId}", method = RequestMethod.GET)
     public ModelAndView viewArticle(ModelAndView modelAndView, @PathVariable Integer articleId) throws Exception {
 
-        Article article = boardService.getArticle(new Article(articleId));
+        Article article = articleService.getArticle(new Article(articleId));
 
         if (article != null) {
             // 게시물 읽기 뷰페이지 지정
             modelAndView.addObject("article", article);
-            modelAndView.setViewName("/board/articleDetail");
+            modelAndView.setViewName("/article/articleDetail");
         } else {
             // 게시물 없음 뷰페이지 지정
-            modelAndView.setViewName("/board/articleNotFound");
+            modelAndView.setViewName("/common/pageNotFound");
         }
         return modelAndView;
     }

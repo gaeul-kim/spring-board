@@ -27,11 +27,11 @@
 	</div>
 
 	<div>
-		제목 :<input type="text" name="article_title">
+		제목 :<input type="text" name="articleTitle">
 	</div>
 	<div>
 		내용 :
-		<textarea rows="5" cols="10" name="article_content"></textarea>
+		<textarea rows="5" cols="10" name="articleContent"></textarea>
 	</div>
 	<div>
 		<a href="/">메인</a>

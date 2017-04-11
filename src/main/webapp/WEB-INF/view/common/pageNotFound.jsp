@@ -11,7 +11,7 @@
 <title>SampleProject - 알림</title>
 </head>
 <body>
-존재하지 않거나 삭제된 글 입니다.
+존재하지 않는 페이지이거나 잘못된 요청입니다.
 <div><a href="/">메인</a></div>
 </body>
 </html>

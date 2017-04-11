@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import sampleProject.board.service.BoardService;
+import sampleProject.article.service.ArticleService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml",
@@ -18,7 +18,7 @@ public class BoardTest {
 
  
     @Autowired
-    private BoardService boardService;
+    private ArticleService boardService;
 
     @Before
     public void setUp() throws Exception {

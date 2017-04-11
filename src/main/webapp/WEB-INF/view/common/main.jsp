@@ -11,10 +11,10 @@
 <title>SampleProject - 메인</title>
 </head>
 <body>
-	<a href="/board/qna">qna</a>
-	<a href="/board/free">free</a>
-	<a href="/board/notice">notice</a>
-	<a href="/board/market">market</a>
-	<a href="/user/register">register</a>
+	<a href="/articles/qna">qna</a>
+	<a href="/articles/free">free</a>
+	<a href="/articles/notice">notice</a>
+	<a href="/articles/market">market</a>
+	<a href="/articles/register">register</a>
 </body>
 </html>

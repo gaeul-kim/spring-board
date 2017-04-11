@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SampleProject - ${boardCategory}</title>
+<title>SampleProject - ${articleCategory}</title>
 </head>
 <body>
 	<c:choose>
@@ -18,16 +18,16 @@
 		<c:when test="${!empty articles }">
 			<c:forEach items="${articles}" var="article">
 				<div>
-					${article.article_id } <a href="/article/${article.article_id }">${article.article_title }</a>
-					${article.article_writer } ${article.article_insert_date }
-					${article.article_hit}
+					${article.articleId } <a href="/article/${article.articleId }">${article.articleTitle }</a>
+					${article.articleWriter } ${article.articleInsertDate }
+					${article.articleHit}
 				</div>
 			</c:forEach>
 		</c:when>
 	</c:choose>
 
 	<div>
-		<a href="/">메인</a> &nbsp; <a href="/board/${boardCategory}/write">글 작성</a>
+		<a href="/">메인</a> &nbsp; <a href="/articles/${articleCategory}/write">글 작성</a>
 	</div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package sampleProject.board.service;
+package sampleProject.article.service;
 
 import java.util.List;
 
@@ -7,25 +7,25 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import sampleProject.board.dao.BoardDAO;
-import sampleProject.board.domain.Article;
+import sampleProject.article.dao.ArticleDAO;
+import sampleProject.article.domain.Article;
 
-@Service("boardService")
-public class BoardServiceImpl implements BoardService {
+@Service("articleService")
+public class ArticleServiceImpl implements ArticleService {
     Logger log = Logger.getLogger(this.getClass());
 
     @Resource
-    private BoardDAO boardDAO;
+    private ArticleDAO articleDAO;
 
     @Override
     public List<Article> getArticles(String category) throws Exception {
-        return boardDAO.selectArticles(category);
+        return articleDAO.selectArticles(category);
     }
 
     @Override
     public Article getArticle(Article article) throws Exception {
-        boardDAO.updateHit(article);
-        return boardDAO.selectArticle(article);
+        articleDAO.updateHit(article);
+        return articleDAO.selectArticle(article);
     }
 
     @Override
@@ -33,24 +33,24 @@ public class BoardServiceImpl implements BoardService {
 
         // 삽입된 데이터의 article_id를 파라미터 객체에 넣어줌(sequence)
         // 작성 후 해당 글 보기
-        boardDAO.insertArticle(article);
-        return boardDAO.selectArticle(article);
+        articleDAO.insertArticle(article);
+        return articleDAO.selectArticle(article);
     }
 
     @Override
     public void deleteArticle(Article article) throws Exception {
-        boardDAO.updateDeleteDate(article);
+        articleDAO.updateDeleteDate(article);
     }
 
     @Override
     public Article editArticle(Article article) throws Exception {
-        boardDAO.updateArticle(article);
-        return boardDAO.selectArticle(article);
+        articleDAO.updateArticle(article);
+        return articleDAO.selectArticle(article);
     }
 
     @Override
-    public Boolean hasBoardCategory(String category) throws Exception {
-        if (boardDAO.selectBoardCategory(category) == 0) {
+    public Boolean hasArticleCategory(String category) throws Exception {
+        if (articleDAO.selectArticleCategory(category) == 0) {
             return false;
         } else {
             return true;
@@ -59,7 +59,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public List<String> getArticleCategories(String category) throws Exception {
-        return boardDAO.selectArticleCategories(category);
+        return articleDAO.selectArticleCategories(category);
     }
 
 }
