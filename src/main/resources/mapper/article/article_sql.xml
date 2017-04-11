@@ -59,15 +59,15 @@
 	<select id="selectArticleCategory" parameterType="String"
 		resultType="Integer">
     <![CDATA[
-        select count(*) from category where categoryName = #{articleCategory}
+        select count(*) from article_category where categoryName = #{articleCategory}
     ]]>
 	</select>
 	<select id="selectArticleCategories" parameterType="String"
 		resultType="String">
 	<![CDATA[
-        select tagName from tag 
+        select tagName from article_tag 
             where categoryId = 
-                (select categoryId from category where categoryName = #{articleCategory});	
+                (select categoryId from article_category where categoryName = #{articleCategory});	
     ]]>
 	</select>
 </mapper>
