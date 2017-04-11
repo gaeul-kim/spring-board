@@ -21,23 +21,23 @@ public class ArticleController {
     @Resource
     private BoardService boardService;
 
-    @RequestMapping(value = "/{article_id}", method = RequestMethod.GET)
-    public ModelAndView viewArticle(ModelAndView mv, @PathVariable Integer article_id) throws Exception {
+    @RequestMapping(value = "/{articleId}", method = RequestMethod.GET)
+    public ModelAndView viewArticle(ModelAndView modelAndView, @PathVariable Integer articleId) throws Exception {
 
-        Article article = boardService.getArticle(new Article(article_id));
+        Article article = boardService.getArticle(new Article(articleId));
 
         if (article != null) {
             // 게시물 읽기 뷰페이지 지정
-            mv.addObject("article", article);
-            mv.setViewName(null);
+            modelAndView.addObject("article", article);
+            modelAndView.setViewName("/board/articleDetail");
         } else {
             // 게시물 없음 뷰페이지 지정
-            mv.setViewName(null);
+            modelAndView.setViewName("/board/articleNotFound");
         }
-        return mv;
+        return modelAndView;
     }
 
-    @RequestMapping(value = "/edit/{article_id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/edit/{articleId}", method = RequestMethod.GET)
     public ModelAndView editArticle(ModelAndView mv, @PathVariable Integer article_id, HttpSession session) throws Exception {
 
         /*

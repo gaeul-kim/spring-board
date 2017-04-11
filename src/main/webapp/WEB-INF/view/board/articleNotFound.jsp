@@ -8,13 +8,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SampleProject - 메인</title>
+<title>SampleProject - 알림</title>
 </head>
 <body>
-	<a href="/board/qna">qna</a>
-	<a href="/board/free">free</a>
-	<a href="/board/notice">notice</a>
-	<a href="/board/market">market</a>
-	<a href="/user/register">register</a>
+존재하지 않거나 삭제된 글 입니다.
+<div><a href="/">메인</a></div>
 </body>
 </html>

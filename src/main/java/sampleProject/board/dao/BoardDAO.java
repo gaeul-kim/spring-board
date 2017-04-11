@@ -39,4 +39,13 @@ public class BoardDAO extends AbstractDAO {
         deleteAll("board.deleteAll");
     }
 
+    public Integer selectBoardCategory(String category) throws Exception {
+        return (Integer) selectOne("board.selectBoardCategory", category);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<String> selectArticleCategories(String category) throws Exception {
+        return selectList("board.selectArticleCategories", category);
+    }
+
 }

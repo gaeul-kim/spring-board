@@ -29,7 +29,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Article writeArticle(Article article) throws Exception {
+    public Article setArticle(Article article) throws Exception {
 
         // 삽입된 데이터의 article_id를 파라미터 객체에 넣어줌(sequence)
         // 작성 후 해당 글 보기
@@ -46,6 +46,20 @@ public class BoardServiceImpl implements BoardService {
     public Article editArticle(Article article) throws Exception {
         boardDAO.updateArticle(article);
         return boardDAO.selectArticle(article);
+    }
+
+    @Override
+    public Boolean hasBoardCategory(String category) throws Exception {
+        if (boardDAO.selectBoardCategory(category) == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public List<String> getArticleCategories(String category) throws Exception {
+        return boardDAO.selectArticleCategories(category);
     }
 
 }

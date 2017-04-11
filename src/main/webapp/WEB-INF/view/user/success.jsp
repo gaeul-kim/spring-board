@@ -10,7 +10,7 @@
 <body>
 	<div>success</div>
 	<div>
-		<a href="/">return to main</a>
+		<a href="/">메인</a>
 	</div>
 </body>
 </html>

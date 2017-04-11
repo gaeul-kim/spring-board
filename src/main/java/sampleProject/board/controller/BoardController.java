@@ -22,12 +22,34 @@ public class BoardController {
     @Resource
     private BoardService boardService;
 
-    @RequestMapping(value = "/{category}", method = RequestMethod.GET)
-    public String articleList(Model model, @PathVariable String category) throws Exception {
+    @RequestMapping(value = { "/", "" }, method = RequestMethod.GET)
+    public String boardRoot() throws Exception {
+        return "/common/main";
 
-        List<Article> articles = boardService.getArticles(category);
-        model.addAttribute("articles", articles);
-        return null;
     }
 
+    @RequestMapping(value = "/{boardCategory}", method = RequestMethod.GET)
+    public String articleList(Model model, @PathVariable String boardCategory) throws Exception {
+
+        // 요청한 게시판이 존재하는지 확인 후 목록 검색
+        if (boardService.hasBoardCategory(boardCategory)) {
+            List<Article> articles = boardService.getArticles(boardCategory);
+            model.addAttribute("articles", articles);
+            model.addAttribute("boardCategory", boardCategory);
+            return "board/articleList";
+        } else {
+            return "/common/main";
+        }
+    }
+
+    @RequestMapping(value = "/{boardCategory}/write", method = RequestMethod.GET)
+    public String articleWrite(Model model, @PathVariable String boardCategory) throws Exception {
+
+        // 요청한 게시판이 존재하는지 확인 후 글쓰기 폼을 설정
+        if (boardService.hasBoardCategory(boardCategory)) {
+            model.addAttribute("boardCategory", boardCategory);
+            model.addAttribute("articleCategories", boardService.getArticleCategories(boardCategory));
+        }
+        return "board/articleWrite";
+    }
 }

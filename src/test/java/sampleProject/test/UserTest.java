@@ -2,12 +2,15 @@ package sampleProject.test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +43,7 @@ public class UserTest {
 
     }
 
+    @Ignore
     @Test
     public void checkUserId() throws Exception {
         HashMap<String, Object> map = new HashMap<String, Object>();
@@ -50,26 +54,32 @@ public class UserTest {
         assertEquals(false, availableUserId);
     }
 
+    @Ignore
     @Test
     public void insertArticle() throws Exception {
         // boardDAO.deleteAll();
 
-        Long currentTime = System.currentTimeMillis();
-        Article article = new Article();
-        article.setArticle_title("제목" + currentTime);
-        article.setArticle_content("가나다");
-        article.setArticle_writer("sangsik");
-        article.setArticle_password("1234");
-        article.setArticle_category("test");
+        for (int i = 0; i < 15; i++) {
 
-        boardDAO.insertArticle(article);
+            Long currentTime = System.currentTimeMillis();
+            Article article = new Article();
+            article.setArticle_title("제목" + currentTime);
+            article.setArticle_content("가나다" + i);
+            article.setArticle_writer("sangsik");
+            article.setArticle_password("1234");
+            article.setArticle_category("qna");
+
+            boardDAO.insertArticle(article);
+        }
     }
 
+    @Ignore
     @Test
     public void selectArticles() throws Exception {
         LOG.debug(boardDAO.selectArticles("test"));
     }
 
+    @Ignore
     @Test
     public void selectArticle() throws Exception {
         Article article1 = new Article();
@@ -80,12 +90,27 @@ public class UserTest {
         assertThat(article1.getArticle_id(), is(article2.getArticle_id()));
     }
 
+    @Ignore
     @Test
     public void updateDeleteDate() throws Exception {
 
         Article article = new Article();
         article.setArticle_id(21);
         boardService.deleteArticle(article);
+    }
+
+    @Test
+    public void hasCategory() throws Exception {
+        assertTrue(boardService.hasBoardCategory("qna"));
+    }
+
+    @Test
+    public void hasNotCategory1() throws Exception {
+        assertFalse(boardService.hasBoardCategory("dasf"));
+    }
+    @Test
+    public void hasNotCategory2() throws Exception {
+        assertFalse(boardService.hasBoardCategory(""));
     }
 
 }

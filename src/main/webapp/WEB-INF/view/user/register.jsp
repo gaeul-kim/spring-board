@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>회원가입</title>
+<title>SampleProject - 회원가입</title>
 <script src="/js/jquery-3.1.1.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"

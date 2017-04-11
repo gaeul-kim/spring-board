@@ -10,9 +10,13 @@ public interface BoardService {
 
     Article getArticle(Article article) throws Exception;
 
-    Article writeArticle(Article article) throws Exception;
-    
+    Article setArticle(Article article) throws Exception;
+
     Article editArticle(Article article) throws Exception;
 
     void deleteArticle(Article article) throws Exception;
+
+    Boolean hasBoardCategory(String category) throws Exception;
+
+    List<String> getArticleCategories(String category) throws Exception;
 }
