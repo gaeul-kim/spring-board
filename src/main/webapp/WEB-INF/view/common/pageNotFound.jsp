@@ -8,13 +8,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SampleProject - 메인</title>
+<title>SampleProject - 알림</title>
 </head>
 <body>
-	<a href="/articles/qna">qna</a>
-	<a href="/articles/free">free</a>
-	<a href="/articles/notice">notice</a>
-	<a href="/articles/market">market</a>
-	<a href="/articles/register">register</a>
+존재하지 않는 페이지이거나 잘못된 요청입니다.
+<div><a href="/">메인</a></div>
 </body>
 </html>

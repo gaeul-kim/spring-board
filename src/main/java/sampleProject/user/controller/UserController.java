@@ -18,7 +18,7 @@ import sampleProject.user.domain.User;
 import sampleProject.user.service.UserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping(value = "/user")
 public class UserController {
     Logger LOG = Logger.getLogger(this.getClass());
 
@@ -26,13 +26,13 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String registerForm(Model model) {
+    public String viewRegisterForm(Model model) {
         model.addAttribute("user", new User());
         return "/user/register";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String registerSign(@Valid User user, BindingResult bindingResult) throws Exception {
+    public String userRegister(@Valid User user, BindingResult bindingResult) throws Exception {
 
         if (bindingResult.hasErrors()) {
             return "/user/register";
