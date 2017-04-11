@@ -16,5 +16,6 @@
 	<a href="/articles/notice">notice</a>
 	<a href="/articles/market">market</a>
 	<a href="/member/register">register</a>
+	<a href="/j_spring_security_logout">logout</a>
 </body>
 </html>

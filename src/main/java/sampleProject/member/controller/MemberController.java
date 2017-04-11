@@ -57,4 +57,9 @@ public class MemberController {
         }
         return resultMap;
     }
+
+    @RequestMapping("/login")
+    public String loginForm() throws Exception {
+        return "member/login";
+    }
 }
