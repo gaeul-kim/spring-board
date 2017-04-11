@@ -1,4 +1,4 @@
-package sampleProject.user.controller;
+package sampleProject.member.controller;
 
 import java.util.HashMap;
 
@@ -14,45 +14,45 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import sampleProject.user.domain.User;
-import sampleProject.user.service.UserService;
+import sampleProject.member.domain.Member;
+import sampleProject.member.service.MemberService;
 
 @Controller
-@RequestMapping(value = "/user")
-public class UserController {
+@RequestMapping(value = "/member")
+public class MemberController {
     Logger LOG = Logger.getLogger(this.getClass());
 
-    @Resource(name = "userService")
-    private UserService userService;
+    @Resource(name = "memberService")
+    private MemberService memberService;
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String viewRegisterForm(Model model) {
-        model.addAttribute("user", new User());
-        return "/user/register";
+    public String registerForm(Model model) {
+        model.addAttribute("member", new Member());
+        return "/member/register";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String userRegister(@Valid User user, BindingResult bindingResult) throws Exception {
+    public String registerSubmit(@Valid Member member, BindingResult bindingResult) throws Exception {
 
         if (bindingResult.hasErrors()) {
-            return "/user/register";
+            return "/member/register";
         } else {
-            userService.registerUser(user);
-            LOG.debug(user.getUser_idx());
+            memberService.registerMember(member);
+            LOG.debug(member.getMemberIdx());
         }
-        return "user/success";
+        return "member/success";
     }
 
     @RequestMapping("/checkId")
     @ResponseBody
-    public HashMap<String, Object> checkId(@ModelAttribute User user) throws Exception {
+    public HashMap<String, Object> checkId(@ModelAttribute Member member) throws Exception {
 
-        Boolean availableUserId = userService.checkUserId(user);
+        Boolean availableMemberId = memberService.checkMemberId(member);
 
         HashMap<String, Object> resultMap = new HashMap<String, Object>();
-        if (!availableUserId) {
+        if (!availableMemberId) {
             resultMap.put("result", "fail");
-        } else if (availableUserId) {
+        } else if (availableMemberId) {
             resultMap.put("result", "success");
         }
         return resultMap;

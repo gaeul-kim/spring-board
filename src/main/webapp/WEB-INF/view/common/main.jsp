@@ -15,6 +15,6 @@
 	<a href="/articles/free">free</a>
 	<a href="/articles/notice">notice</a>
 	<a href="/articles/market">market</a>
-	<a href="/articles/register">register</a>
+	<a href="/member/register">register</a>
 </body>
 </html>

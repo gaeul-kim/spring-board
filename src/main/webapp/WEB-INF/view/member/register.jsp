@@ -25,48 +25,48 @@
 <body>
     <div class="container">
         <div class="content">
-            <form:form modelAttribute="user" method="post" autocomplete="false">
+            <form:form modelAttribute="member" method="post" autocomplete="false">
                 <div class="form-box">
                     <div class="input-box">
-                        <form:input path="user_id" class="form-control" placeholder="아이디"
+                        <form:input path="memberId" class="form-control" placeholder="아이디"
                             maxlength="15" />
                         <div class="info">
-                            <form:errors path="user_id" cssClass="errorMessage" />
+                            <form:errors path="memberId" cssClass="errorMessage" />
                         </div>
 
                     </div>
                     <div class="input-box">
-                        <form:password path="user_password" class="form-control"
+                        <form:password path="memberPassword" class="form-control"
                             placeholder="비밀번호" maxlength="15" />
                         <div class="info">
-                            <form:errors path="user_password" cssClass="errorMessage" />
+                            <form:errors path="memberPassword" cssClass="errorMessage" />
                         </div>
                     </div>
                     <div class="input-box">
-                        <form:password path="confirm_password" class="form-control"
+                        <form:password path="confirmPassword" class="form-control"
                             placeholder="비밀번호 확인" maxlength="15" />
                         <div class="info">
-                            <form:errors path="user_password" cssClass="errorMessage" />
+<%--                             <form:errors path="confirmPassword" cssClass="errorMessage" /> --%>
                         </div>
                     </div>
                 </div>
                 <div class="form-box">
                     <div class="input-box">
-                        <form:input path="user_name" class="form-control" placeholder="이름"
+                        <form:input path="memberName" class="form-control" placeholder="이름"
                             maxlength="10" />
                         <div class="info">
-                            <form:errors path="user_name" cssClass="errorMessage" />
+                            <form:errors path="memberName" cssClass="errorMessage" />
                         </div>
                     </div>
                     <div class="input-box">
-                        <form:input path="user_email" class="form-control"
+                        <form:input path="memberEmail" class="form-control"
                             placeholder="이메일" maxlength="30" />
                         <div class="info">
-                            <form:errors path="user_email" cssClass="errorMessage" />
+                            <form:errors path="memberEmail" cssClass="errorMessage" />
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-primary btn-block" id="signUp" name="signUp">회원가입</button>
+                <button class="btn btn-primary btn-block" id="btn-register">회원가입</button>
             </form:form>
         </div>
     </div>
