@@ -20,4 +20,13 @@
                 (#{memberId}, #{memberPassword}, #{memberName}, #{memberEmail}, now()) 
          ]]>
 	</insert>
+	
+	   <insert id="insertAuthority" parameterType="hashmap">
+        <![CDATA[
+            INSERT member_authority 
+                (memberId, authorityCode)
+            VALUES 
+                (#{memberId}, #{authorityCode}) 
+         ]]>
+    </insert>
 </mapper>

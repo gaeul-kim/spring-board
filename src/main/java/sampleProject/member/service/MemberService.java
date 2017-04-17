@@ -12,4 +12,6 @@ public interface MemberService {
 
     void registerMember(Member member) throws Exception;
 
+    void grantBasicAuthority(Member member)throws Exception;
+
 }

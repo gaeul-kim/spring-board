@@ -38,6 +38,7 @@ public class MemberController {
             return "/member/register";
         } else {
             memberService.registerMember(member);
+            memberService.grantBasicAuthority(member);
             LOG.debug(member.getMemberIdx());
         }
         return "member/success";

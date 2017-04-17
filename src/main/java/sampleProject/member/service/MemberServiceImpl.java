@@ -1,6 +1,7 @@
 package sampleProject.member.service;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -40,6 +41,16 @@ public class MemberServiceImpl implements MemberService {
         if (checkMemberId(member)) {
             memberDAO.insertMember(member);
         }
+    }
+
+    @Override
+    public void grantBasicAuthority(Member member) throws Exception {
+        // 기본 권한(USER)부여. 권한부여 기능을 관리하는 부분을 분리해야함
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("memberId", member.getMemberId());
+        map.put("authorityCode", "USER");
+
+        memberDAO.insertAuthority(map);
     }
 
 }

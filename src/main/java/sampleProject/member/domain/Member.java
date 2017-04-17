@@ -18,6 +18,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
 public class Member implements UserDetails {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     @NotEmpty(message = "필수 입력")
     @Size(min = 5, max = 15, message = "5~15자의 영문 소문자/숫자")
     private String memberId;

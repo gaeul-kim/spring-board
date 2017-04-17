@@ -1,4 +1,4 @@
-package sampleProject.common.dao;
+package sampleProject.common.dao.security;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

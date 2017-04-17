@@ -10,27 +10,42 @@
 	<http pattern="/**/*.css" security="none" />
 
 	<http auto-config="true" use-expressions="true">
-		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
 		<intercept-url pattern="/member/login" access="isAnonymous()" />
 		<intercept-url pattern="/member/register" access="isAnonymous()" />
-		<intercept-url pattern="/articles/**/write" access="hasRole('ROLE_USER')" />
-        <intercept-url pattern="/" access="permitAll" />
-		<form-login 
-		    login-page="/member/login"
-			username-parameter="memberId"
-			password-parameter="memberPassword" 
-			default-target-url="/" 
-			authentication-failure-url="/member/login?fail=true" 
-        />
+		<intercept-url pattern="/articles/market" access="hasAnyRole('USER','ADMIN')" />
+		<intercept-url pattern="/articles/notice/write" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/articles/**/write" access="hasAnyRole('USER','ADMIN')" />
+		<intercept-url pattern="/" access="permitAll" />
+		<form-login login-page="/member/login" username-parameter="memberId"
+			password-parameter="memberPassword" default-target-url="/"
+			authentication-failure-url="/member/login?fail=true" />
+
+		<logout logout-success-url="/" delete-cookies="JSESSIONID" />
+
 	</http>
 
 	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="user1" password="user1password" authorities="ROLE_USER" />
-				<user name="admin1" password="admin1password" authorities="ROLE_ADMIN" />
-			</user-service>
-		</authentication-provider>
+		<authentication-provider user-service-ref="customJdbcDaoImpl" />
+		<!-- <user-service> <user name="user1" password="user1password" authorities="ROLE_USER" 
+			/> <user name="admin1" password="admin1password" authorities="ROLE_ADMIN" 
+			/> </user-service> -->
+		<!-- </authentication-provider> -->
 	</authentication-manager>
+
+	<beans:bean id="customJdbcDaoImpl"
+		class="sampleProject.common.dao.security.CustomJdbcDaoImpl">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="rolePrefix" value="" />
+		<beans:property name="usersByUsernameQuery"
+			value="SELECT memberId, memberPassword, memberName FROM member WHERE memberId = ?" />
+
+		<beans:property name="authoritiesByUsernameQuery"
+			value="SELECT authorityCode FROM member_authority where memberId = ?"></beans:property>
+		<beans:property name="enableGroups" value="false" />
+
+	</beans:bean>
+
+
 
 </beans:beans>
