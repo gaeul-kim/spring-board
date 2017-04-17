@@ -35,10 +35,13 @@
 		<form name="loginForm" action="/j_spring_security_check" method='POST'>
 
 			<div>
-				<span>사용자:<input type='text' id="memberId" name='memberId' value=""></span>
-				<span>비밀번호:<input type="password" id="memberPassword" name="memberPassword" value=""></span>
-				<span><input name="submit" type="submit" value="Login" /></span>
-			</div>	
+				<span>사용자:<input type='text' id="memberId" name='memberId'
+					value=""></span> <span>비밀번호:<input type="password"
+					id="memberPassword" name="memberPassword" value=""></span> <span><input
+					name="submit" type="submit" value="Login" /></span>
+			</div>
+			<input type="hidden" name="loginRedirect" value="${loginRedirect}" />
+
 		</form>
 		<c:if test="${not empty param.fail }">
 			<p>Your login attempt was not successful, try again.</p>
