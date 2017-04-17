@@ -18,6 +18,9 @@ import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.util.StringUtils;
 
+/*
+ * 인증 성공 핸들러
+ */
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     Logger LOG = Logger.getLogger(this.getClass());
 

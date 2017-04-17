@@ -19,8 +19,10 @@
 		<intercept-url pattern="/" access="permitAll" />
 		<form-login login-page="/member/login" username-parameter="memberId"
 			password-parameter="memberPassword" default-target-url="/"
-			authentication-failure-url="/member/login?fail=true"
-			authentication-success-handler-ref="customAuthenticationSuccessHandler" />
+
+			authentication-success-handler-ref="customAuthenticationSuccessHandler"
+			authentication-failure-handler-ref="customAuthenticationFailureHandler" />
+
 
 		<logout logout-success-url="/" delete-cookies="JSESSIONID" />
 
@@ -41,12 +43,26 @@
 		<beans:property name="enableGroups" value="false" />
 	</beans:bean>
 
-	<!-- 로그인 성공 후 작업 핸들러 -->
+	<!-- 로그인 성공 작업 핸들러 -->
 	<beans:bean id="customAuthenticationSuccessHandler"
 		class="sampleProject.common.security.handler.CustomAuthenticationSuccessHandler">
 		<beans:property name="targetUrlParameter" value="loginRedirect"></beans:property>
 		<beans:property name="useReferer" value="false"></beans:property>
 		<beans:property name="defaultUrl" value="/"></beans:property>
+	</beans:bean>
+
+	<!-- 로그인 실패 작업 핸들러 -->
+	<beans:bean id="customAuthenticationFailureHandler"
+		class="sampleProject.common.security.handler.CustomAuthenticationFailureHandler">
+		<beans:property name="loginIdName" value="memberId" />
+		<beans:property name="loginPasswordName" value="memberPassword" />
+		<beans:property name="loginRedirectName" value="loginRedirect" />
+		<beans:property name="exceptionMessageName" value="securityExceptionMessage" />
+<!-- 		<beans:property name="defaultFailureUrl" value="/member/login?fail=true" /> -->
+
+		<!-- <beans:property name="targetUrlParameter" value="loginRedirect"></beans:property> 
+			<beans:property name="useReferer" value="false"></beans:property> <beans:property 
+			name="defaultUrl" value="/"></beans:property> -->
 	</beans:bean>
 
 
