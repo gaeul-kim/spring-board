@@ -26,13 +26,10 @@
 
 	<c:if test="${not empty securityExceptionMessage }">
 		<p>Your login attempt was not successful, try again.</p>
-		<p><font color="red">${securityExceptionMessage}</font></p>
+		<p>
+			<font color="red">${securityExceptionMessage}</font>
+		</p>
 	</c:if>
 	<input type="hidden" name="loginRedirect" value="${loginRedirect}" />
-	<!-- <c:if test="${not empty param.fail }">
-	<p>Your login attempt was not successful, try again.</p>
-	<p>Reason: ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message }</p>
-	<c:remove scope="session" var="SPRING_SECURITY_LAST_EXCEPTION"/>
-	</c:if> -->
 </body>
 </html>
