@@ -31,6 +31,16 @@
 			</bean>
 		</property>
 	</bean>
+	
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	   <property name="basenames">
+	       <list>
+	           <value>classpath:/message/spring_security_messages</value>
+	       </list>
+	   </property>
+	   <property name="defaultEncoding" value="utf-8"/>
+	   <property name="cacheSeconds" value="5"/>
+	</bean>
 
 
 </beans>

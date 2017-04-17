@@ -33,8 +33,8 @@
 		useGeneratedKeys="true" keyProperty="articleId">
 	   <![CDATA[
             insert into article
-                (articleTitle, articleContent, articleWriter, articlePassword, articleCategory)
-                    values(#{articleTitle}, #{articleContent}, #{articleWriter}, #{articlePassword},#{articleCategory})
+                (articleTitle, articleContent, articleWriter, articlePassword, articleCategory, articleInsertDate)
+                    values(#{articleTitle}, #{articleContent}, #{articleWriter}, #{articlePassword},#{articleCategory}, now())
         ]]>
 	</insert>
 

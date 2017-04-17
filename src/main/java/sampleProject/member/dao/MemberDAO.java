@@ -1,6 +1,7 @@
 package sampleProject.member.dao;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +21,10 @@ public class MemberDAO extends AbstractDAO {
 
     public Integer insertMember(Member member) throws Exception {
         return (Integer) insert("member.insertMember", member);
+    }
+
+    public void insertAuthority(Map<String, Object> params) {
+        insert("member.insertAuthority", params);
     }
 
 }

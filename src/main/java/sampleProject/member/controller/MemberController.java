@@ -38,7 +38,6 @@ public class MemberController {
             return "/member/register";
         } else {
             memberService.registerMember(member);
-            LOG.debug(member.getMemberIdx());
         }
         return "member/success";
     }
@@ -57,4 +56,10 @@ public class MemberController {
         }
         return resultMap;
     }
+
+    @RequestMapping("/login")
+    public String loginForm() throws Exception {
+        return "member/login";
+    }
+
 }
