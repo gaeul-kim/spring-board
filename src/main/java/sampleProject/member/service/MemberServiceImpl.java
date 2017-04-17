@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import sampleProject.member.dao.MemberDAO;
@@ -14,6 +16,9 @@ import sampleProject.member.domain.Member;
 @Service("memberService")
 public class MemberServiceImpl implements MemberService {
     Logger log = Logger.getLogger(this.getClass());
+
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
 
     @Resource(name = "memberDAO")
     private MemberDAO memberDAO;
@@ -39,13 +44,18 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void registerMember(Member member) throws Exception {
         if (checkMemberId(member)) {
+            // 암호화
+            member.setMemberPassword(passwordEncoder.encode(member.getMemberPassword()));
+            // DB 삽입
             memberDAO.insertMember(member);
+            // 권한부여 (Service 분리필요)
+            grantAuthority(member);
         }
     }
 
     @Override
-    public void grantBasicAuthority(Member member) throws Exception {
-        // 기본 권한(USER)부여. 권한부여 기능을 관리하는 부분을 분리해야함
+    public void grantAuthority(Member member) throws Exception {
+        // 기본 권한(USER)부여(임시)
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("memberId", member.getMemberId());
         map.put("authorityCode", "USER");

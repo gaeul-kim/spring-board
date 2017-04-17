@@ -6,8 +6,6 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,9 +22,6 @@ import sampleProject.member.service.MemberService;
 public class MemberController {
     Logger LOG = Logger.getLogger(this.getClass());
 
-    @Autowired
-    BCryptPasswordEncoder passwordEncoder;
-
     @Resource(name = "memberService")
     private MemberService memberService;
 
@@ -42,10 +37,7 @@ public class MemberController {
         if (bindingResult.hasErrors()) {
             return "/member/register";
         } else {
-            member.setMemberPassword(passwordEncoder.encode(member.getPassword()));
             memberService.registerMember(member);
-            memberService.grantBasicAuthority(member);
-            LOG.debug(member.getMemberIdx());
         }
         return "member/success";
     }
