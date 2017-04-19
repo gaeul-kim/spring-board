@@ -18,5 +18,6 @@ public interface ArticleService {
 
     Boolean hasArticleCategory(String articleCategory) throws Exception;
 
-    List<String> getArticleCategories(String articleCategory) throws Exception;
+    List<String> getArticleTags(String articleCategory) throws Exception;
+
 }

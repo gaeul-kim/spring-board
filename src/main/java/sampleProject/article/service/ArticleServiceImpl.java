@@ -33,6 +33,10 @@ public class ArticleServiceImpl implements ArticleService {
 
         // 삽입된 데이터의 article_id를 파라미터 객체에 넣어줌(sequence)
         // 작성 후 해당 글 보기
+        if (article.getArticleTag() != null) {
+            article.setArticleTitle(article.getArticleTag().concat(article.getArticleTitle()));
+        }
+
         articleDAO.insertArticle(article);
         return articleDAO.selectArticle(article);
     }
@@ -58,8 +62,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<String> getArticleCategories(String category) throws Exception {
-        return articleDAO.selectArticleCategories(category);
+    public List<String> getArticleTags(String category) throws Exception {
+        return articleDAO.selectArticleTags(category);
     }
 
 }

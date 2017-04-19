@@ -1,16 +1,35 @@
 package sampleProject.article.domain;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Article {
 
     private Integer articleId;
+
+    @NotEmpty(message = "필수 입력")
+    @Size(min = 1, max = 200, message = "제목의 길이가 너무 깁니다")
     private String articleTitle;
+
+    @NotEmpty(message = "필수 입력")
+    @Size(min = 1)
     private String articleContent;
+
     private String articleWriter;
-    private String articlePassword;
     private String articleInsertDate;
     private String articleDeleteDate;
     private Integer articleHit;
     private String articleCategory;
+    private String articleTag;
+
+    public String getArticleTag() {
+        return articleTag;
+    }
+
+    public void setArticleTag(String articleTag) {
+        this.articleTag = "[" + articleTag + "] ";
+    }
 
     public Article(Integer articleId) {
         super();
@@ -50,14 +69,6 @@ public class Article {
 
     public void setArticleWriter(String articleWriter) {
         this.articleWriter = articleWriter;
-    }
-
-    public String getArticlePassword() {
-        return articlePassword;
-    }
-
-    public void setArticlePassword(String articlePassword) {
-        this.articlePassword = articlePassword;
     }
 
     public String getArticleInsertDate() {

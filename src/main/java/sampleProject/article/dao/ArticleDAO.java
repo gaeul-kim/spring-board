@@ -40,8 +40,8 @@ public class ArticleDAO extends AbstractDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public List<String> selectArticleCategories(String articleCategory) throws Exception {
-        return selectList("article.selectArticleCategories", articleCategory);
+    public List<String> selectArticleTags(String articleCategory) throws Exception {
+        return selectList("article.selectArticleTags", articleCategory);
     }
 
 }

@@ -4,37 +4,69 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- jQuery -->
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+<!-- bootstrap -->
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bootstrap/css//bootstrap-theme.min.css">
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<!--  register -->
+<link rel="stylesheet" href="/css/input_form.css">
+<!-- include summernote css/js-->
+<link href="/summernote/summernote.css" rel="stylesheet">
+<script src="/summernote/summernote.js"></script>
+
+<!-- include summernote-ko-KR -->
+<script src="/summernote/lang/summernote-ko-KR.js"></script>
+
 <title>SampleProject - 글작성</title>
 </head>
 <body>
-	<div>
-		분류 : <select>
-			<c:choose>
-				<c:when test="${empty articleCategories}">
-					<option>미분류</option>
-				</c:when>
-				<c:when test="${!empty articleCategories }">
-					<c:forEach items="${articleCategories}" var="category">
-						<option>${category }</option>
-					</c:forEach>
-				</c:when>
-			</c:choose>
-		</select>
-	</div>
 
-	<div>
-		제목 :<input type="text" name="articleTitle">
-	</div>
-	<div>
-		내용 :
-		<textarea rows="5" cols="10" name="articleContent"></textarea>
-	</div>
-	<div>
-		<a href="/">메인</a>
+	<div class="container">
+		<div class="content">
+			<form:form modelAttribute="article" mthod="post" autocomplete="false">
+				<input type="hidden" name="articleWriter"
+					value="<sec:authentication property="principal.memberId" />" />
+				<div class="form-box">
+					<c:choose>
+
+						<c:when test="${!empty articleTags }">
+							<div class="input-box">
+								<select name="articleTag" class="form-control">
+									<c:forEach items="${articleTags}" var="articleTag">
+										<option>${articleTag }</option>
+									</c:forEach>
+								</select>
+							</div>
+						</c:when>
+
+					</c:choose>
+					<div class="input-box">
+
+						<form:input path="articleTitle" class="form-control"
+							placeholder="제목" maxlength="80" />
+					</div>
+
+				</div>
+
+				<div class="form-box">
+					<div class="input-box">
+						<form:textarea path="articleContent" class="form-control"
+							placeholder="내용" rows="10" wrap="hard" />
+					</div>
+				</div>
+				<button class="btn btn-primary btn-block" id="btn-register">작성</button>
+			</form:form>
+			<a href="/">메인</a>
+		</div>
 	</div>
 </body>
 </html>

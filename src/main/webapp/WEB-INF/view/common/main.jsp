@@ -1,9 +1,3 @@
-<%@page import="sampleProject.member.domain.Member"%>
-<%@page import="org.springframework.security.core.Authentication"%>
-<%@ page
-	import="org.springframework.security.core.context.SecurityContextHolder"%>
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -19,24 +13,17 @@
 <title>SampleProject - 메인</title>
 </head>
 <body>
-	<%
-	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    Object principal = auth.getPrincipal();
-	    String name = "";
-	    if (principal != null && principal instanceof Member) {
-	        name = ((Member) principal).getMemberName();
-	    }
-	%>
 	<sec:authorize access="isAuthenticated()">
-		<%=name%> 님 반갑습니다.
+		<sec:authentication property="principal.memberName" />님 반갑습니다.
 	</sec:authorize>
 	<sec:authorize access="isAnonymous()">
 		<form name="loginForm" action="/j_spring_security_check" method='POST'>
 
 			<div>
-				<span>사용자:<input type='text' id="memberId" name='memberId'
-					value=""></span> <span>비밀번호:<input type="password"
-					id="memberPassword" name="memberPassword" value=""></span> <span><input
+				<span><input type="text" id="memberId" name='memberId'
+					value="" class="form-control" placeholder="아이디" /></span> <span><input
+					type="password" id="memberPassword" name="memberPassword" value=""
+					class="form-control" placeholder="비밀번호"></span> <span><input
 					name="submit" type="submit" value="Login" /></span>
 			</div>
 			<input type="hidden" name="loginRedirect" value="${loginRedirect}" />
