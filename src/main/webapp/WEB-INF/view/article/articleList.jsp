@@ -9,7 +9,8 @@
 <!DOCTYPE html>
 <html>
 <head>
- <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+<meta charset="UTF-8" name="viewport"
+	content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
 <!-- jQuery -->
 <script src="/js/jquery-3.1.1.min.js"></script>
 
@@ -55,7 +56,7 @@
 								<tr>
 									<td>${article.articleId }</td>
 									<td><a href="/article/${article.articleId }">${article.articleTitle }</a></td>
-									<td>${article.articleWriter }</td>
+									<td>${article.articleWriterName }</td>
 									<td>${article.articleInsertDate }</td>
 									<td>${article.articleHit}</td>
 								</tr>
@@ -65,7 +66,6 @@
 				</tbody>
 			</table>
 			<div class="text-center">
-				<a class="btn btn-default pull-left" href="/">메인</a>
 				<ul class="pagination">
 					<li><a href="#">1</a></li>
 					<li><a href="#">2</a></li>
@@ -78,8 +78,9 @@
 					<li><a href="#">9</a></li>
 					<li><a href="#">10</a></li>
 				</ul>
-				<a class="btn btn-default pull-right"
-					href="/articles/${articleCategory}/write">글 작성</a>
+                <a class="btn btn-default pull-left" href="/">메인</a> <a
+                    class="btn btn-default pull-right"
+                    href="/articles/${articleCategory}/write">글 작성</a>
 			</div>
 
 		</div>

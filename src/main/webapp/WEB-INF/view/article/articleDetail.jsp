@@ -46,7 +46,7 @@
 				<tr>
 					<td>${article.articleId }</td>
 					<td>${article.articleTitle }</td>
-					<td>${article.articleWriter }</td>
+					<td>${article.articleWriterName }</td>
 					<td>${article.articleInsertDate }</td>
 					<td>${article.articleHit}</td>
 				</tr>
@@ -55,8 +55,6 @@
 				</tr>
 
 			</table>
-
-
 			<a class="btn btn-default pull-left" href="/">메인</a>
 			<a class="btn btn-default pull-right" href="/articles/${article.articleCategory}">목록</a>
 

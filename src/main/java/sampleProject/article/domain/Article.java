@@ -22,6 +22,15 @@ public class Article {
     private Integer articleHit;
     private String articleCategory;
     private String articleTag;
+    private String articleWriterName;
+
+    public String getArticleWriterName() {
+        return articleWriterName;
+    }
+
+    public void setArticleWriterName(String articleWriterName) {
+        this.articleWriterName = articleWriterName;
+    }
 
     public String getArticleTag() {
         return articleTag;
