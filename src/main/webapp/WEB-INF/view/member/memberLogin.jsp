@@ -9,7 +9,8 @@
 <!DOCTYPE html>
 <html>
 <head>
- <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+<meta charset="UTF-8" name="viewport"
+	content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
 <!-- jQuery -->
 <script src="/js/jquery-3.1.1.min.js"></script>
 
@@ -35,38 +36,30 @@
 	<div class="container">
 		<div class="content">
 
-			<form name="loginForm" action="/j_spring_security_check"
-				method='POST'>
-
-
-
-
+			<form name="loginForm" action="/member/loginProcess" method='POST'>
 				<div class="form-box">
 					<div class="input-box">
 
 						<input type='text' id="memberId" name='memberId'
-							value="${loginId}" class="form-control" placeholder="아이디">
+							value="${memberId}" class="form-control" placeholder="아이디">
 					</div>
 					<div class="input-box">
-
-
 						<input type="password" id="memberPassword" name="memberPassword"
 							value="" class="form-control" placeholder="비밀번호">
 					</div>
 				</div>
-
-				<button class="btn btn-primary btn-block">Login</button>
+				<div class="info">
+					<c:if test="${not empty securityExceptionMessage }">
+						<%--  <p>${securityExceptionMessage }</p> --%>
+						<p class="errorMessage">로그인 정보를 확인하세요</p>
+					</c:if>
+				</div>
+				<button class="btn btn-default btn-block">로그인</button>
+    <!--                 <a href="/" class="pull-right" >메인</a>
+                    <a href="/member/register" class="pull-right">회원가입</a> -->
 			</form>
-
-			<c:if test="${not empty securityExceptionMessage }">
-				<p>Your login attempt was not successful, try again.</p>
-				<p>
-					<font color="red">${securityExceptionMessage}</font>
-				</p>
-			</c:if>
 		</div>
 	</div>
-
 
 	<input type="hidden" name="loginRedirect" value="${loginRedirect}" />
 </body>

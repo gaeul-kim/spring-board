@@ -23,6 +23,24 @@ public class Article {
     private String articleCategory;
     private String articleTag;
     private String articleWriterName;
+    private String TOTAL_COUNT;
+    private String RNUM;
+
+    public String getTOTAL_COUNT() {
+        return TOTAL_COUNT;
+    }
+
+    public void setTOTAL_COUNT(String tOTAL_COUNT) {
+        TOTAL_COUNT = tOTAL_COUNT;
+    }
+
+    public String getRNUM() {
+        return RNUM;
+    }
+
+    public void setRNUM(String rNUM) {
+        RNUM = rNUM;
+    }
 
     public String getArticleWriterName() {
         return articleWriterName;

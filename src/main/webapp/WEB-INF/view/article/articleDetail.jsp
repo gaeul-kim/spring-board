@@ -9,7 +9,8 @@
 <!DOCTYPE html>
 <html>
 <head>
- <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+<meta charset="UTF-8" name="viewport"
+	content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
 <!-- jQuery -->
 <script src="/js/jquery-3.1.1.min.js"></script>
 
@@ -55,9 +56,9 @@
 				</tr>
 
 			</table>
-			<a class="btn btn-default pull-left" href="/">메인</a>
-			<a class="btn btn-default pull-right" href="/articles/${article.articleCategory}">목록</a>
-
+<%-- 			<a class="btn btn-default pull-right"
+				href="/articles/${article.articleCategory}">목록</a> <a
+				class="btn btn-default pull-left" href="/">메인</a> --%>
 		</div>
 	</div>
 </body>

@@ -20,6 +20,7 @@
 		<form-login login-page="/member/login" username-parameter="memberId"
 			password-parameter="memberPassword" default-target-url="/"
 
+            login-processing-url="/member/loginProcess"
 			authentication-success-handler-ref="customAuthenticationSuccessHandler"
 			authentication-failure-handler-ref="customAuthenticationFailureHandler" />
 

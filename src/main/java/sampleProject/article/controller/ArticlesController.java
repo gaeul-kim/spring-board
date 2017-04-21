@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import sampleProject.article.domain.Article;
@@ -31,8 +32,10 @@ public class ArticlesController {
 
     }
 
-    @RequestMapping(value = "/{articleCategory}", method = RequestMethod.GET)
-    public String articleList(Model model, @PathVariable String articleCategory) throws Exception {
+    @RequestMapping(value = { "/{articleCategory}" }, method = RequestMethod.GET)
+    public String articleList(Model model, @PathVariable String articleCategory,
+            @RequestParam(value = "currentPageNo", required = false) Integer currentPageNo,@RequestParam(value = "pageNo", required = false) Integer pageNo) throws Exception {
+        LOG.debug(currentPageNo);
 
         // 요청한 게시판이 존재하는지 확인 후 목록 검색
         if (articleService.hasArticleCategory(articleCategory)) {
@@ -60,9 +63,14 @@ public class ArticlesController {
 
     @RequestMapping(value = "/{articleCategory}/write", method = RequestMethod.POST)
     public ModelAndView articleWrite(@Valid Article article, BindingResult bindingResult, ModelAndView modelAndView) throws Exception {
-        
+
         LOG.debug("CATEGORY : " + article.getArticleCategory());
         if (bindingResult.hasErrors()) {
+            /*
+             * modelAndView.setViewName("redirect:/articles/" +
+             * article.getArticleCategory() + "/write");
+             */
+            modelAndView.addObject("articleTags", articleService.getArticleTags(article.getArticleCategory()));
             modelAndView.setViewName("/article/articleWrite");
         } else {
             modelAndView.addObject("article", articleService.setArticle(article));

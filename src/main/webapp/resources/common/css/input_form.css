@@ -11,9 +11,10 @@ body {
 }
 
 .info {
-	display: none; padding : 6px 12px;
+	/*  	padding: 6px 12px;
 	font-size: 0.8em;
-	padding: 6px 12px;
+	padding: 6px 12px; */
+	
 }
 
 .form-box {
@@ -36,6 +37,15 @@ body {
 }
 
 .errorMessage {
-	display: block;
+	padding: 6px 12px;
+	font-size: 0.8em;
+	padding: 6px 12px;
 	color: red;
+}
+
+.successMessage {
+	padding: 6px 12px;
+	font-size: 0.8em;
+	padding: 6px 12px;
+	color: black;
 }

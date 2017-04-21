@@ -9,7 +9,8 @@
 <!DOCTYPE html>
 <html>
 <head>
- <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+<meta charset="UTF-8" name="viewport"
+	content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
 <!-- jQuery -->
 <script src="/js/jquery-3.1.1.min.js"></script>
 
@@ -52,7 +53,7 @@
 					<div class="input-box">
 
 						<form:input path="articleTitle" class="form-control"
-							placeholder="제목" maxlength="80" />
+							placeholder="제목" maxlength="80" required="required" />
 					</div>
 
 				</div>
@@ -60,12 +61,13 @@
 				<div class="form-box">
 					<div class="input-box">
 						<form:textarea path="articleContent" class="form-control"
-							placeholder="내용" rows="10" wrap="hard" />
+							placeholder="내용" rows="10" wrap="hard" required="required" />
 					</div>
 				</div>
-				<button class="btn btn-primary btn-block" id="btn-register">작성</button>
+				<button class="btn btn-default btn-block" id="btn-register">작성</button>
+<%-- 				<a class="btn btn-default btn-block"
+					href="/articles/${articleCategory}">목록</a> --%>
 			</form:form>
-			<a href="/">메인</a>
 		</div>
 	</div>
 </body>

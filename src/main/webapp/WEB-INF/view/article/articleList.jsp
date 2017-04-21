@@ -4,8 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,7 +66,10 @@
 					</c:choose>
 				</tbody>
 			</table>
-			<div class="text-center">
+			<c:if test="${not empty paginationInfo}">
+                        <ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="fn_search" />
+             </c:if>
+			<!-- <div class="text-center">
 				<ul class="pagination">
 					<li><a href="#">1</a></li>
 					<li><a href="#">2</a></li>
@@ -78,10 +82,7 @@
 					<li><a href="#">9</a></li>
 					<li><a href="#">10</a></li>
 				</ul>
-                <a class="btn btn-default pull-left" href="/">메인</a> <a
-                    class="btn btn-default pull-right"
-                    href="/articles/${articleCategory}/write">글 작성</a>
-			</div>
+			</div> -->
 
 		</div>
 	</div>

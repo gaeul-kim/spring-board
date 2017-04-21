@@ -1,6 +1,7 @@
 package sampleProject.article.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -18,8 +19,8 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleDAO articleDAO;
 
     @Override
-    public List<Article> getArticles(String category) throws Exception {
-        return articleDAO.selectArticles(category);
+    public Map<String, Object> getArticles(Map<String, Object> params) throws Exception {
+        return articleDAO.selectArticles(params);
     }
 
     @Override
@@ -65,5 +66,4 @@ public class ArticleServiceImpl implements ArticleService {
     public List<String> getArticleTags(String category) throws Exception {
         return articleDAO.selectArticleTags(category);
     }
-
 }
