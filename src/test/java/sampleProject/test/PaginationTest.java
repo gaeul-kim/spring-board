@@ -38,19 +38,20 @@ public class PaginationTest {
     @Test
     public void pagination() throws Exception {
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("currentPageNo", 2);
+        // params.put("currentPageNo", 0);
         params.put("articleCategory", "free");
 
     }
 
-    
     @Test
     public void list() throws Exception {
         Map<String, Object> map = new HashMap<>();
         map.put("articleCategory", "free");
-//        map.put("currentPageNo",1);
+        // map.put("currentPageNo",1);
+        Map<String, Object> returnMap = articleService.getArticles(map);
 
-        articleService.getArticles(map);
+        LOG.debug(returnMap.get("result"));
+        LOG.debug(returnMap.get("paginationInfo"));
     }
 
 }

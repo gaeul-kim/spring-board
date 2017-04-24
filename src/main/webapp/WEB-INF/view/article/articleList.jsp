@@ -4,7 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 
 <!DOCTYPE html>
@@ -46,14 +47,14 @@
 				</thead>
 				<tbody>
 					<c:choose>
-						<c:when test="${empty articles}">
+						<c:when test="${empty result}">
 							<tr>
 								<td colspan="5" class="text-center">등록된 글이 없습니다.</td>
 							</tr>
 						</c:when>
-						<c:when test="${!empty articles }">
+						<c:when test="${!empty result }">
 
-							<c:forEach items="${articles}" var="article">
+							<c:forEach items="${result.articles}" var="article">
 								<tr>
 									<td>${article.articleId }</td>
 									<td><a href="/article/${article.articleId }">${article.articleTitle }</a></td>
@@ -66,9 +67,13 @@
 					</c:choose>
 				</tbody>
 			</table>
-			<c:if test="${not empty paginationInfo}">
-                        <ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="fn_search" />
-             </c:if>
+
+			<div class="text-center">
+				<c:if test="${not empty result.paginationInfo}">
+					<ui:pagination paginationInfo="${result.paginationInfo}"
+						type="text" jsFunction="fn_search" />
+				</c:if>
+			</div>
 			<!-- <div class="text-center">
 				<ul class="pagination">
 					<li><a href="#">1</a></li>
@@ -86,5 +91,11 @@
 
 		</div>
 	</div>
+	<script>
+    function fn_search(pageNo){
+        var articleCategory = $('caption').html();
+        location.href = "/articles/"+articleCategory+"?currentPageNo="+pageNo;    	
+  		}
+	</script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package sampleProject.article.controller;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -31,17 +32,45 @@ public class ArticlesController {
         return "/common/main";
 
     }
+    //
+    // @RequestMapping(value = { "/{articleCategory}" }, method =
+    // RequestMethod.GET)
+    // public String articleList(Model model, @PathVariable String
+    // articleCategory,
+    // @RequestParam(value = "currentPageNo", required = false) Integer
+    // currentPageNo,
+    // @RequestParam(value = "pageNo", required = false) Integer pageNo) throws
+    // Exception {
+    // LOG.debug(currentPageNo);
+    //
+    // // 요청한 게시판이 존재하는지 확인 후 목록 검색
+    // if (articleService.hasArticleCategory(articleCategory)) {
+    // List<Article> articles = articleService.getArticles(articleCategory);
+    // model.addAttribute("articles", articles);
+    // model.addAttribute("articleCategory", articleCategory);
+    // return "article/articleList";
+    // } else {
+    // return "/common/main";
+    // }
+    // }
 
     @RequestMapping(value = { "/{articleCategory}" }, method = RequestMethod.GET)
     public String articleList(Model model, @PathVariable String articleCategory,
-            @RequestParam(value = "currentPageNo", required = false) Integer currentPageNo,@RequestParam(value = "pageNo", required = false) Integer pageNo) throws Exception {
-        LOG.debug(currentPageNo);
+            @RequestParam(value = "currentPageNo", required = false) Integer currentPageNo) throws Exception {
 
         // 요청한 게시판이 존재하는지 확인 후 목록 검색
         if (articleService.hasArticleCategory(articleCategory)) {
-            List<Article> articles = articleService.getArticles(articleCategory);
-            model.addAttribute("articles", articles);
-            model.addAttribute("articleCategory", articleCategory);
+            Map<String, Object> map = new HashMap<String, Object>();
+            
+            LOG.debug(currentPageNo);
+            //if (currentPageNo > 0) {
+                map.put("currentPageNo", currentPageNo);
+            //}
+            map.put("articleCategory", articleCategory);
+
+            map = articleService.getArticles(map);
+            model.addAttribute("result", map);
+            LOG.debug(map);
             return "article/articleList";
         } else {
             return "/common/main";

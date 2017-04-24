@@ -5,9 +5,9 @@
 	
 	<sql id="pagingPre">
 		<![CDATA[
-            SELECT @i AS TOTAL_COUNT, AAA.*
+            SELECT @i AS totalCount, AAA.*
                 FROM(
-                    SELECT @i:=@i+ 1 as RNUM, AA.* FROM(
+                    SELECT @i:=@i+ 1 as rowNumber, AA.* FROM(
  		]]>
  	</sql>
  	
@@ -15,7 +15,7 @@
  		<![CDATA[
             ) AA,
                 (SELECT @i := 0, @j := 0) temp) AAA
-                    WHERE AAA.RNUM limit #{START}, #{END}
+                    WHERE AAA.rowNumber limit #{START}, #{END}
  		]]>
  	</sql>
 </mapper>

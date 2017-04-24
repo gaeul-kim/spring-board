@@ -12,7 +12,7 @@
                   left outer join member m on a.articleWriter = m.memberId
                     where articleDeleteDate is null 
                         and articleCategory = #{articleCategory}
-                          order by articleId desc 
+                          order by articleInsertDate desc 
         ]]>
         <include refid="common.pagingPost"/> 
 	</select>
@@ -38,7 +38,7 @@
             select 
                 a.articleId, a.articleTitle, a.articleContent, a.articleWriter,  m.memberName articleWriterName, date_format(a.articleInsertDate,'%Y-%m-%d %H:%i') articleInsertDate, a.articleHit, a.articleCategory
                     from article a
-                         inner join member m on a.articleWriter = m.memberId
+                         left outer join member m on a.articleWriter = m.memberId
                             where articleDeleteDate is null 
                                 and articleId = #{articleId}
         ]]>

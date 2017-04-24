@@ -76,8 +76,9 @@ public abstract class AbstractDAO {
         Map<String, Object> map = (Map<String, Object>) params;
         PaginationInfo paginationInfo = null;
 
-        if (map.containsKey("currentPageNo") == false || StringUtils.isEmpty(map.get("currentPageNo")) == true)
+        if (map.containsKey("currentPageNo") == false || StringUtils.isEmpty(map.get("currentPageNo")) == true) {
             map.put("currentPageNo", "1");
+        }
 
         paginationInfo = new PaginationInfo();
         paginationInfo.setCurrentPageNo(Integer.parseInt(map.get("currentPageNo").toString()));
@@ -89,8 +90,9 @@ public abstract class AbstractDAO {
         paginationInfo.setPageSize(PAGE_SIZE);
 
         int start = paginationInfo.getFirstRecordIndex();
-        int end = start + paginationInfo.getRecordCountPerPage();
-        map.put("START", start + 1);
+        // int end = start + paginationInfo.getRecordCountPerPage();
+        int end = RECORD_COUNT_PER_PAGE;
+        map.put("START", start);
         map.put("END", end);
 
         params = map;
@@ -100,9 +102,8 @@ public abstract class AbstractDAO {
 
         if (list.size() == 0) {
             map = new HashMap<String, Object>();
-             map.put("TOTAL_COUNT", 0);
-             list.add((Article) map);
-            //returnMap.put("TOTAL_COUNT", 0);
+            map.put("TOTAL_COUNT", 0);
+            // list.add((Article) map);
 
             if (paginationInfo != null) {
                 paginationInfo.setTotalRecordCount(0);
@@ -110,11 +111,12 @@ public abstract class AbstractDAO {
             }
         } else {
             if (paginationInfo != null) {
-                paginationInfo.setTotalRecordCount(Integer.parseInt(list.get(0).getTOTAL_COUNT().toString()));
+                // paginationInfo.setTotalRecordCount(Integer.parseInt(list.get(0).getTOTAL_COUNT().toString()));
+                paginationInfo.setTotalRecordCount(list.get(0).getTotalCount());
                 returnMap.put("paginationInfo", paginationInfo);
             }
         }
-        returnMap.put("result", list);
+        returnMap.put("articles", list);
         return returnMap;
     }
 

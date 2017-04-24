@@ -23,23 +23,23 @@ public class Article {
     private String articleCategory;
     private String articleTag;
     private String articleWriterName;
-    private String TOTAL_COUNT;
-    private String RNUM;
+    private Integer totalCount;
+    private Integer rowNumber;
 
-    public String getTOTAL_COUNT() {
-        return TOTAL_COUNT;
+    public Integer getRowNumber() {
+        return rowNumber;
     }
 
-    public void setTOTAL_COUNT(String tOTAL_COUNT) {
-        TOTAL_COUNT = tOTAL_COUNT;
+    public void setRowNumber(Integer rowNumber) {
+        this.rowNumber = rowNumber;
     }
 
-    public String getRNUM() {
-        return RNUM;
+    public Integer getTotalCount() {
+        return totalCount;
     }
 
-    public void setRNUM(String rNUM) {
-        RNUM = rNUM;
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
     }
 
     public String getArticleWriterName() {
