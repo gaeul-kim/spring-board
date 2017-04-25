@@ -4,17 +4,20 @@ body {
 	padding-top: 10px;
 }
 
+.caption {
+	padding-top: 8px;
+	padding-bottom: 8px;
+	text-align: left;
+}
+
+caption {
+	font-size: xx-large;
+}
+
 .form-control {
 	border: none;
 	box-shadow: none;
 	height: 45px;
-}
-
-.info {
-	/*  	padding: 6px 12px;
-	font-size: 0.8em;
-	padding: 6px 12px; */
-	
 }
 
 .form-box {
@@ -32,8 +35,22 @@ body {
 }
 
 .content {
-	margin: auto;
+	
+}
+
+.box-small {
 	width: 300px;
+	margin: auto;
+}
+
+.box-medium {
+	width: 600px;
+	margin: auto;
+}
+
+.box-large {
+	width: 900px;
+	margin: auto;
 }
 
 .errorMessage {
@@ -48,4 +65,8 @@ body {
 	font-size: 0.8em;
 	padding: 6px 12px;
 	color: black;
+}
+
+.list-table th,td{
+    text-align: center;
 }

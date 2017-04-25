@@ -10,6 +10,7 @@ import java.util.TreeSet;
 
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Email;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,7 +31,8 @@ public class Member implements UserDetails {
     @Pattern(regexp = "[가-힣a-zA-Z]{2,10}", message = "2~10자의 한글이나 영문만 가능")
     private String memberName;
 
-    @Pattern(regexp = "[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}", message = "유효하지 않은 이메일 형식")
+    //@Pattern(regexp = "[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}", message = "유효하지 않은 이메일 형식")
+    @Email(message="유효하지 않은 이메일 형식")
     private String memberEmail;
 
     @Pattern(regexp = "(?=.*[a-zA-Z])((?=.*\\d)|(?=.*\\W)).{5,15}", message = "숫자나 특수문자를 포함한 5~15자의 영문 대소문자")

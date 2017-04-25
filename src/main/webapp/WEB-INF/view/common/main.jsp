@@ -1,15 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
- <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+<%@ include file="/WEB-INF/view/include/header.jspf" %>
 <title>SampleProject - 메인</title>
 </head>
 <body>
@@ -17,7 +10,7 @@
 		<sec:authentication property="principal.memberName" />님 반갑습니다.
 	</sec:authorize>
 	<sec:authorize access="isAnonymous()">
-		<form name="loginForm" action="/j_spring_security_check" method='POST'>
+		<form name="loginForm" action="/member/loginProcess" method='POST'>
 
 			<div>
 				<span><input type="text" id="memberId" name='memberId'

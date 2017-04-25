@@ -62,7 +62,7 @@ public class ArticlesController {
         if (articleService.hasArticleCategory(articleCategory)) {
             Map<String, Object> map = new HashMap<String, Object>();
             
-            LOG.debug(currentPageNo);
+            LOG.debug("currentPageNo : "+currentPageNo);
             //if (currentPageNo > 0) {
                 map.put("currentPageNo", currentPageNo);
             //}

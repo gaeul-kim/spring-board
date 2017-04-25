@@ -1,48 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" name="viewport"
-	content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
-<!-- jQuery -->
-<script src="/js/jquery-3.1.1.min.js"></script>
-
-<!-- bootstrap -->
-<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="/bootstrap/css//bootstrap-theme.min.css">
-<script src="/bootstrap/js/bootstrap.min.js"></script>
-<!--  register -->
-<link rel="stylesheet" href="/css/article.css">
-<!-- include summernote css/js-->
-<link href="/summernote/summernote.css" rel="stylesheet">
-<script src="/summernote/summernote.js"></script>
-
-<!-- include summernote-ko-KR -->
-<script src="/summernote/lang/summernote-ko-KR.js"></script>
+<%@ include file="/WEB-INF/view/include/header.jspf" %>
 <title>SampleProject - ${articleCategory}</title>
 </head>
 <body>
-
 	<div class="container">
 		<div class="content">
-			<table class="table table-hover">
-				<caption>${articleCategory }</caption>
+		  <div class="box-medium"> 
+			<table class="table table-hover table-condensed">
+				<caption>
+					<input type="hidden" value="${articleCategory }" id="articleCategory" /> 
+					<a href="/articles/${articleCategory }">${articleCategory }</a>
+					<a class="btn btn-default pull-right" href="/articles/${articleCategory}/write">글쓰기</a>
+				</caption>
 				<thead>
 					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>이름</th>
-						<th>날짜</th>
-						<th>조회수</th>
+						<th class="col-xs-1 text-center">번호</th>
+						<th class="col-xs-5">제목</th>
+						<th class="col-xs-2 text-center">작성자</th>
+						<th class="col-xs-2 text-center">날짜</th>
+						<th class="col-xs-2 text-center">조회수</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -53,49 +32,42 @@
 							</tr>
 						</c:when>
 						<c:when test="${!empty result }">
-
 							<c:forEach items="${result.articles}" var="article">
 								<tr>
-									<td>${article.articleId }</td>
-									<td><a href="/article/${article.articleId }">${article.articleTitle }</a></td>
-									<td>${article.articleWriterName }</td>
-									<td>${article.articleInsertDate }</td>
-									<td>${article.articleHit}</td>
+									<td class="text-center">${article.articleId }</td>
+									<td><a href="/article/${article.articleId }">
+								<c:choose>
+									   <c:when test="${fn:length(article.articleTitle) > 25 }">
+									       <c:out value="${fn:substring(article.articleTitle,0,25) }"/>...
+									   </c:when>
+									   <c:otherwise>
+									       <c:out value="${article.articleTitle }"/>
+									   </c:otherwise>
+									</c:choose>
+									</a></td>
+									<td class="text-center">${article.articleWriterName }</td>
+									<td class="text-center">${article.articleInsertDate }</td>
+									<td class="text-center">${article.articleHit}</td>
 								</tr>
 							</c:forEach>
 						</c:when>
 					</c:choose>
 				</tbody>
 			</table>
-
 			<div class="text-center">
 				<c:if test="${not empty result.paginationInfo}">
 					<ui:pagination paginationInfo="${result.paginationInfo}"
 						type="text" jsFunction="fn_search" />
 				</c:if>
+				</div>
 			</div>
-			<!-- <div class="text-center">
-				<ul class="pagination">
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#">6</a></li>
-					<li><a href="#">7</a></li>
-					<li><a href="#">8</a></li>
-					<li><a href="#">9</a></li>
-					<li><a href="#">10</a></li>
-				</ul>
-			</div> -->
-
 		</div>
 	</div>
 	<script>
-    function fn_search(pageNo){
-        var articleCategory = $('caption').html();
-        location.href = "/articles/"+articleCategory+"?currentPageNo="+pageNo;    	
-  		}
+		function fn_search(pageNo) {
+			var articleCategory = $('#articleCategory').val();
+			location.href = "/articles/" + articleCategory + "?currentPageNo=" + pageNo;
+		}
 	</script>
 </body>
 </html>

@@ -12,7 +12,7 @@
                   left outer join member m on a.articleWriter = m.memberId
                     where articleDeleteDate is null 
                         and articleCategory = #{articleCategory}
-                          order by articleInsertDate desc 
+                          order by articleInsertDate desc, articleId desc
         ]]>
         <include refid="common.pagingPost"/> 
 	</select>

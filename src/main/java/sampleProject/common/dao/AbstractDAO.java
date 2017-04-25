@@ -90,8 +90,11 @@ public abstract class AbstractDAO {
         paginationInfo.setPageSize(PAGE_SIZE);
 
         int start = paginationInfo.getFirstRecordIndex();
-        // int end = start + paginationInfo.getRecordCountPerPage();
-        int end = RECORD_COUNT_PER_PAGE;
+        int end = paginationInfo.getRecordCountPerPage();
+        if (start <= 0) {
+            start = 0;
+        }
+
         map.put("START", start);
         map.put("END", end);
 

@@ -67,7 +67,7 @@ $(document).ready(function() {
 
 	function validateMemberName() {
 		var val = $('#memberName').val();
-		var regex = /^[가-힣a-zA-Z]{2,5}$/;
+		var regex = /^[가-힣a-zA-Z]{2,10}$/;
 
 		if (val == '' | val == null) {
 			$('#memberName + div').html("필수입력 항목").attr('class','errorMessage');
