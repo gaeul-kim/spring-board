@@ -69,7 +69,7 @@ public abstract class AbstractDAO {
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public Map selectPagingList(String queryId, Object params) {
-        final Integer RECORD_COUNT_PER_PAGE = 15;
+        final Integer RECORD_COUNT_PER_PAGE = 10;
         final Integer PAGE_SIZE = 10;
         printQueryId(queryId);
 

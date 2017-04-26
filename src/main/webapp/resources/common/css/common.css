@@ -1,5 +1,94 @@
 @CHARSET "UTF-8";
 
+@CHARSET "UTF-8";
+
+header {
+	border-bottom: 1px solid gray;
+	padding-left: 10px;
+}
+
+footer {
+	border-top: 1px solid gray;
+	padding: 10px;
+	text-align: center;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.content {
+	display: flex;
+}
+
+.content nav {
+	border-right: 1px solid gray;
+}
+
+nav {
+	flex-basis: 150px;
+	flex-shrink: 0;
+	padding: 10px;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	flex-shrink: 0;
+	padding: 10px;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style: none;
+}
+
+.article-wrap {
+	display: flex;
+	border-bottom: 1px solid gray;
+}
+
+.search-control {
+	padding-bottom: 10px;
+}
+
+.article-wrap:hover {
+	background-color: #FFF0F0;
+}
+/* .article-wrap>div:NTH-CHILD(1) */
+.article-title-wrap {
+	word-break: break-word;
+	width: 650px;
+}
+
+.article-info-wrap {
+	width: 150px;
+	flex-shrink: 0;
+}
+
+.article-info-wrap>div {
+	display: flex;
+	flex-direction: row;
+}
+
+.article-info-wrap span:NTH-CHILD(1) {
+	width: 75px;
+}
+
+.article-info-wrap span:NTH-CHILD(2) {
+	width: 75px;
+}
+
+#article-info {
+	display: none;
+}
+
 body {
 	padding-top: 10px;
 }
@@ -67,6 +156,75 @@ caption {
 	color: black;
 }
 
-.list-table th,td{
-    text-align: center;
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style: none;
+}
+
+@media ( min-width :800px) {
+	.container {
+		margin: auto;
+		width: 1000px;
+	}
+	main {
+		width: 820px;
+	}
+}
+
+@media ( max-width :800px) {
+	body {
+		margin: 0px;
+	}
+	.content {
+		flex-direction: column;
+	}
+	.content nav {
+		border: none;
+		flex-basis: auto;
+	}
+	main {
+		order: 0;
+		border-bottom: 1px solid gray;
+	}
+	nav {
+		order: 1;
+	}
+	.box-medium {
+		width: auto;
+		margin: 0;
+	}
+	.box-large {
+		width: auto;
+		margin: 0;
+	}
+}
+
+@media ( max-width : 520px) {
+	.container {
+		min-width: 300px;
+	}
+	.article-wrap {
+		flex-direction: column;
+	}
+	.article-title-wrap {
+		width: auto;
+	}
+	#article-info {
+		float: right;
+		display: inline;
+	}
+	.article-info-wrap {
+		display: none;
+	}
+}
+
+@media ( max-width : 350px) {
+	.box-small {
+		width: auto;
+		margin: 0;
+	}
 }

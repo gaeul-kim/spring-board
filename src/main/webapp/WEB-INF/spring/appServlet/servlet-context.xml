@@ -17,6 +17,7 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/js/**" location="/resources/common/js/" />
 	<resources mapping="/css/**" location="/resources/common/css/" />
+	<resources mapping="/img/**" location="/resources/common/image/" />
 	<resources mapping="/summernote/**" location="/resources/summernote/" />
 	<resources mapping="/bootstrap/**" location="/resources/bootstrap/" />
 

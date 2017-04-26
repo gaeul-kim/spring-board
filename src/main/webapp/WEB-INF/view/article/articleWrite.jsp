@@ -8,36 +8,65 @@
 </head>
 <body>
 	<div class="container">
-		<div class="content">
-		  <div class="box-medium">
-			<form:form modelAttribute="article" mthod="post" autocomplete="false">
-				<input type="hidden" name="articleWriter" value="<sec:authentication property="principal.memberId" />" />
-				<div class="form-box">
-					<c:choose>
-						<c:when test="${!empty articleTags }">
-							<div class="input-box">
-								<select name="articleTag" class="form-control">
-									<c:forEach items="${articleTags}" var="articleTag">
-										<option>${articleTag }</option>
-									</c:forEach>
-								</select>
-							</div>
-						</c:when>
+		<header>
+			<h1>
+				<a href="/">SampleProject</a>
+			</h1>
+		</header>
+		<section class="content">
+			<%@ include file="/WEB-INF/view/include/navigation.jsp"%>
+			<main> <input type="hidden" id="articleCategory"
+				value="${articleCategory }" />
+			<div class="box-medium">
+				<form:form modelAttribute="article" mthod="post"
+					autocomplete="false">
+					<input type="hidden" name="articleWriter"
+						value="<sec:authentication property="principal.memberId" />" />
+					<div class="form-box">
+						<c:choose>
+							<c:when test="${!empty articleTags }">
+								<div class="input-box">
+									<select name="articleTag" class="form-control">
+										<c:forEach items="${articleTags}" var="articleTag">
+											<option>${articleTag }</option>
+										</c:forEach>
+									</select>
+								</div>
+							</c:when>
 
-					</c:choose>
-					<div class="input-box">
-						<form:input path="articleTitle" class="form-control" placeholder="제목" maxlength="80" required="required" />
+						</c:choose>
+						<div class="input-box">
+							<form:input path="articleTitle" class="form-control"
+								placeholder="제목" maxlength="50" required="required" />
+						</div>
 					</div>
-				</div>
-				<div class="form-box">
-					<div class="input-box">
-						<form:textarea path="articleContent" class="form-control" placeholder="내용" rows="10" wrap="hard" required="required" />
+					<div class="form-box">
+						<div class="input-box">
+							<form:textarea path="articleContent" class="form-control"
+								placeholder="내용" rows="10" wrap="hard" required="required" />
+						</div>
 					</div>
-				</div>
-				<button class="btn btn-default btn-block" id="btn-register">작성</button>
-			</form:form>
+					<button class="btn btn-default btn-block" id="btn-register">작성</button>
+				</form:form>
 			</div>
-		</div>
+			</main>
+		</section>
+		<footer>
+			<a href="#">홈페이지</a>
+		</footer>
 	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

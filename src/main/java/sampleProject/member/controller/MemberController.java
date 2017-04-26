@@ -57,14 +57,8 @@ public class MemberController {
         return resultMap;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login")
     public String loginForm() throws Exception {
-        LOG.debug("GET");
-        return "member/memberLogin";
-    }
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginForm11() throws Exception {
-        LOG.debug("POST");
         return "member/memberLogin";
     }
 }
