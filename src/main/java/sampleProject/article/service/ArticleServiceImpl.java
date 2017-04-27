@@ -25,8 +25,11 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article getArticle(Article article) throws Exception {
-        articleDAO.updateHit(article);
-        return articleDAO.selectArticle(article);
+        article = articleDAO.selectArticle(article);
+        if (article != null) {
+            articleDAO.updateHit(article);
+        }
+        return article;
     }
 
     @Override

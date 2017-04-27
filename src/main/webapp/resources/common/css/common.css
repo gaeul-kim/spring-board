@@ -62,8 +62,14 @@ li {
 	border-top: none;
 }
 
-.search-control {
-	padding-bottom: 10px;
+.control {
+	display: flex;
+	flex-direction: row-reverse;
+	padding: 10px;
+}
+
+.control>a {
+	margin-left: 10px;
 }
 
 .article-wrap:hover {

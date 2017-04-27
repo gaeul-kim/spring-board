@@ -4,7 +4,7 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/view/include/header.jspf"%>
-<title>SampleProject - 글작성</title>
+<title>SampleProject</title>
 </head>
 <body>
 	<div class="container">

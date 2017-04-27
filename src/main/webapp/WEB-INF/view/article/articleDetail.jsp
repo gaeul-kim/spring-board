@@ -7,7 +7,6 @@
 <title>SampleProject - ${article.articleTitle }</title>
 </head>
 <body>
-
 	<div class="container">
 		<header>
 			<h1>
@@ -17,18 +16,40 @@
 		<section class="content">
 			<%@ include file="/WEB-INF/view/include/navigation.jsp"%>
 			<main>
+			<div class="control">
+				<%-- 				<c:choose>
+					<c:when test="${isAdmin or loginId eq article.articleWriter }">
+						<a class="btn btn-default"
+							href="/article/edit/${articleId}">수정</a>
+						<a class="btn btn-default"
+							href="/article/delete/${articleId}">삭제</a>
+					</c:when>
+					<c:otherwise>
+					</c:otherwise>
+				</c:choose> --%>
+				<c:if test="${isAdmin or loginId eq article.articleWriter }">
+					<a class="btn btn-default" href="/article/delete/${articleId}">삭제</a>
+					<a class="btn btn-default" href="/article/edit/${articleId}">수정</a>
+				</c:if>
+			</div>
 			<ul class="article-list">
 				<li class="article-wrap">
 					<div class="article-title-wrap">
 						<div>
-							<span>#${article.articleId }</span>
+							<span>#${article.articleId }</span> <span class="article-info">
+								<span>${article.articleWriterName }</span> <span
+								class="articleInsertDate" title="${article.articleInsertDate }"></span>
+								<span>${article.articleHit}hit</span>
+							</span>
 						</div>
 						<div>${article.articleTitle }</div>
 					</div>
 					<div class="article-info-wrap">
 						<div>${article.articleWriterName }</div>
 						<div>
-							<span class="articleInsertDate" title="${article.articleInsertDate }"></span><span class="text-right">${article.articleHit}hit</span>
+							<span class="articleInsertDate"
+								title="${article.articleInsertDate }"></span><span
+								class="text-right">${article.articleHit}hit</span>
 						</div>
 					</div>
 				</li>

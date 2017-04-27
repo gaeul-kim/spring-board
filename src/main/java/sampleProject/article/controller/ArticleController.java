@@ -46,5 +46,14 @@ public class ArticleController {
          */
         return mv;
     }
+    @RequestMapping(value = "/delete/{articleId}", method = RequestMethod.GET)
+    public ModelAndView deleteArticle(ModelAndView mv, @PathVariable Integer article_id, HttpSession session) throws Exception {
+
+        /*
+         * spring security / session 사용여부 확정후 구현
+         * 
+         */
+        return mv;
+    }
 
 }

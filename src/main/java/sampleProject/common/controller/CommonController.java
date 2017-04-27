@@ -10,7 +10,22 @@ public class CommonController {
     Logger LOG = Logger.getLogger(this.getClass());
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String test() {
+    public String main() {
         return "/common/main";
+    }
+
+    @RequestMapping(value = "/common/pageNotFound")
+    public String pageNotFound() {
+        return "common/pageNotFound";
+    }
+
+    @RequestMapping(value = "/common/notYetFinished")
+    public String notYetFinished() {
+        return "common/notYetFinished";
+    }
+
+    @RequestMapping(value = "/common/serverError")
+    public String serverError() {
+        return "common/serverError";
     }
 }

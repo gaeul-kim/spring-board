@@ -4,7 +4,7 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/view/include/header.jspf"%>
-<title>SampleProject - 메인</title>
+<title>SampleProject</title>
 </head>
 <body>
 	<div class="container">
@@ -16,8 +16,11 @@
 		<section class="content">
 			<%@ include file="/WEB-INF/view/include/navigation.jsp"%>
 			<main>
-			<div class="text-center">
-				<img style="width: 50%;" src="/img/computer.png" />
+			<div class="box-small">
+				<ul>
+					<li><div class="text-center"></div>처리 과정에서 문제가 발생하였습니다.</li>
+					<li><div class="text-center"></div>문제가 반복될 경우 관리자에게 문의하세요.</li>
+				</ul>
 			</div>
 			</main>
 		</section>
