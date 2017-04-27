@@ -1,7 +1,5 @@
 @CHARSET "UTF-8";
 
-@CHARSET "UTF-8";
-
 header {
 	border-bottom: 1px solid gray;
 	padding-left: 10px;
@@ -45,13 +43,23 @@ ul {
 	padding: 0;
 }
 
+.article-list {
+	border: 1px solid #D8D8D8;
+}
+
 li {
 	list-style: none;
 }
 
 .article-wrap {
+	padding: 10px;
 	display: flex;
-	border-bottom: 1px solid gray;
+	border-top: 1px solid #D8D8D8;
+	display: flex;
+}
+
+.article-list>li:first-child {
+	border-top: none;
 }
 
 .search-control {
@@ -85,12 +93,12 @@ li {
 	width: 75px;
 }
 
-#article-info {
+.article-info {
 	display: none;
 }
 
 body {
-	padding-top: 10px;
+	
 }
 
 .caption {
@@ -189,6 +197,8 @@ li {
 	main {
 		order: 0;
 		border-bottom: 1px solid gray;
+		padding-left: 0;
+		padding-right: 0;
 	}
 	nav {
 		order: 1;
@@ -213,7 +223,7 @@ li {
 	.article-title-wrap {
 		width: auto;
 	}
-	#article-info {
+	.article-info {
 		float: right;
 		display: inline;
 	}

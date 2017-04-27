@@ -21,7 +21,7 @@
 				<a class="btn btn-default pull-right"
 					href="/articles/${articleCategory}/write">글쓰기</a>
 			</div>
-			<ul>
+			<ul class="article-list">
 				<c:choose>
 					<c:when test="${empty result.articles}">
 						<li><div class="text-center">등록된 글이 없습니다.</div></li>
@@ -31,8 +31,12 @@
 							<li class="article-wrap">
 								<div class="article-title-wrap">
 									<div>
-										<span>#${article.articleId }</span> <span id="article-info">${article.articleWriterName }${article.articleInsertDate }${article.articleHit}
-											hit</span>
+										<span>#${article.articleId }</span> 
+										<span class="article-info">
+										      <span>${article.articleWriterName }</span>
+											  <span class="articleInsertDate" title="${article.articleInsertDate }"></span>
+											  <span>(${article.articleHit}hit)</span>
+										</span>
 									</div>
 									<div>
 										<a href="/article/${article.articleId }">
@@ -42,27 +46,40 @@
 								<div class="article-info-wrap">
 									<div>${article.articleWriterName }</div>
 									<div>
-										${article.articleInsertDate }<span>&nbsp;${article.articleHit}hit</span>
+										<span class="articleInsertDate" title="${article.articleInsertDate }"></span>
+										<span class="text-right">${article.articleHit}hit</span>
 									</div>
 								</div>
 
 							</li>
 						</c:forEach>
-						<div class="text-center">
-							<c:if test="${not empty result.paginationInfo}">
-								<ui:pagination paginationInfo="${result.paginationInfo}"
-									type="text" jsFunction="fn_search" />
-							</c:if>
-						</div>
 					</c:when>
 				</c:choose>
 			</ul>
+			<div class="text-center">
+				<c:if
+					test="${not empty result.articles && not empty result.paginationInfo}">
+					<ui:pagination paginationInfo="${result.paginationInfo}"
+						type="text" jsFunction="fn_search" />
+				</c:if>
+			</div>
 			</main>
 		</section>
 		<footer>
 			<a href="#">홈페이지</a>
 		</footer>
 		<script>
+			$(document).ready(function() {
+		
+				$.fn.setDate = function() {
+					return this.each(function() {
+						var str = date_calculator($(this).attr('title'));
+						$(this).text(str);
+					});
+				};
+				$('.articleInsertDate').setDate();
+			});
+		
 			function fn_search(pageNo) {
 				var articleCategory = $('#articleCategory').val();
 				location.href = "/articles/" + articleCategory + "?currentPageNo=" + pageNo;

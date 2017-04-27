@@ -7,7 +7,7 @@
 		resultType="sampleProject.article.domain.Article">
         <include refid="common.pagingPre"/> 
         <![CDATA[
-            select a.articleId, a.articleTitle, a.articleWriter, m.memberName articleWriterName, date_format(a.articleInsertDate,'%Y-%m-%d') articleInsertDate, a.articleHit, a.articleCategory
+            select a.articleId, a.articleTitle, a.articleWriter, m.memberName articleWriterName, date_format(a.articleInsertDate,'%Y-%m-%d %H:%i') articleInsertDate, a.articleHit, a.articleCategory
                 from article a 
                   left outer join member m on a.articleWriter = m.memberId
                     where articleDeleteDate is null 
@@ -16,22 +16,6 @@
         ]]>
         <include refid="common.pagingPost"/> 
 	</select>
-
-
-<!-- 	<select id="selectArticles" parameterType="sampleProject.article.domain.Article"
-		resultType="sampleProject.article.domain.Article">
-		<![CDATA[
-		    select a.articleId, a.articleTitle, a.articleWriter, m.memberName articleWriterName, date_format(a.articleInsertDate,'%Y-%m-%d') articleInsertDate, a.articleHit, a.articleCategory
-		        from article a 
-		          inner join member m on a.articleWriter = m.memberId
-		            where articleDeleteDate is null 
-		                and articleCategory = #{articleCategory}
-		                  order by articleId desc
-		                  
-		                  
-		                  
-	    ]]>
-	</select> -->
 	<select id="selectArticle" parameterType="sampleProject.article.domain.Article"
 		resultType="sampleProject.article.domain.Article">
         <![CDATA[

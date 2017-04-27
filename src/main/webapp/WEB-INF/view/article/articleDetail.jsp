@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,35 +7,50 @@
 <title>SampleProject - ${article.articleTitle }</title>
 </head>
 <body>
+
 	<div class="container">
-		<div class="content">
-		  <div class="box-medium">
-			<table class="table table-striped">
-				<caption>
-				    <a href="/articles/${article.articleCategory }">${article.articleCategory }</a>
-				</caption>
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>이름</th>
-						<th>날짜</th>
-						<th>조회수</th>
-					</tr>
-				</thead>
-				<tr>
-					<td>${article.articleId }</td>
-					<td>${article.articleTitle }</td>
-					<td>${article.articleWriterName }</td>
-					<td>${article.articleInsertDate }</td>
-					<td>${article.articleHit}</td>
-				</tr>
-				<tr>
-					<td colspan="5">${article.articleContent }</td>
-				</tr>
-			</table>
-			</div>
-		</div>
+		<header>
+			<h1>
+				<a href="/">SampleProject</a>
+			</h1>
+		</header>
+		<section class="content">
+			<%@ include file="/WEB-INF/view/include/navigation.jsp"%>
+			<main>
+			<ul class="article-list">
+				<li class="article-wrap">
+					<div class="article-title-wrap">
+						<div>
+							<span>#${article.articleId }</span>
+						</div>
+						<div>${article.articleTitle }</div>
+					</div>
+					<div class="article-info-wrap">
+						<div>${article.articleWriterName }</div>
+						<div>
+							<span class="articleInsertDate" title="${article.articleInsertDate }"></span><span class="text-right">${article.articleHit}hit</span>
+						</div>
+					</div>
+				</li>
+				<li class="article-wrap">${article.articleContent }</li>
+			</ul>
+			</main>
+		</section>
+		<footer>
+			<a href="#">홈페이지</a>
+		</footer>
 	</div>
+	<script>
+		$(document).ready(function() {
+	
+			$.fn.setDate = function() {
+				return this.each(function() {
+					var str = date_calculator($(this).attr('title'));
+					$(this).text(str);
+				});
+			};
+			$('.articleInsertDate').setDate();
+		});
+	</script>
 </body>
 </html>
