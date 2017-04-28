@@ -17,25 +17,18 @@
 			<%@ include file="/WEB-INF/view/include/navigation.jsp"%>
 			<main>
 			<div class="control">
-				<%-- 				<c:choose>
-					<c:when test="${isAdmin or loginId eq article.articleWriter }">
-						<a class="btn btn-default"
-							href="/article/edit/${articleId}">수정</a>
-						<a class="btn btn-default"
-							href="/article/delete/${articleId}">삭제</a>
-					</c:when>
-					<c:otherwise>
-					</c:otherwise>
-				</c:choose> --%>
 				<c:if test="${isAdmin or loginId eq article.articleWriter }">
 					<a class="btn btn-default" href="/article/delete/${articleId}">삭제</a>
-					<a class="btn btn-default" href="/article/edit/${articleId}">수정</a>
+					<a class="btn btn-default" href="/article/edit/${articleId}">수정</a> 
+<!-- 					<a class="btn btn-default" id="btn-delete">삭제</a>
+					<a class="btn btn-default" id="btn-edit">수정</a> -->
 				</c:if>
 			</div>
 			<ul class="article-list">
 				<li class="article-wrap">
 					<div class="article-title-wrap">
 						<div>
+							<input type="hidden" id="articleId" value="${article.articleId }" />
 							<span>#${article.articleId }</span> <span class="article-info">
 								<span>${article.articleWriterName }</span> <span
 								class="articleInsertDate" title="${article.articleInsertDate }"></span>
@@ -63,7 +56,6 @@
 	</div>
 	<script>
 		$(document).ready(function() {
-	
 			$.fn.setDate = function() {
 				return this.each(function() {
 					var str = date_calculator($(this).attr('title'));

@@ -1,5 +1,4 @@
-
-function gfn_isNull(str) {
+/*function gfn_isNull(str) {
 	if (str == null) return true;
 	if (str == "NaN") return true;
 	if (new String(str).valueOf() == "undefined") return true;
@@ -32,15 +31,16 @@ function ComSubmit(opt_formId) {
 		frm.method = "post";
 		frm.submit();
 	};
-}
+}*/
 
 function date_calculator(input_date) {
 	var now = new Date();
-	var date = new Date(input_date);
+	var date = new Date(input_date.replace(/-/g,'/'));
 	var subtract_value = parseInt(((now - date) / 60000));
 	var prefix = "";
 	var suffix = "";
 	var result = " 전";
+	/*	return now;*/
 
 	if (now.getFullYear() != date.getFullYear()) {
 		prefix = now.getFullYear() - date.getFullYear();
@@ -55,12 +55,11 @@ function date_calculator(input_date) {
 		prefix = parseInt(subtract_value / (60));
 		suffix = "시간";
 	} else if (subtract_value >= 1) {
-		prefix = parseInt(subtract_value / (60));
+		prefix = subtract_value;
 		suffix = "분";
 	} else {
 		suffix = "방금"
 	}
 	result = prefix + suffix + result;
 	return result;
-
 }

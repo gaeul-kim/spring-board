@@ -15,13 +15,13 @@
 		</header>
 		<section class="content">
 			<%@ include file="/WEB-INF/view/include/navigation.jsp"%>
-			<main> <input type="hidden" id="articleCategory" value="${articleCategory }" />
+			<main> <input type="hidden" id="articleCategory"
+				value="${articleCategory }" />
 			<div class="control">
-				<a class="btn btn-default"
-					href="/articles/${articleCategory}/write">글쓰기</a>
+				<a class="btn btn-default" href="/articles/${articleCategory}/write">글쓰기</a>
 			</div>
 			<ul class="article-list">
-							<c:choose>
+				<c:choose>
 					<c:when test="${empty result.articles}">
 						<li><div class="text-center">등록된 글이 없습니다.</div></li>
 					</c:when>
@@ -30,11 +30,10 @@
 							<li class="article-wrap">
 								<div class="article-title-wrap">
 									<div>
-										<span>#${article.articleId }</span> 
-										<span class="article-info">
-										      <span>${article.articleWriterName }</span>
-											  <span class="articleInsertDate" title="${article.articleInsertDate }"></span>
-											  <span>${article.articleHit}hit</span>
+										<span>#${article.articleId }</span> <span class="article-info">
+											<span>${article.articleWriterName }</span> 
+											<span class="articleInsertDate" title="${article.articleInsertDate }"></span> 
+											<span>${article.articleHit}hit</span>
 										</span>
 									</div>
 									<div>
@@ -45,8 +44,9 @@
 								<div class="article-info-wrap">
 									<div>${article.articleWriterName }</div>
 									<div>
-										<span class="articleInsertDate" title="${article.articleInsertDate }"></span>
-										<span class="text-right">${article.articleHit}hit</span>
+										<span class="articleInsertDate"
+											title="${article.articleInsertDate }"></span> <span
+											class="text-right">${article.articleHit}hit</span>
 									</div>
 								</div>
 

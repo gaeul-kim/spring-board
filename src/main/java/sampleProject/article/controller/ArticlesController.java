@@ -27,12 +27,6 @@ public class ArticlesController {
     @Resource
     private ArticleService articleService;
 
-    @RequestMapping(value = { "/", "" }, method = RequestMethod.GET)
-    public String articleRoot() throws Exception {
-        return "/common/main";
-
-    }
-
     @RequestMapping(value = { "/{articleCategory}" }, method = RequestMethod.GET)
     public String articleList(Model model, @PathVariable String articleCategory,
             @RequestParam(value = "currentPageNo", required = false) Integer currentPageNo) throws Exception {
@@ -41,15 +35,11 @@ public class ArticlesController {
         if (articleService.hasArticleCategory(articleCategory)) {
             Map<String, Object> map = new HashMap<String, Object>();
 
-            LOG.debug("currentPageNo : " + currentPageNo);
-            // if (currentPageNo > 0) {
             map.put("currentPageNo", currentPageNo);
-            // }
             map.put("articleCategory", articleCategory);
-
             map = articleService.getArticles(map);
             model.addAttribute("result", map);
-            LOG.debug(map);
+            
             return "article/articleList";
         } else {
             return "/common/main";

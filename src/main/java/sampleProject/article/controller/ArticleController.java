@@ -37,22 +37,27 @@ public class ArticleController {
         return modelAndView;
     }
 
+    /*
+     * @RequestMapping(value = "/{articleId}", method = RequestMethod.PUT)
+     * public ModelAndView editArticle(ModelAndView modelAndView, @PathVariable
+     * Integer articleId) throws Exception {
+     * 
+     * LOG.debug("RequestMethod.PUT called"); return null; }
+     * 
+     * @RequestMapping(value = "/{articleId}", method = RequestMethod.DELETE)
+     * public ModelAndView deleteArticle(ModelAndView
+     * modelAndView, @PathVariable Integer articleId) throws Exception { return
+     * null; }
+     */
+
     @RequestMapping(value = "/edit/{articleId}", method = RequestMethod.GET)
     public ModelAndView editArticle(ModelAndView mv, @PathVariable Integer article_id, HttpSession session) throws Exception {
 
-        /*
-         * spring security / session 사용여부 확정후 구현
-         * 
-         */
         return mv;
     }
+
     @RequestMapping(value = "/delete/{articleId}", method = RequestMethod.GET)
     public ModelAndView deleteArticle(ModelAndView mv, @PathVariable Integer article_id, HttpSession session) throws Exception {
-
-        /*
-         * spring security / session 사용여부 확정후 구현
-         * 
-         */
         return mv;
     }
 
