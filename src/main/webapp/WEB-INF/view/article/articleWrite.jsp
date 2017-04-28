@@ -1,40 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<%@ include file="/WEB-INF/view/include/header.jspf"%>
 <title>SampleProject - 글작성</title>
 </head>
 <body>
-	<div>
-		분류 : <select>
-			<c:choose>
-				<c:when test="${empty articleCategories}">
-					<option>미분류</option>
-				</c:when>
-				<c:when test="${!empty articleCategories }">
-					<c:forEach items="${articleCategories}" var="category">
-						<option>${category }</option>
-					</c:forEach>
-				</c:when>
-			</c:choose>
-		</select>
+	<div class="container">
+		<header>
+			<h1>
+				<a href="/">SampleProject</a>
+			</h1>
+		</header>
+		<section class="content">
+			<%@ include file="/WEB-INF/view/include/navigation.jsp"%>
+			<main> <input type="hidden" id="articleCategory"
+				value="${articleCategory }" />
+			<div class="box-medium">
+				<form:form modelAttribute="article" mthod="post"
+					autocomplete="false">
+					<input type="hidden" name="articleWriter"
+						value="<sec:authentication property="principal.memberId" />" />
+					<div class="form-box">
+						<c:choose>
+							<c:when test="${!empty articleTags }">
+								<div class="input-box">
+									<select name="articleTag" class="form-control">
+										<c:forEach items="${articleTags}" var="articleTag">
+											<option>${articleTag }</option>
+										</c:forEach>
+									</select>
+								</div>
+							</c:when>
+
+						</c:choose>
+						<div class="input-box">
+							<form:input path="articleTitle" class="form-control"
+								placeholder="제목" maxlength="50" required="required" />
+						</div>
+					</div>
+					<div class="form-box">
+						<div class="input-box">
+							<form:textarea path="articleContent" class="form-control"
+								placeholder="내용" rows="10" wrap="hard" required="required" />
+						</div>
+					</div>
+					<button class="btn btn-default btn-block" id="btn-register">작성</button>
+				</form:form>
+			</div>
+			</main>
+		</section>
+		<footer>
+			<a href="#">홈페이지</a>
+		</footer>
 	</div>
 
-	<div>
-		제목 :<input type="text" name="articleTitle">
-	</div>
-	<div>
-		내용 :
-		<textarea rows="5" cols="10" name="articleContent"></textarea>
-	</div>
-	<div>
-		<a href="/">메인</a>
-	</div>
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

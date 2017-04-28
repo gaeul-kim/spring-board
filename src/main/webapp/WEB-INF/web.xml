@@ -34,6 +34,19 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+	<error-page>
+		<error-code>400</error-code>
+		<location>/common/notYetFinished</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/common/pageNotFound</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/common/serverError</location>
+	</error-page>
+
 	<!-- UTF-8 Encoding -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>

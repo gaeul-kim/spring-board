@@ -1,6 +1,7 @@
 package sampleProject.article.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -11,8 +12,8 @@ import sampleProject.common.dao.AbstractDAO;
 public class ArticleDAO extends AbstractDAO {
 
     @SuppressWarnings("unchecked")
-    public List<Article> selectArticles(String articleCategory) throws Exception {
-        return selectList("article.selectArticles", articleCategory);
+    public Map<String, Object> selectArticles(Map<String, Object> params) throws Exception {
+        return selectPagingList("article.selectArticles", params);
     }
 
     public Article selectArticle(Article article) throws Exception {
@@ -40,8 +41,7 @@ public class ArticleDAO extends AbstractDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public List<String> selectArticleCategories(String articleCategory) throws Exception {
-        return selectList("article.selectArticleCategories", articleCategory);
+    public List<String> selectArticleTags(String articleCategory) throws Exception {
+        return selectList("article.selectArticleTags", articleCategory);
     }
-
 }

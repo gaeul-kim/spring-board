@@ -28,18 +28,18 @@ public class MemberController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerForm(Model model) {
         model.addAttribute("member", new Member());
-        return "/member/register";
+        return "/member/memberRegister";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerSubmit(@Valid Member member, BindingResult bindingResult) throws Exception {
 
         if (bindingResult.hasErrors()) {
-            return "/member/register";
+            return "/member/memberRegister";
         } else {
             memberService.registerMember(member);
         }
-        return "member/success";
+        return "member/memberRegisterSuccess";
     }
 
     @RequestMapping("/checkId")
@@ -57,9 +57,8 @@ public class MemberController {
         return resultMap;
     }
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login")
     public String loginForm() throws Exception {
-        return "member/login";
+        return "member/memberLogin";
     }
-
 }

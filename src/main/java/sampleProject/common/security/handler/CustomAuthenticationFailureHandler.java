@@ -83,7 +83,7 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 //        String loginPassword = request.getParameter(loginPasswordName);
         String loginRedirect = request.getParameter(loginRedirectName);
         
-        request.setAttribute("loginId", loginId);
+        request.setAttribute("memberId", loginId);
         request.setAttribute("loginRedirect", loginRedirect);
         
 

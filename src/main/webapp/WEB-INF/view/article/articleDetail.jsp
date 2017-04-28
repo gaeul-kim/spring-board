@@ -1,25 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<%@ include file="/WEB-INF/view/include/header.jspf"%>
 <title>SampleProject - ${article.articleTitle }</title>
 </head>
 <body>
-	<div>분류 : ${article.articleCategory }</div>
-	<div>글번호 : ${article.articleId }</div>
-	<div>작성자 : ${article.articleWriter }</div>
-	<div>제목 : ${article.articleTitle }</div>
-	<div>내용 : ${article.articleContent }</div>
-	<div>작성일 : ${article.articleInsertDate }</div>
-	<div>조회수 : ${article.articleHit }</div>
-	<div>
-		<a href="/">메인</a>&nbsp;<a href="/articles/${article.articleCategory}">목록</a>
+	<div class="container">
+		<header>
+			<h1>
+				<a href="/">SampleProject</a>
+			</h1>
+		</header>
+		<section class="content">
+			<%@ include file="/WEB-INF/view/include/navigation.jsp"%>
+			<main>
+			<div class="control">
+				<c:if test="${isAdmin or loginId eq article.articleWriter }">
+					<a class="btn btn-default" href="/article/delete/${articleId}">삭제</a>
+					<a class="btn btn-default" href="/article/edit/${articleId}">수정</a> 
+<!-- 					<a class="btn btn-default" id="btn-delete">삭제</a>
+					<a class="btn btn-default" id="btn-edit">수정</a> -->
+				</c:if>
+			</div>
+			<ul class="article-list">
+				<li class="article-wrap">
+					<div class="article-title-wrap">
+						<div>
+							<input type="hidden" id="articleId" value="${article.articleId }" />
+							<span>#${article.articleId }</span> <span class="article-info">
+								<span>${article.articleWriterName }</span> <span
+								class="articleInsertDate" title="${article.articleInsertDate }"></span>
+								<span>${article.articleHit}hit</span>
+							</span>
+						</div>
+						<div>${article.articleTitle }</div>
+					</div>
+					<div class="article-info-wrap">
+						<div>${article.articleWriterName }</div>
+						<div>
+							<span class="articleInsertDate"
+								title="${article.articleInsertDate }"></span><span
+								class="text-right">${article.articleHit}hit</span>
+						</div>
+					</div>
+				</li>
+				<li class="article-wrap">${article.articleContent }</li>
+			</ul>
+			</main>
+		</section>
+		<footer>
+			<a href="#">홈페이지</a>
+		</footer>
 	</div>
+	<script>
+		$(document).ready(function() {
+			$.fn.setDate = function() {
+				return this.each(function() {
+					var str = date_calculator($(this).attr('title'));
+					$(this).text(str);
+				});
+			};
+			$('.articleInsertDate').setDate();
+		});
+	</script>
 </body>
 </html>

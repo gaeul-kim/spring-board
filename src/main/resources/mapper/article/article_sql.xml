@@ -2,23 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="article">
-	<select id="selectArticles" parameterType="sampleProject.article.domain.Article"
+
+	<select id="selectArticles" parameterType="HashMap"
 		resultType="sampleProject.article.domain.Article">
-		<![CDATA[
-		    select articleId, articleTitle, articleWriter, date_format(articleInsertDate,'%Y-%m-%d') articleInsertDate, articleHit, articleCategory
-		        from article 
-		            where articleDeleteDate is null 
-		                and articleCategory = #{articleCategory}
-	    ]]>
+        <include refid="common.pagingPre"/> 
+        <![CDATA[
+            select a.articleId, a.articleTitle, a.articleWriter, m.memberName articleWriterName, date_format(a.articleInsertDate,'%Y-%m-%d %H:%i') articleInsertDate, a.articleHit, a.articleCategory
+                from article a 
+                  left outer join member m on a.articleWriter = m.memberId
+                    where articleDeleteDate is null 
+                        and articleCategory = #{articleCategory}
+                          order by articleInsertDate desc, articleId desc
+        ]]>
+        <include refid="common.pagingPost"/> 
 	</select>
 	<select id="selectArticle" parameterType="sampleProject.article.domain.Article"
 		resultType="sampleProject.article.domain.Article">
         <![CDATA[
             select 
-                articleId, articleTitle, articleContent, articleWriter, date_format(articleInsertDate,'%Y-%m-%d %H:%i') articleInsertDate, articleHit, articleCategory
-                    from article
-                        where articleDeleteDate is null 
-                            and articleId = #{articleId}
+                a.articleId, a.articleTitle, a.articleContent, a.articleWriter,  m.memberName articleWriterName, date_format(a.articleInsertDate,'%Y-%m-%d %H:%i') articleInsertDate, a.articleHit, a.articleCategory
+                    from article a
+                         left outer join member m on a.articleWriter = m.memberId
+                            where articleDeleteDate is null 
+                                and articleId = #{articleId}
         ]]>
 	</select>
 	<update id="updateHit" parameterType="sampleProject.article.domain.Article">
@@ -33,8 +39,8 @@
 		useGeneratedKeys="true" keyProperty="articleId">
 	   <![CDATA[
             insert into article
-                (articleTitle, articleContent, articleWriter, articlePassword, articleCategory, articleInsertDate)
-                    values(#{articleTitle}, #{articleContent}, #{articleWriter}, #{articlePassword},#{articleCategory}, now())
+                (articleTitle, articleContent, articleWriter, articleCategory, articleInsertDate)
+                    values(#{articleTitle}, #{articleContent}, #{articleWriter}, #{articleCategory}, now())
         ]]>
 	</insert>
 
@@ -62,7 +68,7 @@
         select count(*) from article_category where categoryName = #{articleCategory}
     ]]>
 	</select>
-	<select id="selectArticleCategories" parameterType="String"
+	<select id="selectArticleTags" parameterType="String"
 		resultType="String">
 	<![CDATA[
         select tagName from article_tag 

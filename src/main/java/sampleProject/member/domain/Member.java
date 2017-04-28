@@ -8,10 +8,9 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,24 +22,20 @@ public class Member implements UserDetails {
      */
     private static final long serialVersionUID = 1L;
 
-    @NotEmpty(message = "필수 입력")
-    @Size(min = 5, max = 15, message = "5~15자의 영문 소문자/숫자")
+    @Pattern(regexp = "[a-z0-9+]{5,15}", message = "5~15자의 영문 소문자와 숫자만 가능")
     private String memberId;
 
-    @NotEmpty(message = "필수 입력")
-    @Size(min = 5, max = 15, message = "5~15자의 영문 대소문자와 숫자/특수문자를 포함")
+    @Pattern(regexp = "(?=.*[a-zA-Z])((?=.*\\d)|(?=.*\\W)).{5,15}", message = "숫자나 특수문자를 포함한 5~15자의 영문 대소문자")
     private String memberPassword;
 
-    @NotEmpty(message = "필수 입력")
-    @Size(min = 2, max = 10, message = "2~10자의 한글, 4~10자의 영문자")
+    @Pattern(regexp = "[가-힣a-zA-Z]{2,10}", message = "2~10자의 한글이나 영문만 가능")
     private String memberName;
 
-    @NotEmpty(message = "필수 입력")
-    @Email(message = "이메일 주소가 유효하지 않습니다")
+    //@Pattern(regexp = "[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}", message = "유효하지 않은 이메일 형식")
+    @Email(message="유효하지 않은 이메일 형식")
     private String memberEmail;
 
-    @NotEmpty(message = "필수 입력")
-    @Size(min = 5, max = 15, message = "5~15자의 영문 대소문자와 숫자/특수문자를 포함")
+    @Pattern(regexp = "(?=.*[a-zA-Z])((?=.*\\d)|(?=.*\\W)).{5,15}", message = "숫자나 특수문자를 포함한 5~15자의 영문 대소문자")
     private String confirmPassword;
 
     private Integer memberIdx;
@@ -53,9 +48,9 @@ public class Member implements UserDetails {
         this.memberName = memberName;
         this.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));
     }
-    
-    public Member(){
-        
+
+    public Member() {
+
     }
 
     public String getMemberId() {
