@@ -33,8 +33,11 @@
 									<div>
 										<span>#${article.articleId }</span>
 										<c:if test="${not empty article.articleTag }">
-											<span><a
-												href="/articles/${articleCategory }?articleTag=${article.articleTag }">[${article.articleTag }]</a></span>
+											<!-- query string encoding -->
+											<c:url value="/articles/${articleCategory }" var="url">
+												<c:param name="articleTag" value="${article.articleTag }" />
+											</c:url>
+											<span><a href="${url }">[${article.articleTag }]</a></span>
 										</c:if>
 										<span class="article-info"> <span>${article.articleWriterName }</span>
 											<span class="articleInsertDate"

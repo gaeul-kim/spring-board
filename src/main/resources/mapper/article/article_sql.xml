@@ -3,97 +3,89 @@
 
 <mapper namespace="article">
 
-	<select id="selectArticles" parameterType="HashMap"
-		resultType="sampleProject.article.domain.Article">
-		<include refid="common.pagingPre" /> 
-        <![CDATA[
+	<select id="selectArticles" parameterType="HashMap"	resultType="sampleProject.article.domain.Article">
+        <include refid="common.pagingPre" /> 
+            <![CDATA[
             select a.articleId, a.articleTitle, a.articleTag, a.articleWriter, m.memberName articleWriterName, date_format(a.articleInsertDate,'%Y-%m-%d %H:%i') articleInsertDate, a.articleHit, a.articleCategory
-                from article a 
-                  left outer join member m on a.articleWriter = m.memberId
-                    where articleDeleteDate is null 
-                        and articleCategory = #{articleCategory}
-         ]]>
+                from article a left outer join member m on a.articleWriter = m.memberId
+                    where articleDeleteDate is null and articleCategory = #{articleCategory}
+            ]]>
 		<if test="articleTag != null and articleTag != ''">
+			<![CDATA[
 			and articleTag = #{articleTag}
+			]]>
 		</if>
-		<![CDATA[
-		order by articleInsertDate desc, articleId desc
-        ]]>
+			<![CDATA[
+			order by articleInsertDate desc, articleId desc
+	        ]]>
 		<include refid="common.pagingPost" />
 	</select>
-	<select id="selectArticle" parameterType="sampleProject.article.domain.Article"
-		resultType="sampleProject.article.domain.Article">
+	<select id="selectArticle" parameterType="sampleProject.article.domain.Article" resultType="sampleProject.article.domain.Article">
         <![CDATA[
-            select 
-                a.articleId, a.articleTitle, a.articleTag, a.articleContent, a.articleWriter,  m.memberName articleWriterName, date_format(a.articleInsertDate,'%Y-%m-%d %H:%i') articleInsertDate, a.articleHit, a.articleCategory
-                    from article a
-                         left outer join member m on a.articleWriter = m.memberId
-                            where articleDeleteDate is null 
-                                and articleId = #{articleId}  
+            select a.articleId, a.articleTitle, a.articleTag, a.articleContent, a.articleWriter,  m.memberName articleWriterName, date_format(a.articleInsertDate,'%Y-%m-%d %H:%i') articleInsertDate, a.articleHit, a.articleCategory
+                    from article a left outer join member m on a.articleWriter = m.memberId
+                            where articleDeleteDate is null  and articleId = #{articleId}  
         ]]>
-		<if test="articleWriter != null and articleWriter != ''">
+    <if test="articleWriter != null and articleWriter != ''">
+		<![CDATA[
 			and articleWriter = #{articleWriter}
-		</if>
+	    ]]>
+    </if>
 
 	</select>
 	<update id="updateHit" parameterType="sampleProject.article.domain.Article">
         <![CDATA[
-            update article
-                set articleHit = articleHit+1
-                    where articleId = #{articleId}
-                        and articleDeleteDate is null               
+            update article set articleHit = articleHit+1
+                where articleId = #{articleId} and articleDeleteDate is null               
         ]]>
 	</update>
-	<insert id="insertArticle" parameterType="sampleProject.article.domain.Article"
-		useGeneratedKeys="true" keyProperty="articleId">
+	<insert id="insertArticle" parameterType="sampleProject.article.domain.Article" useGeneratedKeys="true" keyProperty="articleId">
 	   <![CDATA[
-            insert into article
-                (articleTitle, articleTag, articleContent, articleWriter, articleCategory, articleInsertDate)
-                    values(#{articleTitle},]]>
-		<choose>
-			<when test="articleTag == null or articleTag ==''">
-				NULL,
-			</when>
-			<otherwise>
-				#{articleTag},
-			</otherwise>
-		</choose>
-		     <![CDATA[
-		     #{articleContent}, #{articleWriter}, #{articleCategory}, now())
-		     ]]>
-
+            insert into article (articleTitle, articleTag, articleContent, articleWriter, articleCategory, articleInsertDate)
+            values(#{articleTitle},
+       ]]>
+    <choose>
+        <when test="articleTag == null or articleTag ==''">
+        <![CDATA[
+            NULL,
+        ]]>
+        </when>
+        <otherwise>
+        <![CDATA[
+            #{articleTag},
+        ]]>
+        </otherwise>
+    </choose>
+        <![CDATA[
+        #{articleContent}, #{articleWriter}, #{articleCategory}, now())
+        ]]>
 	</insert>
 
 	<update id="updateDeleteDate" parameterType="sampleProject.article.domain.Article">
         <![CDATA[
-        update article 
-            set articleDeleteDate = now()
-                where articleId = #{articleId}
+        update article set articleDeleteDate = now()
+        where articleId = #{articleId}
         ]]>
 	</update>
 
 	<update id="updateArticle" parameterType="sampleProject.article.domain.Article">
 	<![CDATA[
-	   update article
-	       set articleTitle = #{articleTitle}, articleTag = #{articleTag}, articleContent = #{articleContent}
-                where articleId = #{articleId} 
-                    and articleWriter = #{articleWriter}
+	   update article set articleTitle = #{articleTitle}, articleTag = #{articleTag}, articleContent = #{articleContent}
+                where articleId = #{articleId} and articleWriter = #{articleWriter}
 	]]>
 
 	</update>
 
-	<select id="selectArticleCategory" parameterType="String"
-		resultType="Integer">
+	<select id="selectArticleCategory" parameterType="String" resultType="Integer">
     <![CDATA[
         select count(*) from article_category where categoryName = #{articleCategory}
     ]]>
 	</select>
-	<select id="selectArticleTags" parameterType="String"
-		resultType="String">
+	
+	<select id="selectArticleTags" parameterType="String" resultType="String">
 	<![CDATA[
         select tagName from article_tag 
-            where categoryId = 
-                (select categoryId from article_category where categoryName = #{articleCategory});	
+            where categoryId = (select categoryId from article_category where categoryName = #{articleCategory});	
     ]]>
 	</select>
 </mapper>

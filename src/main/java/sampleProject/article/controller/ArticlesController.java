@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -29,7 +30,7 @@ public class ArticlesController {
     private ArticleService articleService;
 
     @RequestMapping(value = { "/{articleCategory}" }, method = RequestMethod.GET)
-    public String articleList(Model model, @PathVariable String articleCategory,
+    public String articleList(HttpServletRequest req, Model model, @PathVariable String articleCategory,
             @RequestParam(value = "currentPageNo", required = false) Integer currentPageNo,
             @RequestParam(value = "articleTag", required = false) String articleTag) throws Exception {
 
