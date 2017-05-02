@@ -5,27 +5,31 @@
 
 	<select id="selectArticles" parameterType="HashMap"
 		resultType="sampleProject.article.domain.Article">
-        <include refid="common.pagingPre"/> 
+		<include refid="common.pagingPre" /> 
         <![CDATA[
-            select a.articleId, a.articleTitle, a.articleWriter, m.memberName articleWriterName, date_format(a.articleInsertDate,'%Y-%m-%d %H:%i') articleInsertDate, a.articleHit, a.articleCategory
+            select a.articleId, a.articleTitle, a.articleTag, a.articleWriter, m.memberName articleWriterName, date_format(a.articleInsertDate,'%Y-%m-%d %H:%i') articleInsertDate, a.articleHit, a.articleCategory
                 from article a 
                   left outer join member m on a.articleWriter = m.memberId
                     where articleDeleteDate is null 
                         and articleCategory = #{articleCategory}
                           order by articleInsertDate desc, articleId desc
         ]]>
-        <include refid="common.pagingPost"/> 
+		<include refid="common.pagingPost" />
 	</select>
 	<select id="selectArticle" parameterType="sampleProject.article.domain.Article"
 		resultType="sampleProject.article.domain.Article">
         <![CDATA[
             select 
-                a.articleId, a.articleTitle, a.articleContent, a.articleWriter,  m.memberName articleWriterName, date_format(a.articleInsertDate,'%Y-%m-%d %H:%i') articleInsertDate, a.articleHit, a.articleCategory
+                a.articleId, a.articleTitle, a.articleTag, a.articleContent, a.articleWriter,  m.memberName articleWriterName, date_format(a.articleInsertDate,'%Y-%m-%d %H:%i') articleInsertDate, a.articleHit, a.articleCategory
                     from article a
                          left outer join member m on a.articleWriter = m.memberId
                             where articleDeleteDate is null 
-                                and articleId = #{articleId}
+                                and articleId = #{articleId}  
         ]]>
+		<if test="articleWriter != null and articleWriter != ''">
+			and articleWriter = #{articleWriter}
+		</if>
+
 	</select>
 	<update id="updateHit" parameterType="sampleProject.article.domain.Article">
         <![CDATA[
@@ -39,9 +43,20 @@
 		useGeneratedKeys="true" keyProperty="articleId">
 	   <![CDATA[
             insert into article
-                (articleTitle, articleContent, articleWriter, articleCategory, articleInsertDate)
-                    values(#{articleTitle}, #{articleContent}, #{articleWriter}, #{articleCategory}, now())
-        ]]>
+                (articleTitle, articleTag, articleContent, articleWriter, articleCategory, articleInsertDate)
+                    values(#{articleTitle},]]>
+		<choose>
+			<when test="articleTag == null or articleTag ==''">
+				NULL,
+			</when>
+			<otherwise>
+				#{articleTag},
+			</otherwise>
+		</choose>
+		     <![CDATA[
+		     #{articleContent}, #{articleWriter}, #{articleCategory}, now())
+		     ]]>
+
 	</insert>
 
 	<update id="updateDeleteDate" parameterType="sampleProject.article.domain.Article">

@@ -30,10 +30,13 @@
 							<li class="article-wrap">
 								<div class="article-title-wrap">
 									<div>
-										<span>#${article.articleId }</span> <span class="article-info">
-											<span>${article.articleWriterName }</span> 
-											<span class="articleInsertDate" title="${article.articleInsertDate }"></span> 
-											<span>${article.articleHit}hit</span>
+										<span>#${article.articleId }</span>
+										<c:if test="${not empty article.articleTag }">
+											<span>[${article.articleTag }]</span>
+										</c:if>
+										<span class="article-info"> <span>${article.articleWriterName }</span>
+											<span class="articleInsertDate"
+											title="${article.articleInsertDate }"></span> <span>${article.articleHit}hit</span>
 										</span>
 									</div>
 									<div>

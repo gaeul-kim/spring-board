@@ -4,7 +4,7 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/view/include/header.jspf"%>
-<title>SampleProject - 글작성</title>
+<title>SampleProject - 글수정</title>
 </head>
 <body>
 	<div class="container">
@@ -15,23 +15,23 @@
 		</header>
 		<section class="content">
 			<%@ include file="/WEB-INF/view/include/navigation.jsp"%>
-			<main> <input type="hidden" id="articleCategory"
-				value="${articleCategory }" />
+			<main> 
+			<input type="hidden" id="articleCategory" value="${articleCategory }" />
+			<input type="hidden" id="articleId" value="${articleId }" />
 			<div class="box-medium">
-				<form:form modelAttribute="article" mthod="post"
-					autocomplete="false">
+				<form:form modelAttribute="article" method="post" autocomplete="false">
 					<div class="form-box">
 						<c:choose>
 							<c:when test="${!empty articleTags }">
 								<div class="input-box">
 									<select name="articleTag" class="form-control">
-										<option value="">선택하세요</option>
 										<c:forEach items="${articleTags}" var="articleTag">
 											<option>${articleTag }</option>
 										</c:forEach>
 									</select>
 								</div>
 							</c:when>
+
 						</c:choose>
 						<div class="input-box">
 							<form:input path="articleTitle" class="form-control"

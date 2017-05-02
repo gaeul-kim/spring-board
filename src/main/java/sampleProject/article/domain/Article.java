@@ -15,7 +15,6 @@ public class Article {
     @NotEmpty(message = "필수 입력")
     @Size(min = 1)
     private String articleContent;
-
     private String articleWriter;
     private String articleInsertDate;
     private String articleDeleteDate;
@@ -55,12 +54,18 @@ public class Article {
     }
 
     public void setArticleTag(String articleTag) {
-        this.articleTag = "[" + articleTag + "] ";
+        this.articleTag = articleTag;
     }
 
     public Article(Integer articleId) {
         super();
         this.articleId = articleId;
+    }
+
+    public Article(Integer articleId, String articleWriter) {
+        super();
+        this.articleId = articleId;
+        this.articleWriter = articleWriter;
     }
 
     public Article() {

@@ -1,7 +1,8 @@
 package sampleProject.article.controller;
 
+import java.security.Principal;
+
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -51,14 +52,24 @@ public class ArticleController {
      */
 
     @RequestMapping(value = "/edit/{articleId}", method = RequestMethod.GET)
-    public ModelAndView editArticle(ModelAndView mv, @PathVariable Integer article_id, HttpSession session) throws Exception {
+    public ModelAndView editArticleForm(ModelAndView modelAndView, Principal principal, @PathVariable Integer articleId) throws Exception {
 
-        return mv;
+        Article article = articleService.getArticle(new Article(articleId, principal.getName()));
+        if (article != null) {
+            modelAndView.addObject("article", article);
+            modelAndView.addObject("articleTags", articleService.getArticleTags(article.getArticleCategory()));
+            modelAndView.setViewName("/article/articleEdit");
+        } else {
+            modelAndView.setViewName("/common/main");
+
+        }
+        return modelAndView;
     }
-
-    @RequestMapping(value = "/delete/{articleId}", method = RequestMethod.GET)
-    public ModelAndView deleteArticle(ModelAndView mv, @PathVariable Integer article_id, HttpSession session) throws Exception {
-        return mv;
+    
+    @RequestMapping(value = "/edit/{articleId}", method = RequestMethod.POST)
+    public ModelAndView editArticle(Article article) throws Exception {
+          LOG.debug("RequestMethod.PUT");
+        return null;
     }
-
+    
 }
