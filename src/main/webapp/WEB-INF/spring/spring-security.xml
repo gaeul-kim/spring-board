@@ -13,14 +13,15 @@
 		<intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
 		<intercept-url pattern="/member/login" access="isAnonymous()" />
 		<intercept-url pattern="/member/register" access="isAnonymous()" />
+        <intercept-url pattern="/article/edit/**" access="hasAnyRole('USER','ADMIN')" />
 		<intercept-url pattern="/articles/notice/write" access="hasRole('ADMIN')" />
 		<intercept-url pattern="/articles/**/write" access="hasAnyRole('USER','ADMIN')" />
 		<intercept-url pattern="/" access="permitAll" />
-		
+
 		<form-login login-page="/member/login" username-parameter="memberId"
 			password-parameter="memberPassword" default-target-url="/"
 
-            login-processing-url="/member/loginProcess"
+			login-processing-url="/member/loginProcess"
 			authentication-success-handler-ref="customAuthenticationSuccessHandler"
 			authentication-failure-handler-ref="customAuthenticationFailureHandler" />
 

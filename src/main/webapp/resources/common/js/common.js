@@ -35,31 +35,31 @@ function ComSubmit(opt_formId) {
 
 function date_calculator(input_date) {
 	var now = new Date();
-	var date = new Date(input_date.replace(/-/g,'/'));
+	var date = new Date(input_date.replace(/-/g, '/'));
 	var subtract_value = parseInt(((now - date) / 60000));
 	var prefix = "";
 	var suffix = "";
 	var result = " 전";
-	/*	return now;*/
 
-	if (now.getFullYear() != date.getFullYear()) {
-		prefix = now.getFullYear() - date.getFullYear();
-		suffix = "년";
-	} else if (now.getMonth() != date.getMonth()) {
-		prefix = (now.getMonth() - date.getMonth()) + 1;
-		suffix = "개월";
-	} else if (subtract_value >= (60 * 24)) {
-		prefix = parseInt(subtract_value / (60 * 24));
-		suffix = "일";
-	} else if (subtract_value >= 60) {
-		prefix = parseInt(subtract_value / (60));
-		suffix = "시간";
-	} else if (subtract_value >= 1) {
+	if (subtract_value < 1) {
+		prefix = "방금";
+	} else if (subtract_value < 60) {
 		prefix = subtract_value;
 		suffix = "분";
+	} else if (subtract_value < (60 * 24)) {
+		prefix = parseInt(subtract_value / 60);
+		suffix = "시간";
+	} else if (subtract_value < (60 * 24 * 30)) {
+		prefix = parseInt(subtract_value / 60 / 24);
+		suffix = "일";
+	} else if (subtract_value < ((60 * 24 * 30 * 12) + 5)) {
+		prefix = parseInt(subtract_value / 60 / 24 / 30);
+		suffix = "달"
 	} else {
-		suffix = "방금"
+		prefix = parseInt(subtract_value / 365);
+		suffix = "년";
 	}
+
 	result = prefix + suffix + result;
 	return result;
 }

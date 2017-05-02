@@ -1,10 +1,13 @@
 package sampleProject.article.controller;
 
+import java.security.Principal;
+
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,28 +40,39 @@ public class ArticleController {
         return modelAndView;
     }
 
-    /*
-     * @RequestMapping(value = "/{articleId}", method = RequestMethod.PUT)
-     * public ModelAndView editArticle(ModelAndView modelAndView, @PathVariable
-     * Integer articleId) throws Exception {
-     * 
-     * LOG.debug("RequestMethod.PUT called"); return null; }
-     * 
-     * @RequestMapping(value = "/{articleId}", method = RequestMethod.DELETE)
-     * public ModelAndView deleteArticle(ModelAndView
-     * modelAndView, @PathVariable Integer articleId) throws Exception { return
-     * null; }
-     */
-
     @RequestMapping(value = "/edit/{articleId}", method = RequestMethod.GET)
-    public ModelAndView editArticle(ModelAndView mv, @PathVariable Integer article_id, HttpSession session) throws Exception {
+    public ModelAndView editArticleForm(ModelAndView modelAndView, Principal principal, @PathVariable Integer articleId) throws Exception {
+        Article article = articleService.getArticle(new Article(articleId, principal.getName()));
+        if (article != null) {
+            modelAndView.addObject("article", article);
+            modelAndView.addObject("articleTags", articleService.getArticleTags(article.getArticleCategory()));
+            modelAndView.setViewName("/article/articleEdit");
+        } else {
+            modelAndView.setViewName("/common/main");
 
-        return mv;
+        }
+        return modelAndView;
     }
 
-    @RequestMapping(value = "/delete/{articleId}", method = RequestMethod.GET)
-    public ModelAndView deleteArticle(ModelAndView mv, @PathVariable Integer article_id, HttpSession session) throws Exception {
-        return mv;
+    @RequestMapping(value = "/edit/{articleId}", method = RequestMethod.POST)
+    public ModelAndView editArticle(@Valid Article article, BindingResult bindingResult, ModelAndView modelAndView, Principal principal)
+            throws Exception {
+
+        if (bindingResult.hasErrors()) {
+            // 바인딩 에러처리
+            modelAndView.addObject("articleTags", articleService.getArticleTags(article.getArticleCategory()));
+            modelAndView.setViewName("/article/articleEdit");
+        } else {
+            article.setArticleWriter(principal.getName());
+            if (articleService.editArticle(article)) {
+                modelAndView.addObject("article", articleService.getArticle(article));
+                modelAndView.setViewName("/article/articleDetail");
+            } else {
+                // update 에러 처리
+                modelAndView.setViewName("common/serverError");
+            }
+        }
+        return modelAndView;
     }
 
 }

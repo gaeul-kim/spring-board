@@ -18,10 +18,8 @@
 			<main>
 			<div class="control">
 				<c:if test="${isAdmin or loginId eq article.articleWriter }">
-					<a class="btn btn-default" href="/article/delete/${articleId}">삭제</a>
-					<a class="btn btn-default" href="/article/edit/${articleId}">수정</a> 
-<!-- 					<a class="btn btn-default" id="btn-delete">삭제</a>
-					<a class="btn btn-default" id="btn-edit">수정</a> -->
+					<a class="btn btn-default" href="/article/delete/${article.articleId}">삭제</a>
+					<a class="btn btn-default" href="/article/edit/${article.articleId}">수정</a>
 				</c:if>
 			</div>
 			<ul class="article-list">
@@ -29,10 +27,13 @@
 					<div class="article-title-wrap">
 						<div>
 							<input type="hidden" id="articleId" value="${article.articleId }" />
-							<span>#${article.articleId }</span> <span class="article-info">
-								<span>${article.articleWriterName }</span> <span
-								class="articleInsertDate" title="${article.articleInsertDate }"></span>
-								<span>${article.articleHit}hit</span>
+							<span>#${article.articleId }</span>
+							<c:if test="${not empty article.articleTag }">
+								<span>[${article.articleTag }]</span>
+							</c:if>
+							<span class="article-info"> <span>${article.articleWriterName }</span>
+								<span class="articleInsertDate"
+								title="${article.articleInsertDate }"></span> <span>${article.articleHit}hit</span>
 							</span>
 						</div>
 						<div>${article.articleTitle }</div>

@@ -13,7 +13,7 @@ public interface ArticleService {
 
     Article setArticle(Article article) throws Exception;
 
-    Article editArticle(Article article) throws Exception;
+    Boolean editArticle(Article article) throws Exception;
 
     void deleteArticle(Article article) throws Exception;
 

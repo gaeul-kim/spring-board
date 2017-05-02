@@ -16,7 +16,8 @@
 		<section class="content">
 			<%@ include file="/WEB-INF/view/include/navigation.jsp"%>
 			<main> <input type="hidden" id="articleCategory"
-				value="${articleCategory }" />
+				value="${articleCategory }" /> <input type="hidden" id="articleTag"
+				value="${result.articleTag }" />
 			<div class="control">
 				<a class="btn btn-default" href="/articles/${articleCategory}/write">글쓰기</a>
 			</div>
@@ -30,10 +31,14 @@
 							<li class="article-wrap">
 								<div class="article-title-wrap">
 									<div>
-										<span>#${article.articleId }</span> <span class="article-info">
-											<span>${article.articleWriterName }</span> 
-											<span class="articleInsertDate" title="${article.articleInsertDate }"></span> 
-											<span>${article.articleHit}hit</span>
+										<span>#${article.articleId }</span>
+										<c:if test="${not empty article.articleTag }">
+											<span><a
+												href="/articles/${articleCategory }?articleTag=${article.articleTag }">[${article.articleTag }]</a></span>
+										</c:if>
+										<span class="article-info"> <span>${article.articleWriterName }</span>
+											<span class="articleInsertDate"
+											title="${article.articleInsertDate }"></span> <span>${article.articleHit}hit</span>
 										</span>
 									</div>
 									<div>
@@ -81,7 +86,20 @@
 		
 			function fn_search(pageNo) {
 				var articleCategory = $('#articleCategory').val();
-				location.href = "/articles/" + articleCategory + "?currentPageNo=" + pageNo;
+				var articleTag = $('#articleTag').val();
+		
+				var prefix = "/";
+				var suffix = "";
+		
+				if (articleCategory != '' && articleCategory != null) {
+					prefix = "/articles/" + articleCategory + "?currentPageNo=" + pageNo;
+				}
+		
+				if (articleTag != '' && articleTag != null) {
+					suffix = "&articleTag=" + articleTag;
+				}
+		
+				location.href = prefix + suffix;
 			}
 		</script>
 	</div>
