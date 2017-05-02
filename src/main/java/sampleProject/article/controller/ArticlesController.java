@@ -30,7 +30,8 @@ public class ArticlesController {
 
     @RequestMapping(value = { "/{articleCategory}" }, method = RequestMethod.GET)
     public String articleList(Model model, @PathVariable String articleCategory,
-            @RequestParam(value = "currentPageNo", required = false) Integer currentPageNo) throws Exception {
+            @RequestParam(value = "currentPageNo", required = false) Integer currentPageNo,
+            @RequestParam(value = "articleTag", required = false) String articleTag) throws Exception {
 
         // 요청한 게시판이 존재하는지 확인 후 목록 검색
         if (articleService.hasArticleCategory(articleCategory)) {
@@ -38,9 +39,10 @@ public class ArticlesController {
 
             map.put("currentPageNo", currentPageNo);
             map.put("articleCategory", articleCategory);
+            map.put("articleTag", articleTag);
             map = articleService.getArticles(map);
-            model.addAttribute("result", map);
 
+            model.addAttribute("result", map);
             return "article/articleList";
         } else {
             return "/common/main";

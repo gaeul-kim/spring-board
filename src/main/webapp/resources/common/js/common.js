@@ -53,7 +53,7 @@ function date_calculator(input_date) {
 		prefix = parseInt(subtract_value / 60 / 24);
 		suffix = "일";
 	} else if (subtract_value < ((60 * 24 * 30 * 12) + 5)) {
-		prefix = parseInt(subtract_value / 60 / 24 / 30 / 12);
+		prefix = parseInt(subtract_value / 60 / 24 / 30);
 		suffix = "달"
 	} else {
 		prefix = parseInt(subtract_value / 365);

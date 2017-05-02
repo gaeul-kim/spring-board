@@ -38,22 +38,8 @@ public class ArticleController {
         return modelAndView;
     }
 
-    /*
-     * @RequestMapping(value = "/{articleId}", method = RequestMethod.PUT)
-     * public ModelAndView editArticle(ModelAndView modelAndView, @PathVariable
-     * Integer articleId) throws Exception {
-     * 
-     * LOG.debug("RequestMethod.PUT called"); return null; }
-     * 
-     * @RequestMapping(value = "/{articleId}", method = RequestMethod.DELETE)
-     * public ModelAndView deleteArticle(ModelAndView
-     * modelAndView, @PathVariable Integer articleId) throws Exception { return
-     * null; }
-     */
-
     @RequestMapping(value = "/edit/{articleId}", method = RequestMethod.GET)
     public ModelAndView editArticleForm(ModelAndView modelAndView, Principal principal, @PathVariable Integer articleId) throws Exception {
-
         Article article = articleService.getArticle(new Article(articleId, principal.getName()));
         if (article != null) {
             modelAndView.addObject("article", article);

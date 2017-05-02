@@ -12,7 +12,12 @@
                   left outer join member m on a.articleWriter = m.memberId
                     where articleDeleteDate is null 
                         and articleCategory = #{articleCategory}
-                          order by articleInsertDate desc, articleId desc
+         ]]>
+		<if test="articleTag != null and articleTag != ''">
+			and articleTag = #{articleTag}
+		</if>
+		<![CDATA[
+		order by articleInsertDate desc, articleId desc
         ]]>
 		<include refid="common.pagingPost" />
 	</select>

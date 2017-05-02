@@ -120,6 +120,11 @@ public abstract class AbstractDAO {
             }
         }
         returnMap.put("articles", list);
+
+        // articleTag 로 검색했을경우 returnMap에 추가해줌
+        if (StringUtils.isEmpty(map.get("articleTag")) == false) {
+            returnMap.put("articleTag", map.get("articleTag"));
+        }
         return returnMap;
     }
 
