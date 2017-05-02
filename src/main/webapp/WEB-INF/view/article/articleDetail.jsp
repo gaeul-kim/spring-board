@@ -18,8 +18,8 @@
 			<main>
 			<div class="control">
 				<c:if test="${isAdmin or loginId eq article.articleWriter }">
-					<a class="btn btn-default" href="/article/delete/${articleId}">삭제</a>
-					<a class="btn btn-default" href="/article/edit/${articleId}">수정</a>
+					<a class="btn btn-default" href="/article/delete/${article.articleId}">삭제</a>
+					<a class="btn btn-default" href="/article/edit/${article.articleId}">수정</a>
 				</c:if>
 			</div>
 			<ul class="article-list">

@@ -75,9 +75,9 @@
 	<update id="updateArticle" parameterType="sampleProject.article.domain.Article">
 	<![CDATA[
 	   update article
-	       set(articleTitle, articleContent, articleCategory)
-	           values(#{articleTitle}, #{articleContent}, #{articleCategory})
-	               where articleId = #{articleId}
+	       set articleTitle = #{articleTitle}, articleTag = #{articleTag}, articleContent = #{articleContent}
+                where articleId = #{articleId} 
+                    and articleWriter = #{articleWriter}
 	]]>
 
 	</update>

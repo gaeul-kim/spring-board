@@ -66,10 +66,6 @@ public class ArticlesController {
     public ModelAndView articleWrite(@Valid Article article, BindingResult bindingResult, ModelAndView modelAndView, Principal principal)
             throws Exception {
 
-        // 사용자를 폼이 아니라 시큐리티 객체에서 가져옴
-        article.setArticleWriter(principal.getName());
-
-        LOG.debug("CATEGORY : " + article.getArticleCategory());
         if (bindingResult.hasErrors()) {
             /*
              * modelAndView.setViewName("redirect:/articles/" +
@@ -78,6 +74,8 @@ public class ArticlesController {
             modelAndView.addObject("articleTags", articleService.getArticleTags(article.getArticleCategory()));
             modelAndView.setViewName("/article/articleWrite");
         } else {
+            // 사용자를 시큐리티 객체에서 가져옴
+            article.setArticleWriter(principal.getName());
             modelAndView.addObject("article", articleService.setArticle(article));
             modelAndView.setViewName("/article/articleDetail");
         }

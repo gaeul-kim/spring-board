@@ -15,8 +15,8 @@
 		</header>
 		<section class="content">
 			<%@ include file="/WEB-INF/view/include/navigation.jsp"%>
-			<main> <input type="hidden" id="articleCategory"
-				value="${articleCategory }" />
+			<main> 
+			<input type="hidden" id="articleCategory" value="${articleCategory }" />
 			<div class="box-medium">
 				<form:form modelAttribute="article" mthod="post"
 					autocomplete="false">

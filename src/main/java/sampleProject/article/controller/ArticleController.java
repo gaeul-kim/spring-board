@@ -3,9 +3,11 @@ package sampleProject.article.controller;
 import java.security.Principal;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,11 +53,26 @@ public class ArticleController {
         }
         return modelAndView;
     }
-    
+
     @RequestMapping(value = "/edit/{articleId}", method = RequestMethod.POST)
-    public ModelAndView editArticle(Article article) throws Exception {
-          LOG.debug("RequestMethod.PUT");
-        return null;
+    public ModelAndView editArticle(@Valid Article article, BindingResult bindingResult, ModelAndView modelAndView, Principal principal)
+            throws Exception {
+
+        if (bindingResult.hasErrors()) {
+            // 바인딩 에러처리
+            modelAndView.addObject("articleTags", articleService.getArticleTags(article.getArticleCategory()));
+            modelAndView.setViewName("/article/articleEdit");
+        } else {
+            article.setArticleWriter(principal.getName());
+            if (articleService.editArticle(article)) {
+                modelAndView.addObject("article", articleService.getArticle(article));
+                modelAndView.setViewName("/article/articleDetail");
+            } else {
+                // update 에러 처리
+                modelAndView.setViewName("common/serverError");
+            }
+        }
+        return modelAndView;
     }
-    
+
 }

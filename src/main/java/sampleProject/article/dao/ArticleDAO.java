@@ -32,8 +32,8 @@ public class ArticleDAO extends AbstractDAO {
         update("article.updateDeleteDate", article);
     }
 
-    public void updateArticle(Article article) throws Exception {
-        update("article.updateArticle", article);
+    public Integer updateArticle(Article article) throws Exception {
+        return (Integer) update("article.updateArticle", article);
     }
 
     public Integer selectArticleCategory(String articleCategory) throws Exception {
