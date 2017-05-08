@@ -9,6 +9,14 @@
 		<property name="url" value="jdbc:mysql://localhost/sample_project" />
 		<property name="username" value="sample" />
 		<property name="password" value="1234" />
+		<!-- validation query -->
+		<property name="validationQuery" value="select 1" />
+		<!-- 비활성화 커넥션을 추출할때 커넥션이 유효한지 여부를 검사해서 유효하지 않으면 제거 -->
+		<property name="testWhileIdle" value="true" />
+		<!-- 해당 밀리초마다 validation query를 이용하여 유효성 검사 진행 -->
+		<property name="timeBetweenEvictionRunsMillis" value="30000" />
+		<!-- 커넥션을 가져올때 유효 여부 검사 -->
+		<property name="testOnBorrow" value="false" />
 	</bean>
 
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -44,8 +52,10 @@
 	</bean>
 
 	<!-- pagination using egovframework -->
-	<bean id="textRenderer" class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationRenderer" />
-	<bean id="paginationManager" class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">
+	<bean id="textRenderer"
+		class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationRenderer" />
+	<bean id="paginationManager"
+		class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">
 		<property name="rendererType">
 			<map>
 				<entry key="text" value-ref="textRenderer" />
