@@ -1,4 +1,4 @@
-/*function gfn_isNull(str) {
+function gfn_isNull(str) {
 	if (str == null) return true;
 	if (str == "NaN") return true;
 	if (new String(str).valueOf() == "undefined") return true;
@@ -31,7 +31,7 @@ function ComSubmit(opt_formId) {
 		frm.method = "post";
 		frm.submit();
 	};
-}*/
+}
 
 function date_calculator(input_date) {
 	var now = new Date();

@@ -15,7 +15,7 @@ public interface ArticleService {
 
     Boolean editArticle(Article article) throws Exception;
 
-    void deleteArticle(Article article) throws Exception;
+    Boolean deleteArticle(Article article) throws Exception;
 
     Boolean hasArticleCategory(String articleCategory) throws Exception;
 

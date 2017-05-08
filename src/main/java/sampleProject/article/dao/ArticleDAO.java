@@ -24,12 +24,12 @@ public class ArticleDAO extends AbstractDAO {
         insert("article.insertArticle", article);
     }
 
-    public void updateHit(Article article) throws Exception {
-        update("article.updateHit", article);
+    public Integer updateHit(Article article) throws Exception {
+       return (Integer) update("article.updateHit", article);
     }
 
-    public void updateDeleteDate(Article article) throws Exception {
-        update("article.updateDeleteDate", article);
+    public Integer updateDeleteDate(Article article) throws Exception {
+        return (Integer) update("article.updateDeleteDate", article);
     }
 
     public Integer updateArticle(Article article) throws Exception {

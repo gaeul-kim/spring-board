@@ -25,11 +25,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article getArticle(Article article) throws Exception {
-        article = articleDAO.selectArticle(article);
-        if (article != null) {
-            articleDAO.updateHit(article);
-        }
-        return article;
+
+        articleDAO.updateHit(article);
+        return articleDAO.selectArticle(article);
     }
 
     @Override
@@ -44,21 +42,23 @@ public class ArticleServiceImpl implements ArticleService {
          */
 
         articleDAO.insertArticle(article);
-        return articleDAO.selectArticle(article);
+        return getArticle(article);
     }
 
     @Override
-    public void deleteArticle(Article article) throws Exception {
-        articleDAO.updateDeleteDate(article);
+    public Boolean deleteArticle(Article article) throws Exception {
+        if (articleDAO.updateDeleteDate(article) == 0) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public Boolean editArticle(Article article) throws Exception {
         if (articleDAO.updateArticle(article) == 0) {
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     @Override

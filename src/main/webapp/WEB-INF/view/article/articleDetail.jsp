@@ -18,15 +18,16 @@
 			<main>
 			<div class="control">
 				<c:if test="${isAdmin or loginId eq article.articleWriter }">
-					<a class="btn btn-default" href="/article/delete/${article.articleId}">삭제</a>
+					<a class="btn btn-default" id="btn-article-delete">삭제</a>
 					<a class="btn btn-default" href="/article/edit/${article.articleId}">수정</a>
 				</c:if>
+				<a class="btn btn-default" href="/articles/${article.articleCategory}">목록</a>
+				<a class="btn btn-default" href="javascript:history.back();">이전</a>
 			</div>
 			<ul class="article-list">
 				<li class="article-wrap">
 					<div class="article-title-wrap">
 						<div>
-							<input type="hidden" id="articleId" value="${article.articleId }" />
 							<span>#${article.articleId }</span>
 							<c:if test="${not empty article.articleTag }">
 								<span>[${article.articleTag }]</span>
@@ -49,6 +50,7 @@
 				</li>
 				<li class="article-wrap">${article.articleContent }</li>
 			</ul>
+			<form id="commonForm" name="commonForm"></form>
 			</main>
 		</section>
 		<footer>
@@ -57,6 +59,14 @@
 	</div>
 	<script>
 		$(document).ready(function() {
+			$('#btn-article-delete').on("click", function(e) {
+				e.preventDefault();
+				var result = confirm('삭제하시겠습니까?');
+				if (result) {
+					fn_articleDelete();
+				}
+			});
+	
 			$.fn.setDate = function() {
 				return this.each(function() {
 					var str = date_calculator($(this).attr('title'));
@@ -65,6 +75,13 @@
 			};
 			$('.articleInsertDate').setDate();
 		});
+	
+		function fn_articleDelete() {
+			var comSubmit = new ComSubmit();
+			comSubmit.setUrl("<c:url value='/article/delete/${article.articleId}' />");
+			comSubmit.addParam("articleCategory", '${article.articleCategory}');
+			comSubmit.submit();
+		}
 	</script>
 </body>
 </html>

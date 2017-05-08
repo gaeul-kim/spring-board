@@ -65,10 +65,10 @@ li {
 .control {
 	display: flex;
 	flex-direction: row-reverse;
-	padding: 10px;
+	padding-bottom: 10px;
 }
 
-.control>a {
+.control>.btn{
 	margin-left: 10px;
 }
 

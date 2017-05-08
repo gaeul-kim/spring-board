@@ -28,4 +28,9 @@ public class CommonController {
     public String serverError() {
         return "common/serverError";
     }
+    @RequestMapping(value = "/common/accessDenied")
+    public String accessDenied() {
+        return "common/accessDenied";
+    }
+
 }

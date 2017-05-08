@@ -42,6 +42,8 @@ public class ArticleController {
 
     @RequestMapping(value = "/edit/{articleId}", method = RequestMethod.GET)
     public ModelAndView editArticleForm(ModelAndView modelAndView, Principal principal, @PathVariable Integer articleId) throws Exception {
+
+        // edit 요청한 사용자와 게시물 id를 검색조건으로 하여 해당사용자가 맞는지 확인 후 view 리턴
         Article article = articleService.getArticle(new Article(articleId, principal.getName()));
         if (article != null) {
             modelAndView.addObject("article", article);
@@ -63,14 +65,28 @@ public class ArticleController {
             modelAndView.addObject("articleTags", articleService.getArticleTags(article.getArticleCategory()));
             modelAndView.setViewName("/article/articleEdit");
         } else {
+            // 로그인 사용자를 article 객체에 넣서 edit query 실행
             article.setArticleWriter(principal.getName());
             if (articleService.editArticle(article)) {
                 modelAndView.addObject("article", articleService.getArticle(article));
                 modelAndView.setViewName("/article/articleDetail");
             } else {
                 // update 에러 처리
-                modelAndView.setViewName("common/serverError");
+                modelAndView.setViewName("/common/serverError");
             }
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/delete/{articleId}", method = RequestMethod.POST)
+    public ModelAndView deleteArticlePost(@PathVariable Integer articleId, ModelAndView modelAndView, Principal principal, Article article)
+            throws Exception {
+
+        if (articleService.deleteArticle(new Article(articleId, principal.getName()))) {
+            // 성공처리
+            modelAndView.setViewName("redirect:/articles/" + article.getArticleCategory());
+        } else { // delete 에러 처리
+            modelAndView.setViewName("/common/serverError");
         }
         return modelAndView;
     }

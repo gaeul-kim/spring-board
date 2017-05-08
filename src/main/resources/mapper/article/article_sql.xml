@@ -64,7 +64,7 @@
 	<update id="updateDeleteDate" parameterType="sampleProject.article.domain.Article">
         <![CDATA[
         update article set articleDeleteDate = now()
-        where articleId = #{articleId}
+        where articleId = #{articleId} and articleWriter = #{articleWriter}
         ]]>
 	</update>
 
