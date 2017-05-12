@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="comment">
+	<insert id="insertComment" parameterType="sampleProject.comment.domain.Comment"
+		useGeneratedKeys="true" keyProperty="commentId">
+	   <![CDATA[
+            insert into comment (commentWriter, commentContent, commentInsertDate, articleId, commentParentsId)
+            values(#{commentWriter},#{commentContent},now(),#{articleId}, #{commentParentsId});
+       ]]>
+
+		<!-- insert into comment (commentWriter, commentContent, commentInsertDate, 
+			articleId, commentParentsId) values(#{commentWriter},#{commentContent},now(),#{articleId}, 
+			(select * from (select commentParentsId from comment where commentId = #{commentParentsId}) 
+			as commentParentsId)); -->
+	</insert>
+
+	<select id="selectComments" parameterType="Integer"
+		resultType="sampleProject.comment.domain.Comment">
+		<![CDATA[
+		select c.commentId, c.commentWriter, c.commentContent, date_format(c.commentInsertDate,'%Y-%m-%d %H:%i') commentInsertDate, c.commentParentsId, c.articleId, 
+		(select memberName from member where memberId = c.commentWriter) commentWriterName	
+			from comment c	
+			  where c.commentDeleteDate is null 
+			      and c.articleId = #{articleId} order by if(isnull(c.commentParentsId), c.commentId, c.commentParentsId);
+		]]>
+	</select>
+</mapper>
