@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,11 +14,9 @@
 		</header>
 		<section class="content">
 			<%@ include file="/WEB-INF/view/include/navigation.jsp"%>
-			<main> 
-			<input type="hidden" id="articleCategory" value="${articleCategory }" />
+			<main> <input type="hidden" id="articleCategory" value="${articleCategory }" />
 			<div class="box-medium">
-				<form:form modelAttribute="article" mthod="post"
-					autocomplete="false">
+				<form:form modelAttribute="article" mthod="post" autocomplete="false">
 					<div class="form-box">
 						<c:choose>
 							<c:when test="${!empty articleTags }">
@@ -34,14 +31,12 @@
 							</c:when>
 						</c:choose>
 						<div class="input-box">
-							<form:input path="articleTitle" class="form-control"
-								placeholder="제목" maxlength="50" required="required" />
+							<form:input path="articleTitle" class="form-control" placeholder="제목" maxlength="50" required="required" />
 						</div>
 					</div>
 					<div class="form-box">
 						<div class="input-box">
-							<form:textarea path="articleContent" class="form-control"
-								placeholder="내용" rows="10" wrap="hard" required="required" />
+							<form:textarea path="articleContent" class="form-control" placeholder="내용" rows="10" required="required" />
 						</div>
 					</div>
 					<button class="btn btn-default btn-block" id="btn-register">작성</button>

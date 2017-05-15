@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +8,9 @@
 <body>
 	<div class="container">
 		<header>
-            <h1><a href="/">SampleProject</a></h1>
+			<h1>
+				<a href="/">SampleProject</a>
+			</h1>
 		</header>
 		<section class="content">
 			<%@ include file="/WEB-INF/view/include/navigation.jsp"%>
@@ -17,12 +19,10 @@
 				<form name="loginForm" action="/member/loginProcess" method='POST'>
 					<div class="form-box">
 						<div class="input-box">
-							<input type='text' id="memberId" name='memberId'
-								value="${memberId}" class="form-control" placeholder="아이디">
+							<input type='text' id="memberId" name='memberId' value="${memberId}" class="form-control" placeholder="아이디">
 						</div>
 						<div class="input-box">
-							<input type="password" id="memberPassword" name="memberPassword"
-								value="" class="form-control" placeholder="비밀번호">
+							<input type="password" id="memberPassword" name="memberPassword" value="" class="form-control" placeholder="비밀번호">
 						</div>
 					</div>
 					<div class="info">
