@@ -42,9 +42,9 @@ public class MemberController {
         return "member/memberRegisterSuccess";
     }
 
-    @RequestMapping("/checkId")
+    @RequestMapping("/checkMemberId")
     @ResponseBody
-    public HashMap<String, Object> checkId(@ModelAttribute Member member) throws Exception {
+    public HashMap<String, Object> checkMemberId(@ModelAttribute Member member) throws Exception {
 
         Boolean availableMemberId = memberService.checkMemberId(member);
 

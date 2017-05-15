@@ -11,7 +11,7 @@ public interface ArticleService {
 
     Article getArticle(Article article) throws Exception;
 
-    Article setArticle(Article article) throws Exception;
+    void setArticle(Article article) throws Exception;
 
     Boolean editArticle(Article article) throws Exception;
 

@@ -15,7 +15,7 @@ import sampleProject.member.domain.Member;
 
 @Service("memberService")
 public class MemberServiceImpl implements MemberService {
-    Logger log = Logger.getLogger(this.getClass());
+    Logger LOG = Logger.getLogger(this.getClass());
 
     @Autowired
     BCryptPasswordEncoder passwordEncoder;

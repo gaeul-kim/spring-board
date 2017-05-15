@@ -77,8 +77,12 @@ public class ArticlesController {
         } else {
             // 사용자를 시큐리티 객체에서 가져옴
             article.setArticleWriter(principal.getName());
-            modelAndView.addObject("article", articleService.setArticle(article));
-            modelAndView.setViewName("/article/articleDetail");
+            articleService.setArticle(article);
+            /*
+             * modelAndView.addObject("article",
+             * articleService.setArticle(article));
+             */
+            modelAndView.setViewName("redirect:/article/" + article.getArticleId());
         }
         return modelAndView;
     }

@@ -31,7 +31,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Article setArticle(Article article) throws Exception {
+    public void setArticle(Article article) throws Exception {
 
         // 삽입된 데이터의 article_id를 파라미터 객체에 넣어줌(sequence)
         // 작성 후 해당 글 보기
@@ -42,7 +42,6 @@ public class ArticleServiceImpl implements ArticleService {
          */
 
         articleDAO.insertArticle(article);
-        return getArticle(article);
     }
 
     @Override
