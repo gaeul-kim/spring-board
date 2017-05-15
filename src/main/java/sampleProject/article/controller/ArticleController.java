@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import sampleProject.article.domain.Article;
 import sampleProject.article.service.ArticleService;
+import sampleProject.comment.service.CommentService;
 
 @Controller
 @RequestMapping(value = "/article")
@@ -23,6 +24,9 @@ public class ArticleController {
 
     @Resource
     private ArticleService articleService;
+    
+    @Resource
+    private CommentService commentService;
 
     @RequestMapping(value = "/{articleId}", method = RequestMethod.GET)
     public ModelAndView viewArticle(ModelAndView modelAndView, @PathVariable Integer articleId) throws Exception {
@@ -32,6 +36,7 @@ public class ArticleController {
         if (article != null) {
             // 게시물 읽기 뷰페이지 지정
             modelAndView.addObject("article", article);
+            modelAndView.addObject("comments", commentService.getComments(article.getArticleId()));
             modelAndView.setViewName("/article/articleDetail");
         } else {
             // 게시물 없음 뷰페이지 지정

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,16 +14,20 @@
 		</header>
 		<section class="content">
 			<%@ include file="/WEB-INF/view/include/navigation.jsp"%>
-			<main> <input type="hidden" id="articleCategory"
-				value="${articleCategory }" /> <input type="hidden" id="articleTag"
-				value="${result.articleTag }" />
+			<main>
+			<div>
+				<input type="hidden" id="articleCategory" value="${articleCategory }" />
+				<input type="hidden" id="articleTag" value="${result.articleTag }" />
+			</div>
 			<div class="control">
 				<a class="btn btn-default" href="/articles/${articleCategory}/write">글쓰기</a>
 			</div>
 			<ul class="article-list">
 				<c:choose>
 					<c:when test="${empty result.articles}">
-						<li><div class="text-center">등록된 글이 없습니다.</div></li>
+						<li>
+							<div class="text-center">등록된 글이 없습니다.</div>
+						</li>
 					</c:when>
 					<c:when test="${!empty result.articles }">
 						<c:forEach items="${result.articles}" var="article">
@@ -37,24 +40,25 @@
 											<c:url value="/articles/${articleCategory }" var="url">
 												<c:param name="articleTag" value="${article.articleTag }" />
 											</c:url>
-											<span><a href="${url }">[${article.articleTag }]</a></span>
+											<span>
+												<a href="${url }">[${article.articleTag }]</a>
+											</span>
 										</c:if>
-										<span class="article-info"> <span>${article.articleWriterName }</span>
-											<span class="articleInsertDate"
-											title="${article.articleInsertDate }"></span> <span>${article.articleHit}hit</span>
+										<span class="article-info">
+											<span>${article.articleWriterName }</span>
+											<span class="articleInsertDate" title="${article.articleInsertDate }"></span>
+											<span>${article.articleHit}hit</span>
 										</span>
 									</div>
 									<div>
-										<a href="/article/${article.articleId }">
-											${article.articleTitle }</a>
+										<a href="/article/${article.articleId }"> ${article.articleTitle }</a>
 									</div>
 								</div>
 								<div class="article-info-wrap">
 									<div>${article.articleWriterName }</div>
 									<div>
-										<span class="articleInsertDate"
-											title="${article.articleInsertDate }"></span> <span
-											class="text-right">${article.articleHit}hit</span>
+										<span class="articleInsertDate" title="${article.articleInsertDate }"></span>
+										<span class="text-right">${article.articleHit}hit</span>
 									</div>
 								</div>
 
@@ -64,10 +68,8 @@
 				</c:choose>
 			</ul>
 			<div class="text-center">
-				<c:if
-					test="${not empty result.articles && not empty result.paginationInfo}">
-					<ui:pagination paginationInfo="${result.paginationInfo}"
-						type="text" jsFunction="fn_search" />
+				<c:if test="${not empty result.articles && not empty result.paginationInfo}">
+					<ui:pagination paginationInfo="${result.paginationInfo}" type="text" jsFunction="fn_search" />
 				</c:if>
 			</div>
 			</main>
