@@ -3,6 +3,7 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/view/include/header.jspf"%>
+<link rel="stylesheet" href="/css/member.css">
 <title>SampleProject - 회원가입</title>
 </head>
 <body>
@@ -60,6 +61,6 @@
 			<a href="#">홈페이지</a>
 		</footer>
 	</div>
-	<script src="/js/memberRegister.js"></script>
+	<script src="/js/member.js"></script>
 </body>
 </html>

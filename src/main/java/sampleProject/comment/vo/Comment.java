@@ -1,4 +1,4 @@
-package sampleProject.comment.domain;
+package sampleProject.comment.vo;
 
 public class Comment {
     private Integer commentId;

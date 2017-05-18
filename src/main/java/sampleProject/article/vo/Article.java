@@ -1,4 +1,4 @@
-package sampleProject.article.domain;
+package sampleProject.article.vo;
 
 import javax.validation.constraints.Size;
 
@@ -24,6 +24,15 @@ public class Article {
     private String articleWriterName;
     private Integer totalCount;
     private Integer rowNumber;
+    private Integer commentCount;
+
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
+    }
 
     public Integer getRowNumber() {
         return rowNumber;

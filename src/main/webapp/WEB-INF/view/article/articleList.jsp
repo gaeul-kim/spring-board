@@ -3,6 +3,7 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/view/include/header.jspf"%>
+<link rel="stylesheet" href="/css/article.css">
 <title>SampleProject - ${articleCategory}</title>
 </head>
 <body>
@@ -19,7 +20,7 @@
 				<input type="hidden" id="articleCategory" value="${articleCategory }" />
 				<input type="hidden" id="articleTag" value="${result.articleTag }" />
 			</div>
-			<div class="control">
+			<div class="article-control">
 				<a class="btn btn-default" href="/articles/${articleCategory}/write">글쓰기</a>
 			</div>
 			<ul class="article-list">
@@ -41,7 +42,7 @@
 												<c:param name="articleTag" value="${article.articleTag }" />
 											</c:url>
 											<span>
-												<a href="${url }">[${article.articleTag }]</a>
+												<a href="${url }"><span class="tag">${article.articleTag }</span></a>
 											</span>
 										</c:if>
 										<span class="article-info">
@@ -51,7 +52,12 @@
 										</span>
 									</div>
 									<div>
-										<a href="/article/${article.articleId }"> ${article.articleTitle }</a>
+										<span>
+											<a href="/article/${article.articleId }"> ${article.articleTitle }</a>
+										</span>
+										<c:if test="${article.commentCount ne 0 }">
+											<span class="comment-count">${article.commentCount }</span>
+										</c:if>
 									</div>
 								</div>
 								<div class="article-info-wrap">
@@ -77,36 +83,33 @@
 		<footer>
 			<a href="#">홈페이지</a>
 		</footer>
-		<script>
-			$(document).ready(function() {
-		
-				$.fn.setDate = function() {
-					return this.each(function() {
-						var str = date_calculator($(this).attr('title'));
-						$(this).text(str);
-					});
-				};
-				$('.articleInsertDate').setDate();
-			});
-		
-			function fn_search(pageNo) {
-				var articleCategory = $('#articleCategory').val();
-				var articleTag = $('#articleTag').val();
-		
-				var prefix = "/";
-				var suffix = "";
-		
-				if (articleCategory != '' && articleCategory != null) {
-					prefix = "/articles/" + articleCategory + "?currentPageNo=" + pageNo;
-				}
-		
-				if (articleTag != '' && articleTag != null) {
-					suffix = "&articleTag=" + articleTag;
-				}
-		
-				location.href = prefix + suffix;
-			}
-		</script>
 	</div>
+	<script>
+		$(document).ready(function() {
+			$.fn.setDate = function() {
+				return this.each(function() {
+					var str = date_calculator($(this).attr('title'));
+					$(this).text(str);
+				}
+				);
+			}
+			;
+			$('.articleInsertDate').setDate();
+		});
+	
+		function fn_search(pageNo) {
+			var articleCategory = $('#articleCategory').val();
+			var articleTag = $('#articleTag').val();
+			var prefix = "/";
+			var suffix = "";
+			if (articleCategory != '' && articleCategory != null) {
+				prefix = "/articles/" + articleCategory + "?currentPageNo=" + pageNo;
+			}
+			if (articleTag != '' && articleTag != null) {
+				suffix = "&articleTag=" + articleTag;
+			}
+			location.href = prefix + suffix;
+		}
+	</script>
 </body>
 </html>

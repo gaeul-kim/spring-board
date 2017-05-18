@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import sampleProject.member.domain.Member;
 import sampleProject.member.service.MemberService;
+import sampleProject.member.vo.Member;
 
 @Controller
 @RequestMapping(value = "/member")

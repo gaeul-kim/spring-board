@@ -8,7 +8,7 @@
 				<li><a href="/member/login">login</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="/j_spring_security_logout">logout</a></li>
+				<li><a href="/member/logout">logout</a></li>
 			</c:otherwise>
 		</c:choose>
 	</ul>

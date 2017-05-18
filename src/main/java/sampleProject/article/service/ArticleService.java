@@ -3,7 +3,7 @@ package sampleProject.article.service;
 import java.util.List;
 import java.util.Map;
 
-import sampleProject.article.domain.Article;
+import sampleProject.article.vo.Article;
 
 public interface ArticleService {
 

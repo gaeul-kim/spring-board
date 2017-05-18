@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import sampleProject.article.domain.Article;
+import sampleProject.article.vo.Article;
 import sampleProject.common.dao.AbstractDAO;
 
 @Repository("articleDAO")

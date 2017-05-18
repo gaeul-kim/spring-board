@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import sampleProject.article.domain.Article;
 import sampleProject.article.service.ArticleService;
+import sampleProject.article.vo.Article;
 import sampleProject.comment.service.CommentService;
 
 @Controller

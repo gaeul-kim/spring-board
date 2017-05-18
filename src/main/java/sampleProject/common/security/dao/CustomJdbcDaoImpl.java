@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 
-import sampleProject.member.domain.Member;
+import sampleProject.member.vo.Member;
 
 public class CustomJdbcDaoImpl extends JdbcDaoImpl {
 

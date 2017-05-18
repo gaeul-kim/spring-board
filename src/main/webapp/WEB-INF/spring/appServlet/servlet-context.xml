@@ -15,9 +15,10 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<resources mapping="/js/**" location="/resources/common/js/" />
-	<resources mapping="/css/**" location="/resources/common/css/" />
-	<resources mapping="/img/**" location="/resources/common/image/" />
+	<resources mapping="/lib/**" location="/resources/lib/" />
+	<resources mapping="/js/**" location="/resources/custom/js/" />
+	<resources mapping="/css/**" location="/resources/custom/css/" />
+	<resources mapping="/img/**" location="/resources/custom/image/" />
 	<resources mapping="/summernote/**" location="/resources/summernote/" />
 	<resources mapping="/bootstrap/**" location="/resources/bootstrap/" />
 

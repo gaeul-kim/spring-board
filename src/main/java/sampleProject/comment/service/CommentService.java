@@ -2,7 +2,7 @@ package sampleProject.comment.service;
 
 import java.util.List;
 
-import sampleProject.comment.domain.Comment;
+import sampleProject.comment.vo.Comment;
 
 public interface CommentService {
     Boolean setComment(Comment comment) throws Exception;

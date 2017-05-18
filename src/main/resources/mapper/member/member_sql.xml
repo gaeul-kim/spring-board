@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="member">
-	<select id="selectMemberId" parameterType="sampleProject.member.domain.Member"
+	<select id="selectMemberId" parameterType="sampleProject.member.vo.Member"
 		resultType="Integer">
 		<![CDATA[
 			SELECT count(memberId) count 
@@ -11,7 +11,7 @@
 	    ]]>
 	</select>
 
-	<insert id="insertMember" parameterType="sampleProject.member.domain.Member"
+	<insert id="insertMember" parameterType="sampleProject.member.vo.Member"
 		useGeneratedKeys="true" keyProperty="memberIdx">
         <![CDATA[
             INSERT member 

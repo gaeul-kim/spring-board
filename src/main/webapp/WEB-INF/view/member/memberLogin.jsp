@@ -3,6 +3,7 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/view/include/header.jspf"%>
+<link rel="stylesheet" href="/css/member.css">
 <title>SampleProject - 로그인</title>
 </head>
 <body>

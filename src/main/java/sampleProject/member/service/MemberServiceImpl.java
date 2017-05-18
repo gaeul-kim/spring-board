@@ -11,7 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import sampleProject.member.dao.MemberDAO;
-import sampleProject.member.domain.Member;
+import sampleProject.member.vo.Member;
 
 @Service("memberService")
 public class MemberServiceImpl implements MemberService {

@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
-import sampleProject.article.domain.Article;
+import sampleProject.article.vo.Article;
 
 public abstract class AbstractDAO {
     protected Log LOG = LogFactory.getLog(AbstractDAO.class);

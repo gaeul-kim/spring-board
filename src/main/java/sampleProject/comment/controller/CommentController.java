@@ -10,8 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import sampleProject.comment.domain.Comment;
 import sampleProject.comment.service.CommentService;
+import sampleProject.comment.vo.Comment;
 
 @Controller
 @RequestMapping(value = "/comment")

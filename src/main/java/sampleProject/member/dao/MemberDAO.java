@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import sampleProject.common.dao.AbstractDAO;
-import sampleProject.member.domain.Member;
+import sampleProject.member.vo.Member;
 
 @Repository("memberDAO")
 public class MemberDAO extends AbstractDAO {

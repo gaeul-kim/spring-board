@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import sampleProject.comment.domain.Comment;
+import sampleProject.comment.vo.Comment;
 import sampleProject.common.dao.AbstractDAO;
 
 @Repository("commentDAO")

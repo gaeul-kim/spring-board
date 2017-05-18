@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import sampleProject.article.dao.ArticleDAO;
-import sampleProject.article.domain.Article;
+import sampleProject.article.vo.Article;
 
 @Service("articleService")
 public class ArticleServiceImpl implements ArticleService {

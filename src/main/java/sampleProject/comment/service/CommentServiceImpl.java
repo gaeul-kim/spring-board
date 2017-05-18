@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import sampleProject.comment.dao.CommentDAO;
-import sampleProject.comment.domain.Comment;
+import sampleProject.comment.vo.Comment;
 
 @Service("commentService")
 public class CommentServiceImpl implements CommentService {

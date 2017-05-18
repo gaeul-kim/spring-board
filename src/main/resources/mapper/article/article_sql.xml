@@ -3,12 +3,14 @@
 
 <mapper namespace="article">
 
-	<select id="selectArticles" parameterType="HashMap"	resultType="sampleProject.article.domain.Article">
+	<select id="selectArticles" parameterType="HashMap"	resultType="sampleProject.article.vo.Article">
         <include refid="common.pagingPre" /> 
             <![CDATA[
-            select a.articleId, a.articleTitle, a.articleTag, a.articleWriter, m.memberName articleWriterName, date_format(a.articleInsertDate,'%Y-%m-%d %H:%i') articleInsertDate, a.articleHit, a.articleCategory
-                from article a left outer join member m on a.articleWriter = m.memberId
-                    where articleDeleteDate is null and articleCategory = #{articleCategory}
+            select a.articleId, a.articleTitle, a.articleTag, a.articleWriter, m.memberName articleWriterName, 
+                date_format(a.articleInsertDate,'%Y-%m-%d %H:%i') articleInsertDate, a.articleHit, a.articleCategory, 
+                (select count(*) from comment where articleId=a.articleId and commentDeleteDate is null) commentCount
+                    from article a left outer join member m on a.articleWriter = m.memberId
+                        where articleDeleteDate is null and articleCategory = #{articleCategory}
             ]]>
 		<if test="articleTag != null and articleTag != ''">
 			<![CDATA[
@@ -20,7 +22,7 @@
 	        ]]>
 		<include refid="common.pagingPost" />
 	</select>
-	<select id="selectArticle" parameterType="sampleProject.article.domain.Article" resultType="sampleProject.article.domain.Article">
+	<select id="selectArticle" parameterType="sampleProject.article.vo.Article" resultType="sampleProject.article.vo.Article">
         <![CDATA[
             select a.articleId, a.articleTitle, a.articleTag, a.articleContent, a.articleWriter,  m.memberName articleWriterName, date_format(a.articleInsertDate,'%Y-%m-%d %H:%i') articleInsertDate, a.articleHit, a.articleCategory
                     from article a left outer join member m on a.articleWriter = m.memberId
@@ -33,13 +35,13 @@
     </if>
 
 	</select>
-	<update id="updateHit" parameterType="sampleProject.article.domain.Article">
+	<update id="updateHit" parameterType="sampleProject.article.vo.Article">
         <![CDATA[
             update article set articleHit = articleHit+1
                 where articleId = #{articleId} and articleDeleteDate is null               
         ]]>
 	</update>
-	<insert id="insertArticle" parameterType="sampleProject.article.domain.Article" useGeneratedKeys="true" keyProperty="articleId">
+	<insert id="insertArticle" parameterType="sampleProject.article.vo.Article" useGeneratedKeys="true" keyProperty="articleId">
 	   <![CDATA[
             insert into article (articleTitle, articleTag, articleContent, articleWriter, articleCategory, articleInsertDate)
             values(#{articleTitle},
@@ -61,14 +63,14 @@
         ]]>
 	</insert>
 
-	<update id="updateDeleteDate" parameterType="sampleProject.article.domain.Article">
+	<update id="updateDeleteDate" parameterType="sampleProject.article.vo.Article">
         <![CDATA[
         update article set articleDeleteDate = now()
         where articleId = #{articleId} and articleWriter = #{articleWriter}
         ]]>
 	</update>
 
-	<update id="updateArticle" parameterType="sampleProject.article.domain.Article">
+	<update id="updateArticle" parameterType="sampleProject.article.vo.Article">
 	<![CDATA[
 	   update article set articleTitle = #{articleTitle}, articleTag = #{articleTag}, articleContent = #{articleContent}
                 where articleId = #{articleId} and articleWriter = #{articleWriter}

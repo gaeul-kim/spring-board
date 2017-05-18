@@ -3,6 +3,7 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/view/include/header.jspf"%>
+<link rel="stylesheet" href="/css/article.css">
 <title>SampleProject - 글수정</title>
 </head>
 <body>

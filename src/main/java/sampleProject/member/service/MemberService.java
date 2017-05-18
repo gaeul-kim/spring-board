@@ -2,7 +2,7 @@ package sampleProject.member.service;
 
 import java.util.HashMap;
 
-import sampleProject.member.domain.Member;
+import sampleProject.member.vo.Member;
 
 public interface MemberService {
 

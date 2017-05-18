@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import sampleProject.article.domain.Article;
 import sampleProject.article.service.ArticleService;
+import sampleProject.article.vo.Article;
 
 @Controller
 @RequestMapping(value = "/articles")

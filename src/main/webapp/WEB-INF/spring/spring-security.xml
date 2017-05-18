@@ -25,7 +25,7 @@
 			authentication-success-handler-ref="customAuthenticationSuccessHandler"
 			authentication-failure-handler-ref="customAuthenticationFailureHandler" />
 
-		<logout logout-success-url="/" delete-cookies="JSESSIONID" />
+		<logout logout-url="/member/logout" logout-success-url="/" delete-cookies="JSESSIONID" />
 		<access-denied-handler error-page="/common/accessDenied" />
 	</http>
 
