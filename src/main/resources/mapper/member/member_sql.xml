@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+	<select id="selectMemberId" parameterType="sampleProject.member.vo.Member"
+		resultType="Integer">
+		<![CDATA[
+			SELECT count(memberId) count 
+			     FROM member 
+			         WHERE memberId = #{memberId}
+	    ]]>
+	</select>
+
+	<insert id="insertMember" parameterType="sampleProject.member.vo.Member"
+		useGeneratedKeys="true" keyProperty="memberIdx">
+        <![CDATA[
+            INSERT member 
+                (memberId, memberPassword, memberName, memberEmail, memberInsertDate)
+            VALUES 
+                (#{memberId}, #{memberPassword}, #{memberName}, #{memberEmail}, now()) 
+         ]]>
+	</insert>
+	
+	   <insert id="insertAuthority" parameterType="hashmap">
+        <![CDATA[
+            INSERT member_authority 
+                (memberId, authorityCode)
+            VALUES 
+                (#{memberId}, #{authorityCode}) 
+         ]]>
+    </insert>
+</mapper>

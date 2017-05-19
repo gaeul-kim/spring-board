@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<context:property-placeholder location="classpath:/property/config.properties"/>
+	
 	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost/sample_project" />
-		<property name="username" value="sample" />
-		<property name="password" value="1234" />
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.local}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- validation query -->
+		<property name="validationQuery" value="select 1" />
+		<!-- 비활성화 커넥션을 추출할때 커넥션이 유효한지 여부를 검사해서 유효하지 않으면 제거 -->
+		<property name="testWhileIdle" value="true" />
+		<!-- 해당 밀리초마다 validation query를 이용하여 유효성 검사 진행 -->
+		<property name="timeBetweenEvictionRunsMillis" value="30000" />
+		<!-- 커넥션을 가져올때 유효 여부 검사 -->
+		<property name="testOnBorrow" value="false" />
 	</bean>
 
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -32,5 +46,27 @@
 		</property>
 	</bean>
 
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>classpath:/message/spring_security_messages</value>
+			</list>
+		</property>
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="cacheSeconds" value="5" />
+	</bean>
+
+	<!-- pagination using egovframework -->
+	<bean id="textRenderer"
+		class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationRenderer" />
+	<bean id="paginationManager"
+		class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">
+		<property name="rendererType">
+			<map>
+				<entry key="text" value-ref="textRenderer" />
+			</map>
+		</property>
+	</bean>
 
 </beans>
