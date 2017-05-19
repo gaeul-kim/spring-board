@@ -33,3 +33,12 @@
 .comment-form>div:first-child {
 	width: 100%;
 }
+
+@media ( max-width : 520px) {
+	.comment-form {
+		flex-direction: column;
+	}
+	.comment-form>div>button:first-child {
+		width: 100%;
+	}
+}

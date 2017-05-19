@@ -97,3 +97,19 @@
 	color: #fff;
 	border-radius: 1px;
 }
+
+@media ( max-width: 520px) {
+    .article-wrap {
+        flex-direction: column;
+    }
+    .article-title-wrap {
+        width: auto;
+    }
+    .article-info {
+        float: right;
+        display: inline;
+    }
+    .article-info-wrap {
+        display: none;
+    }
+}
