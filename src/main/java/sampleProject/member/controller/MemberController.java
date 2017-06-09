@@ -45,7 +45,7 @@ public class MemberController {
     @RequestMapping("/checkMemberId")
     @ResponseBody
     public HashMap<String, Object> checkMemberId(@ModelAttribute Member member) throws Exception {
-
+        System.out.println(member.getMemberId());
         Boolean availableMemberId = memberService.checkMemberId(member);
 
         HashMap<String, Object> resultMap = new HashMap<String, Object>();

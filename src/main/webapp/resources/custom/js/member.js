@@ -13,7 +13,7 @@ function validateMemberId() {
 		$.ajax({
 			dataType : 'json',
 			data : {
-				"member" : val
+				"memberId" : val
 			},
 			async : false,
 			url : '/member/checkMemberId',
